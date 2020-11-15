@@ -46,7 +46,7 @@ for(int i = 0; i < 17; i++)
 //omg doom doesnt have a map title return functin, for reaaaal?!
 str wdimdimaps[64] = {
 "", //0
-"Asylum", //1
+"Asylum", //1 
 "Now Museum, Now You Don't!", //2
 "Clock Town", //3
 "Confinement", //4
