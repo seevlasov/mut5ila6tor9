@@ -91,7 +91,7 @@ int mdigame[18] =
 0,////[5] ammount of Stamina to give per some time
 5,/////[6] ammount of Stamina to take per some time
 
-/////// now ever map exclusive
+/////// now ever map exclusive 
 
 0,/////[7] Map Icons Counter. HAVE to be 3digits number. map1 - 100m map2 - 200, etc
 0, // [8]goal 2 angle to look from the left
