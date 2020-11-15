@@ -179,7 +179,7 @@ else if (endcam[7] <=0 )
                     else  if ((GetCVAR("VOTEYES") > (playercount()- minus)/2) || (GetCVAR("VOTENO") > (playercount()- minus)/2) ||  ((GetCVAR("VOTEYES") + GetCVAR("VOTENO")) >= playercount() - minus )) {counter=0;}
 	               }  //abort it early if large majority of players already called it over 
 counter--;
-delay(35);
+delay(35); 
 }
 ACS_NAMEDTERMINATE("GetPlayerInputVote", 0); //Stop voting input for everybody
 {
