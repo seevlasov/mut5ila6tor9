@@ -30,32 +30,32 @@
 
 
 
-
-                 //by Zeberpal 
+                 //by Zeberpal
                                                                            
 
 //pukename single to play sinleplayer
+#libdefine SEK 35
+bool mdiprologue = false;
+int laughdel = 35;
 
-int sek = 35;
-int TELEPPSEED = 0;
-int TELEPP[16][34] ={{ 4, 5, 31, 9, 13, 24, 19, 1, 18, 26, 11, 3, 15, 23, 8, 7, 17, 32, 30, 25, 0, 12, 29, 20, 14, 22, 33, 10, 6, 16, 21, 28, 27, 2},                 //
-                    { 29, 26, 24, 0, 1, 15, 32, 3, 28, 25, 12, 17, 22, 27, 6, 13, 18, 23, 33, 16, 31, 5, 20, 8, 4, 21, 14, 9, 7, 10, 11, 30, 2, 19},
-                    { 19, 20, 1, 0, 9, 30, 8, 2, 22, 17, 32, 3, 6, 11, 4, 31, 29, 16, 13, 14, 5, 24, 25, 28, 21, 7, 27, 12, 18, 23, 15, 26, 10, 33},
-					{ 21, 11, 15, 22, 0, 6, 14, 13, 1, 24, 12, 27, 19, 20, 2, 30, 4, 33, 29, 7, 18, 25, 10, 9, 8, 5, 17, 23, 28, 16, 26, 3, 32, 31},
-					{ 18, 15, 30, 32, 4, 19, 1, 11, 8, 28, 6, 17, 5, 22, 13, 29, 10, 31, 20, 26, 21, 12, 16, 25, 14, 0, 3, 33, 2, 7, 27, 9, 24, 23},
-					{ 24, 29, 19, 7, 6, 15, 16, 0, 5, 28, 22, 12, 1, 30, 14, 4, 26, 21, 2, 31, 11, 8, 18, 17, 9, 13, 3, 10, 25, 27, 23, 20, 32, 33},
-					{ 30, 6, 22, 1, 7, 29, 2, 16, 13, 23, 4, 25, 24, 10, 8, 31, 17, 12, 33, 27, 14, 9, 18, 32, 21, 20, 28, 15, 26, 19, 0, 3, 11, 5},
-					{ 3, 18, 12, 29, 0, 23, 30, 15, 17, 5, 20, 25, 6, 31, 2, 16, 22, 33, 4, 32, 13, 10, 14, 27, 28, 1, 9, 8, 11, 26, 21, 24, 19, 7},
-					{ 22, 3, 26, 32, 11, 14, 18, 8, 17, 24, 6, 28, 2, 23, 33, 16, 31, 0, 7, 21, 4, 25, 13, 30, 9, 1, 29, 19, 15, 12, 10, 20, 5, 27},
-					{ 3, 31, 13, 8, 21, 0, 25, 19, 24, 10, 28, 15, 2, 12, 6, 22, 11, 27, 1, 16, 26, 5, 7, 9, 29, 20, 33, 14, 23, 17, 4, 30, 32, 18},
-					{ 29, 21, 7, 24, 18, 23, 11, 13, 9, 0, 5, 27, 10, 19, 28, 16, 14, 15, 1, 33, 26, 4, 20, 2, 31, 30, 17, 3, 6, 22, 32, 25, 8, 12},
-					{ 24, 11, 32, 33, 2, 5, 10, 23, 20, 25, 27, 31, 18, 4, 3, 17, 8, 7, 26, 30, 22, 13, 12, 28, 16, 21, 1, 6, 29, 19, 14, 15, 0, 9},
-					{ 13, 22, 19, 26, 16, 8, 6, 7, 33, 20, 2, 32, 24, 27, 5, 17, 30, 12, 29, 31, 3, 14, 18, 9, 23, 4, 11, 21, 15, 10, 1, 25, 0, 28},
-				    { 1, 27, 16, 10, 30, 5, 29, 26, 19, 7, 2, 33, 22, 20, 4, 0, 17, 25, 14, 6, 15, 3, 9, 8, 24, 31, 32, 11, 28, 21, 12, 18, 13, 23},
-					{ 26, 17, 19, 24, 1, 4, 12, 28, 13, 27, 22, 23, 21, 18, 29, 11, 0, 16, 5, 10, 7, 8, 33, 32, 3, 25, 2, 30, 9, 6, 31, 15, 20, 14},
-					{ 15, 16, 4, 30, 19, 20, 31, 32, 5, 18, 21, 7, 9, 28, 12, 13, 0, 11, 3, 27, 33, 10, 14, 29, 23, 26, 25, 6, 22, 17, 2, 8, 1, 24}};
-					
-str MutilatorType[10] = 
+//global int 11:mingame;
+//global bool 12: AllowMDI;
+
+global bool 11: MDIGlobal[];
+/*
+0 = AllowMDI: 0 - no, 1 = yes;
+1 = rounds till next AllowMdi vote;
+2 = Voted to keep MDI info: percentage
+3 = Voted to keep MDI info: Voted yes
+4 = Voted to keep MDI info: Voted No
+5 = Voted to keep MDI info: abstained
+6 = Times ppl rqed
+7 = Test function off
+8 = rounds till next everyone in the server vote(92);
+*/
+global str 12: MDIVoteDate;
+				
+str MutilatorType[12] = 
 {
 "", //[0] is Mutilator (weapon) for Murderer. Primary array.
 "", //[1] is for decorative cases. Like in intro
@@ -69,19 +69,13 @@ str MutilatorType[10] =
 "", //[6]//top victim name
 "", //[7] //minigame state name
 "GH_HolySpirit", //[8] //wdi minigame ghostN1
-"GH_DarkSpirit"  //[9] //wdi minigame ghostN2
-};
-
-str MDIadvice[4] = 
-{
-"Turn Auto-fire off, or you'll be slowed down", 
-"Use flares to break the surveillance cameras,\n\n     shotgun trips or beartraps.", 
-"Save your stamina for emergency cases",
-"Quest marks are distanced, if they still don't\n\nshow up, set your texture format to rgba8"
+"GH_DarkSpirit",  //[9] //wdi minigame ghostN2
+"SDFINWEL" //[10] "prepare to die' sound
 };
 
 
-int mdigame[18] = 
+
+int mdigame[20] = 
 {
 6, ///[0] is playerCount 
 70,///[1] is game tempo
@@ -103,9 +97,14 @@ int mdigame[18] =
 8,  // [13]Stun minimum time
 12,  // [14]Stun maximum time
 0, // [15] give tripshotguns to murd if it's 1
+9101, //[16] spawnpoint of Trite in the end
+120, //[17] teleport murd at the end
+3400, //[18] teleport inno at the end
+121  //[19] Spawn Plank at the end
 };
 
-
+int MDITELEPORTA = 3200;
+int MDITELEPORTB = 3400;
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -151,10 +150,13 @@ Script "VictimRecord" (void)
 Str TopVictimName = strParam(n:0);
 //
 //
-STR mdi_TopVictimScore = strParam(s:"mdi",i:GetLevelInfo(LEVELINFO_LEVELNUM), s:"_TopVictim",i:wdimdiadd[1],s:"Score");
-STR mdi_OLDTopVictimScore = strParam(s:"mdi",i:GetLevelInfo(LEVELINFO_LEVELNUM), s:"_TopVictim",i:wdimdiadd[0],s:"Score");
-STR mdi_TopVictim = strParam(s:"mdi",i:GetLevelInfo(LEVELINFO_LEVELNUM), s:"_TopVictim",i:wdimdiadd[1]);
-STR mdi_OLDTopVictim = strParam(s:"mdi",i:GetLevelInfo(LEVELINFO_LEVELNUM), s:"_TopVictim",i:wdimdiadd[0]);
+str LVL = "acci";
+if (MUTILATOR_MOD() == 2) LVL = "movi";
+
+STR mdi_TopVictimScore = strParam(s:LVL, s:"_TopVictim",i:wdimdiadd[1],s:"Score");
+STR mdi_OLDTopVictimScore = strParam(s:LVL, s:"_TopVictim",i:wdimdiadd[0],s:"Score");
+STR mdi_TopVictim = strParam(s:LVL, s:"_TopVictim",i:wdimdiadd[1]);
+STR mdi_OLDTopVictim = strParam(s:LVL, s:"_TopVictim",i:wdimdiadd[0]);
 
      
 	 if (ClassifyActor(wdimdiadd[13]) & ACTOR_ALIVE)//if (CheckActorInventory(wdimdiadd[13], "IsVictim")) //check if Victim with best pts is alive
@@ -169,8 +171,8 @@ STR mdi_OLDTopVictim = strParam(s:"mdi",i:GetLevelInfo(LEVELINFO_LEVELNUM), s:"_
 	   }
 	  else  //if current slot pts is less than round result
 		{
-	  mdi_TopVictimScore = strParam(s:"mdi",i:GetLevelInfo(LEVELINFO_LEVELNUM), s:"_TopVictim",i:wdimdiadd[0]-1,s:"Score");
-	  mdi_TopVictim = strParam(s:"mdi",i:GetLevelInfo(LEVELINFO_LEVELNUM), s:"_TopVictim",i:wdimdiadd[0]-1);
+	  mdi_TopVictimScore = strParam(s:LVL, s:"_TopVictim",i:wdimdiadd[0]-1,s:"Score");
+	  mdi_TopVictim = strParam(s:LVL, s:"_TopVictim",i:wdimdiadd[0]-1);
        //at this moment round wdimdiadd[1] = new record slot
 
 	    if(wdimdiadd[0]>wdimdiadd[1])   //while it is, scroll the shit down
@@ -180,8 +182,8 @@ STR mdi_OLDTopVictim = strParam(s:"mdi",i:GetLevelInfo(LEVELINFO_LEVELNUM), s:"_
       wdimdiadd[0]-=1;
 	  restart;
 	     }
-	   mdi_TopVictimScore = strParam(s:"mdi",i:GetLevelInfo(LEVELINFO_LEVELNUM), s:"_TopVictim",i:wdimdiadd[1],s:"Score");
-	   mdi_TopVictim = strParam(s:"mdi",i:GetLevelInfo(LEVELINFO_LEVELNUM), s:"_TopVictim",i:wdimdiadd[1]);
+	   mdi_TopVictimScore = strParam(s:LVL, s:"_TopVictim",i:wdimdiadd[1],s:"Score");
+	   mdi_TopVictim = strParam(s:LVL, s:"_TopVictim",i:wdimdiadd[1]);
 	   SetCvar(mdi_TopVictimScore,wdimdiadd[14]); SetCvarString(mdi_TopVictim, TopVictimName/*MutilatorType[6]*/); //then we create a new record
 	   wdimdiadd[1]=7;
 		}
@@ -202,10 +204,14 @@ Script "MutilatorRecord" (void)
 Str TopMutilatorName = strParam(s:"\cc[",i:wdimdiadd[8],s:"\cc]  ",n:gameinfo[2]+1);
 //
 //
-STR mdi_TopMutilatorScore = strParam(s:"mdi",i:GetLevelInfo(LEVELINFO_LEVELNUM), s:"_TopMutilator",i:wdimdiadd[1],s:"Score");
-STR mdi_OLDTopMutilatorScore = strParam(s:"mdi",i:GetLevelInfo(LEVELINFO_LEVELNUM), s:"_TopMutilator",i:wdimdiadd[0],s:"Score");
-STR mdi_TopMutilator = strParam(s:"mdi",i:GetLevelInfo(LEVELINFO_LEVELNUM), s:"_TopMutilator",i:wdimdiadd[1]);
-STR mdi_OLDTopMutilator = strParam(s:"mdi",i:GetLevelInfo(LEVELINFO_LEVELNUM), s:"_TopMutilator",i:wdimdiadd[0]);
+str LVL = "acci";
+if (MUTILATOR_MOD() == 2) LVL = "movi";
+
+
+STR mdi_TopMutilatorScore = strParam(s:LVL, s:"_TopMutilator",i:wdimdiadd[1],s:"Score");
+STR mdi_OLDTopMutilatorScore = strParam(s:LVL, s:"_TopMutilator",i:wdimdiadd[0],s:"Score");
+STR mdi_TopMutilator = strParam(s:LVL, s:"_TopMutilator",i:wdimdiadd[1]);
+STR mdi_OLDTopMutilator = strParam(s:LVL, s:"_TopMutilator",i:wdimdiadd[0]);
 
 
      if (wdimdiadd[1]<7) //+2 to avoid fuckery
@@ -217,8 +223,8 @@ STR mdi_OLDTopMutilator = strParam(s:"mdi",i:GetLevelInfo(LEVELINFO_LEVELNUM), s
 	   }
 	  else  //if current slot pts is less than round result
 	  {
-	  mdi_TopMutilatorScore = strParam(s:"mdi",i:GetLevelInfo(LEVELINFO_LEVELNUM), s:"_TopMutilator",i:wdimdiadd[0]-1,s:"Score");
-	  mdi_TopMutilator = strParam(s:"mdi",i:GetLevelInfo(LEVELINFO_LEVELNUM), s:"_TopMutilator",i:wdimdiadd[0]-1);
+	  mdi_TopMutilatorScore = strParam(s:LVL, s:"_TopMutilator",i:wdimdiadd[0]-1,s:"Score");
+	  mdi_TopMutilator = strParam(s:LVL, s:"_TopMutilator",i:wdimdiadd[0]-1);
        //at this moment round wdimdiadd[1] = new record slot
 
 	    if(wdimdiadd[0]>wdimdiadd[1])   //while it is, scroll the shit down
@@ -227,8 +233,8 @@ STR mdi_OLDTopMutilator = strParam(s:"mdi",i:GetLevelInfo(LEVELINFO_LEVELNUM), s
       wdimdiadd[0]-=1;
 	  restart;
 	     }
-	   mdi_TopMutilatorScore = strParam(s:"mdi",i:GetLevelInfo(LEVELINFO_LEVELNUM), s:"_TopMutilator",i:wdimdiadd[1],s:"Score");
-	   mdi_TopMutilator = strParam(s:"mdi",i:GetLevelInfo(LEVELINFO_LEVELNUM), s:"_TopMutilator",i:wdimdiadd[1]);
+	   mdi_TopMutilatorScore = strParam(s:LVL, s:"_TopMutilator",i:wdimdiadd[1],s:"Score");
+	   mdi_TopMutilator = strParam(s:LVL, s:"_TopMutilator",i:wdimdiadd[1]);
 	   SetCvar(mdi_TopMutilatorScore, wdimdiadd[12]); SetCvarString(mdi_TopMutilator,TopMutilatorName); //then we create a new record
 	   wdimdiadd[1]=7; 
 		 
@@ -243,19 +249,23 @@ Script "MDI_PrintScoreboard" (void)
 {
 While(GetCvar("WDIMDISeason")>0)
 {
+str LVL = "acci";
+if (MUTILATOR_MOD() == 2) LVL = "movi";
+
+
 SetHUDSize(1024, 768, 0);
 SetFont("confont");
-HudMessageBold(s:"Season ",i:GetCvar("WDIMDISeason"),s:"\n\n\ccMap Stats"; HUDMSG_FADEOUT, 1377,CR_GREY, 512.0, 560.0, 1.0, 1.0 );
-HudMessageBold(s: "TOP SURVIVORS\n\n\n\n",s: "\cg1. \cc",i: GetCvar(strParam(s:"mdi",i:GetLevelInfo(LEVELINFO_LEVELNUM), s:"_TopVictim1Score")),s:" PTS  ",s:GetCvarString(strParam(s:"mdi",i:GetLevelInfo(LEVELINFO_LEVELNUM), s:"_TopVictim1")),s:"\n\n",
-s: "\cg2. \cc",i: GetCvar(strParam(s:"mdi",i:GetLevelInfo(LEVELINFO_LEVELNUM), s:"_TopVictim2Score")),s:" PTS  ",s:GetCvarString(strParam(s:"mdi",i:GetLevelInfo(LEVELINFO_LEVELNUM), s:"_TopVictim2")),s:"\n\n",
-s: "\cg3. \cc",i: GetCvar(strParam(s:"mdi",i:GetLevelInfo(LEVELINFO_LEVELNUM), s:"_TopVictim3Score")),s:" PTS  ",s:GetCvarString(strParam(s:"mdi",i:GetLevelInfo(LEVELINFO_LEVELNUM), s:"_TopVictim3")),s:"\n\n",
-s: "\cg4. \cc",i: GetCvar(strParam(s:"mdi",i:GetLevelInfo(LEVELINFO_LEVELNUM), s:"_TopVictim4Score")),s:" PTS  ",s:GetCvarString(strParam(s:"mdi",i:GetLevelInfo(LEVELINFO_LEVELNUM), s:"_TopVictim4")),s:"\n\n",
-s: "\cg5. \cc",i: GetCvar(strParam(s:"mdi",i:GetLevelInfo(LEVELINFO_LEVELNUM), s:"_TopVictim5Score")),s:" PTS  ",s:GetCvarString(strParam(s:"mdi",i:GetLevelInfo(LEVELINFO_LEVELNUM), s:"_TopVictim5")); HUDMSG_FADEOUT, 1378, CR_GREY, 768.0, 600.0, 1.0, 1.0 );
-HudMessageBold(s: "TOP MUTILATORS\n\n\n\n",s: "\cg1. \cc",i: GetCvar(strParam(s:"mdi",i:GetLevelInfo(LEVELINFO_LEVELNUM), s:"_TopMutilator1Score")),s:" PTS ",s:GetCvarString(strParam(s:"mdi",i:GetLevelInfo(LEVELINFO_LEVELNUM), s:"_TopMutilator1")),s:"\n\n",
-s: "\cg2. \cc",i: GetCvar(strParam(s:"mdi",i:GetLevelInfo(LEVELINFO_LEVELNUM), s:"_TopMutilator2Score")),s:" PTS ",s:GetCvarString(strParam(s:"mdi",i:GetLevelInfo(LEVELINFO_LEVELNUM), s:"_TopMutilator2")),s:"\n\n",
-s: "\cg3. \cc",i: GetCvar(strParam(s:"mdi",i:GetLevelInfo(LEVELINFO_LEVELNUM), s:"_TopMutilator3Score")),s:" PTS ",s:GetCvarString(strParam(s:"mdi",i:GetLevelInfo(LEVELINFO_LEVELNUM), s:"_TopMutilator3")),s:"\n\n",
-s: "\cg4. \cc",i: GetCvar(strParam(s:"mdi",i:GetLevelInfo(LEVELINFO_LEVELNUM), s:"_TopMutilator4Score")),s:" PTS ",s:GetCvarString(strParam(s:"mdi",i:GetLevelInfo(LEVELINFO_LEVELNUM), s:"_TopMutilator4")),s:"\n\n",
-s: "\cg5. \cc",i: GetCvar(strParam(s:"mdi",i:GetLevelInfo(LEVELINFO_LEVELNUM), s:"_TopMutilator5Score")),s:" PTS ",s:GetCvarString(strParam(s:"mdi",i:GetLevelInfo(LEVELINFO_LEVELNUM), s:"_TopMutilator5")); HUDMSG_FADEOUT, 1379, CR_GREY, 256.0, 600.0, 1.0, 1.0 );
+HudMessageBold(s:"Season ",i:GetCvar("WDIMDISeason"); HUDMSG_FADEOUT, 1377,CR_GREY, 512.0, 560.0, 1.0, 1.0 );
+HudMessageBold(s: "TOP SURVIVORS\n\n\n\n",s: "\cg1. \cc",i: GetCvar(strParam(s:LVL , s:"_TopVictim1Score")),s:" PTS  ",s:GetCvarString(strParam(s:LVL , s:"_TopVictim1")),s:"\n\n",
+s: "\cg2. \cc",i: GetCvar(strParam(s:LVL , s:"_TopVictim2Score")),s:" PTS  ",s:GetCvarString(strParam(s:LVL , s:"_TopVictim2")),s:"\n\n",
+s: "\cg3. \cc",i: GetCvar(strParam(s:LVL , s:"_TopVictim3Score")),s:" PTS  ",s:GetCvarString(strParam(s:LVL , s:"_TopVictim3")),s:"\n\n",
+s: "\cg4. \cc",i: GetCvar(strParam(s:LVL , s:"_TopVictim4Score")),s:" PTS  ",s:GetCvarString(strParam(s:LVL , s:"_TopVictim4")),s:"\n\n",
+s: "\cg5. \cc",i: GetCvar(strParam(s:LVL , s:"_TopVictim5Score")),s:" PTS  ",s:GetCvarString(strParam(s:LVL , s:"_TopVictim5")); HUDMSG_FADEOUT, 1378, CR_GREY, 768.0, 600.0, 1.0, 1.0 );
+HudMessageBold(s: "TOP MUTILATORS\n\n\n\n",s: "\cg1. \cc",i: GetCvar(strParam(s:LVL , s:"_TopMutilator1Score")),s:" PTS ",s:GetCvarString(strParam(s:LVL , s:"_TopMutilator1")),s:"\n\n",
+s: "\cg2. \cc",i: GetCvar(strParam(s:LVL , s:"_TopMutilator2Score")),s:" PTS ",s:GetCvarString(strParam(s:LVL , s:"_TopMutilator2")),s:"\n\n",
+s: "\cg3. \cc",i: GetCvar(strParam(s:LVL , s:"_TopMutilator3Score")),s:" PTS ",s:GetCvarString(strParam(s:LVL , s:"_TopMutilator3")),s:"\n\n",
+s: "\cg4. \cc",i: GetCvar(strParam(s:LVL , s:"_TopMutilator4Score")),s:" PTS ",s:GetCvarString(strParam(s:LVL , s:"_TopMutilator4")),s:"\n\n",
+s: "\cg5. \cc",i: GetCvar(strParam(s:LVL , s:"_TopMutilator5Score")),s:" PTS ",s:GetCvarString(strParam(s:LVL , s:"_TopMutilator5")); HUDMSG_FADEOUT, 1379, CR_GREY, 256.0, 600.0, 1.0, 1.0 );
 if (getcvar("RoundsLeft")>0) {HudMessageBold(i:GetCvar("RoundsLeft")-1, s:" rounds left"; HUDMSG_FADEOUT, 0, CR_DARKRED, 512.0, 650.0, 1.0, 1.0);}
 HudMessageBold(s:GetCvarString("ScoreRemark"); HUDMSG_FADEOUT, 0, CR_DARKRED, 512.0, 670.0, 1.0, 1.0);
 if (getcvar("ScoreWinnerMini")>0)
@@ -265,35 +275,47 @@ delay(35);
 
 
 
-Script "MDI_PrintScoreboard_ENTER" ENTER
+Script "MDI_PrintScoreboard_ENTER" ENTER 
 {
-if ((GetLevelInfo(LEVELINFO_LEVELNUM)>=40) && (GetLevelInfo(LEVELINFO_LEVELNUM)<=50) && (GetCvar("WDIMDISeason")>0))
+if ((MUTILATOR_MOD() > 0) && (GetCvar("WDIMDISeason")>0)) 
 {
+
+str LVL = "acci";
+if (MUTILATOR_MOD() == 2) LVL = "movi";
+
 SetHUDSize(1024, 768, 0);
 SetFont("confont");
-HudMessageBold(s:"Season ",i:GetCvar("WDIMDISeason"),s:"\n\n\ccMap Stats"; HUDMSG_FADEOUT, 1377,CR_GREY, 512.0, 560.0, 4.0, 2.0 );
-HudMessageBold(s: "TOP SURVIVORS\n\n\n\n",s: "\cg1. \cc",i: GetCvar(strParam(s:"mdi",i:GetLevelInfo(LEVELINFO_LEVELNUM), s:"_TopVictim1Score")),s:" PTS  ",s:GetCvarString(strParam(s:"mdi",i:GetLevelInfo(LEVELINFO_LEVELNUM), s:"_TopVictim1")),s:"\n\n",
-s: "\cg2. \cc",i: GetCvar(strParam(s:"mdi",i:GetLevelInfo(LEVELINFO_LEVELNUM), s:"_TopVictim2Score")),s:" PTS  ",s:GetCvarString(strParam(s:"mdi",i:GetLevelInfo(LEVELINFO_LEVELNUM), s:"_TopVictim2")),s:"\n\n",
-s: "\cg3. \cc",i: GetCvar(strParam(s:"mdi",i:GetLevelInfo(LEVELINFO_LEVELNUM), s:"_TopVictim3Score")),s:" PTS  ",s:GetCvarString(strParam(s:"mdi",i:GetLevelInfo(LEVELINFO_LEVELNUM), s:"_TopVictim3")),s:"\n\n",
-s: "\cg4. \cc",i: GetCvar(strParam(s:"mdi",i:GetLevelInfo(LEVELINFO_LEVELNUM), s:"_TopVictim4Score")),s:" PTS  ",s:GetCvarString(strParam(s:"mdi",i:GetLevelInfo(LEVELINFO_LEVELNUM), s:"_TopVictim4")),s:"\n\n",
-s: "\cg5. \cc",i: GetCvar(strParam(s:"mdi",i:GetLevelInfo(LEVELINFO_LEVELNUM), s:"_TopVictim5Score")),s:" PTS  ",s:GetCvarString(strParam(s:"mdi",i:GetLevelInfo(LEVELINFO_LEVELNUM), s:"_TopVictim5")); HUDMSG_FADEOUT, 1378, CR_GREY, 768.0, 600.0, 4.0, 2.0 );
-HudMessageBold(s: "TOP MUTILATORS\n\n\n\n",s: "\cg1. \cc",i: GetCvar(strParam(s:"mdi",i:GetLevelInfo(LEVELINFO_LEVELNUM), s:"_TopMutilator1Score")),s:" PTS ",s:GetCvarString(strParam(s:"mdi",i:GetLevelInfo(LEVELINFO_LEVELNUM), s:"_TopMutilator1")),s:"\n\n",
-s: "\cg2. \cc",i: GetCvar(strParam(s:"mdi",i:GetLevelInfo(LEVELINFO_LEVELNUM), s:"_TopMutilator2Score")),s:" PTS ",s:GetCvarString(strParam(s:"mdi",i:GetLevelInfo(LEVELINFO_LEVELNUM), s:"_TopMutilator2")),s:"\n\n",
-s: "\cg3. \cc",i: GetCvar(strParam(s:"mdi",i:GetLevelInfo(LEVELINFO_LEVELNUM), s:"_TopMutilator3Score")),s:" PTS ",s:GetCvarString(strParam(s:"mdi",i:GetLevelInfo(LEVELINFO_LEVELNUM), s:"_TopMutilator3")),s:"\n\n",
-s: "\cg4. \cc",i: GetCvar(strParam(s:"mdi",i:GetLevelInfo(LEVELINFO_LEVELNUM), s:"_TopMutilator4Score")),s:" PTS ",s:GetCvarString(strParam(s:"mdi",i:GetLevelInfo(LEVELINFO_LEVELNUM), s:"_TopMutilator4")),s:"\n\n",
-s: "\cg5. \cc",i: GetCvar(strParam(s:"mdi",i:GetLevelInfo(LEVELINFO_LEVELNUM), s:"_TopMutilator5Score")),s:" PTS ",s:GetCvarString(strParam(s:"mdi",i:GetLevelInfo(LEVELINFO_LEVELNUM), s:"_TopMutilator5")); HUDMSG_FADEOUT, 1379, CR_GREY, 256.0, 600.0, 4.0, 2.0 );
-if (getcvar("RoundsLeft")>0) {HudMessageBold(i:GetCvar("RoundsLeft")-1, s:" rounds left"; HUDMSG_FADEOUT, 0, CR_DARKRED, 512.0, 650.0, 4.0, 2.0);}
-HudMessageBold(s:GetCvarString("ScoreRemark"); HUDMSG_FADEOUT, 0, CR_DARKRED, 512.0, 670.0, 4.0, 2.0);
+HudMessage(s:GetCvarString("ScoreRemark"); HUDMSG_FADEOUT, 0, CR_DARKRED, 512.0, 480.0, 8.0, 2.0);
+HudMessage(s:"Season ",i:GetCvar("WDIMDISeason"); HUDMSG_FADEOUT, 1377,CR_GREY, 512.0, 510.0, 8.0, 2.0 );
+if (getcvar("RoundsLeft")>0) HudMessage(i:GetCvar("RoundsLeft")-1, s:" rounds left"; HUDMSG_FADEOUT, 0, CR_DARKRED, 512.0, 530.0, 8.0, 2.0);
+
+
+HudMessage(s: "TOP SURVIVORS\n\n\n\n",s: "\cg1. \cc",i: GetCvar(strParam(s:LVL , s:"_TopVictim1Score")),s:" PTS  ",s:GetCvarString(strParam(s:LVL , s:"_TopVictim1")),s:"\n\n",
+s: "\cg2. \cc",i: GetCvar(strParam(s:LVL , s:"_TopVictim2Score")),s:" PTS  ",s:GetCvarString(strParam(s:LVL , s:"_TopVictim2")),s:"\n\n",
+s: "\cg3. \cc",i: GetCvar(strParam(s:LVL , s:"_TopVictim3Score")),s:" PTS  ",s:GetCvarString(strParam(s:LVL , s:"_TopVictim3")),s:"\n\n",
+s: "\cg4. \cc",i: GetCvar(strParam(s:LVL , s:"_TopVictim4Score")),s:" PTS  ",s:GetCvarString(strParam(s:LVL , s:"_TopVictim4")),s:"\n\n",
+s: "\cg5. \cc",i: GetCvar(strParam(s:LVL , s:"_TopVictim5Score")),s:" PTS  ",s:GetCvarString(strParam(s:LVL , s:"_TopVictim5")); HUDMSG_FADEOUT, 1378, CR_GREY, 768.0, 550.0, 8.0, 1.0 );
+HudMessage(s: "TOP MUTILATORS\n\n\n\n",s: "\cg1. \cc",i: GetCvar(strParam(s:LVL , s:"_TopMutilator1Score")),s:" PTS ",s:GetCvarString(strParam(s:LVL , s:"_TopMutilator1")),s:"\n\n",
+s: "\cg2. \cc",i: GetCvar(strParam(s:LVL , s:"_TopMutilator2Score")),s:" PTS ",s:GetCvarString(strParam(s:LVL , s:"_TopMutilator2")),s:"\n\n",
+s: "\cg3. \cc",i: GetCvar(strParam(s:LVL , s:"_TopMutilator3Score")),s:" PTS ",s:GetCvarString(strParam(s:LVL , s:"_TopMutilator3")),s:"\n\n",
+s: "\cg4. \cc",i: GetCvar(strParam(s:LVL , s:"_TopMutilator4Score")),s:" PTS ",s:GetCvarString(strParam(s:LVL , s:"_TopMutilator4")),s:"\n\n",
+s: "\cg5. \cc",i: GetCvar(strParam(s:LVL , s:"_TopMutilator5Score")),s:" PTS ",s:GetCvarString(strParam(s:LVL , s:"_TopMutilator5")); HUDMSG_FADEOUT, 1379, CR_GREY, 256.0, 550.0, 8.0, 1.0 );
+ACS_NamedExecuteAlways("MDI_ShowVotes", 0);
 }
 }
 
+Script "MDI_ShowVotes"(void) NET
+{
+str voteresult = "against";
+str abst = "";
+if (MDIglobal[0] == 1) voteresult = "for";
+//if (MDIglobal[5] > 0) abst = strparam(i:MDIglobal[5], s:" abstained");
 
-
-
-
-
-
-
+SetHUDSize(1024, 768, 0);
+SetFont("confont");
+/*HudMessage(i:MDIglobal[2], s:"%*/HudMessage(s:"A majority voted ", s:voteresult, s:" 'The Mutilator' mode  (", s:MDIVoteDate, s:")"; HUDMSG_FADEOUT, 0, CR_GREY, 512.0, 630.0, 12.0, 2.0);
+HudMessage(i:MDIglobal[3], s:" voted YES    ", i:MDIglobal[4], s:" voted NO"/*, s:abst*/; HUDMSG_FADEOUT, 0, CR_GREY, 512.0, 645.0, 12.0, 2.0);
+}
 
 
 /*MMMMMMMMMMMMMMMMMMMMNNMMNMMMMMMMMMNMMMMMMMMMMMMMMMMM
@@ -316,17 +338,20 @@ function void resetinventoryselfMDI(void)
 				TakeActorInventory(ActivatorTID(), "Victim4", 999);
                 TakeActorInventory(ActivatorTID(), "Mutilator1", 999);
 				TakeActorInventory(ActivatorTID(), "Mutilator2", 999);
+				TakeActorInventory(ActivatorTID(), "Mutilator3", 999);
+				TakeActorInventory(ActivatorTID(), "Mutilator4", 999);
+				TakeActorInventory(ActivatorTID(), "Mutilator5", 999);
+				TakeActorInventory(ActivatorTID(), "Mutilator6", 999);
+				TakeActorInventory(ActivatorTID(), "Mutilator7", 999);
+				TakeActorInventory(ActivatorTID(), "Mutilator99", 999);
+				TakeActorInventory(ActivatorTID(), "Mutilator100", 999);
 				TakeActorInventory(ActivatorTID(), "IsVictim", 999);
 				TakeActorInventory(ActivatorTID(), "IsMutilator", 999);
 				TakeActorInventory(ActivatorTID(), "BEINGCHASED", 999);
 				TakeActorInventory(ActivatorTID(), "STARTEDCHASE", 999);
 				TakeActorInventory(ActivatorTID(), "SSTAMINA", 2999);
-				TakeActorInventory(ActivatorTID(), "SpeedPTS", 999);
 				TakeActorInventory(ActivatorTID(), "IsInWater", 999);
-				TakeActorInventory(ActivatorTID(), "IsInMDI", 999);
 				TakeActorInventory(ActivatorTID(), "VILL_gamecore", 999);
-				TakeActorInventory(ActivatorTID(), "Cassette_Player", 999);
-				TakeActorInventory(ActivatorTID(), "UsedDrugs", 999);
 				TakeActorInventory(ActivatorTID(), "DrugKit", 999);
 				TakeActorInventory(ActivatorTID(), "Methamphetamine", 999);
 				TakeActorInventory(ActivatorTID(), "Adrenaline_", 999);
@@ -339,7 +364,6 @@ function void resetinventoryselfMDI(void)
 				TakeActorInventory(ActivatorTID(), "Snakebit", 999);
 				TakeActorInventory(ActivatorTID(), "SSawhit", 999);
 				TakeActorInventory(ActivatorTID(), "EggClothOn", 999);
-				TakeActorInventory(ActivatorTID(), "IsInMDIFinale", 999);
 				TakeActorInventory(ActivatorTID(), "StunGas", 999);
 				TakeActorInventory(ActivatorTID(), "StunGasFinale", 999);
 				TakeActorInventory(ActivatorTID(), "VIDIMOST", 999);
@@ -378,10 +402,18 @@ function void resetinventoryselfMDI(void)
 				TakeActorInventory(ActivatorTID(), "VoteNo", 99);
 				TakeActorInventory(ActivatorTID(), "20Dollars", 99);
 				TakeActorInventory(ActivatorTID(), "wdimditosurvive", 99);
-				
+				TakeActorInventory(ActivatorTID(), "mutilatorbonusitem", 99);
+				TakeActorInventory(ActivatorTID(), "MDIpulse", 99);
+				TakeActorInventory(ActivatorTID(), "ClientDrugKitUsed", 99);
+				TakeActorInventory(ActivatorTID(), "RandomWeaponKit", 99);
+				TakeActorInventory(ActivatorTID(), "IsSneaking", 99);
+				TakeActorInventory(ActivatorTID(), "IsRunning", 99);
+				TakeActorInventory(ActivatorTID(), "InvInvCloak", 99);
+				TakeActorInventory(ActivatorTID(), "LatentFlashlight", 99); 
+				TakeActorInventory(ActivatorTID(), "ClientCanVote", 99);
 				
 				SetActorProperty(ActivatorTID(), APROP_Mass, 0x7fffffff);
-				if ((GetLevelInfo(LEVELINFO_LEVELNUM)>=40) && (GetLevelInfo(LEVELINFO_LEVELNUM)<=50))
+				if (MUTILATOR_MOD() > 0)
 				
 {
 				TakeActorInventory(ActivatorTID(), "Smallkit", 999);
@@ -401,16 +433,20 @@ function void resetinventoryMDI(void)
 				TakeActorInventory(TID_START+tx, "Victim4", 999);
                 TakeActorInventory(TID_START+tx, "Mutilator1", 999);
 				TakeActorInventory(TID_START+tx, "Mutilator2", 999);
+				TakeActorInventory(TID_START+tx, "Mutilator3", 999);
+				TakeActorInventory(TID_START+tx, "Mutilator4", 999);
+				TakeActorInventory(TID_START+tx, "Mutilator5", 999);
+				TakeActorInventory(TID_START+tx, "Mutilator6", 999);
+				TakeActorInventory(TID_START+tx, "Mutilator7", 999);
+				TakeActorInventory(TID_START+tx, "Mutilator99", 999);
+				TakeActorInventory(TID_START+tx, "Mutilator100", 999);
 				TakeActorInventory(TID_START+tx, "IsVictim", 999);
 				TakeActorInventory(TID_START+tx, "IsMutilator", 999);
 				TakeActorInventory(TID_START+tx, "BEINGCHASED", 999);
 				TakeActorInventory(TID_START+tx, "STARTEDCHASE", 999);
 				TakeActorInventory(TID_START+tx, "SSTAMINA", 2999);
-				TakeActorInventory(TID_START+tx, "SpeedPTS", 999);
 				TakeActorInventory(TID_START+tx, "IsInWater", 999);
 				TakeActorInventory(TID_START+tx, "VILL_gamecore", 999);
-				TakeActorInventory(TID_START+tx, "Cassette_Player", 999);
-				TakeActorInventory(TID_START+tx, "UsedDrugs", 999);
 				TakeActorInventory(TID_START+tx, "DrugKit", 999);
 				TakeActorInventory(TID_START+tx, "Methamphetamine", 999);
 				TakeActorInventory(TID_START+tx, "Adrenaline_", 999);
@@ -423,7 +459,6 @@ function void resetinventoryMDI(void)
 				TakeActorInventory(TID_START+tx, "Snakebit", 999);
 				TakeActorInventory(TID_START+tx, "SSawhit", 999);
 				TakeActorInventory(TID_START+tx, "EggClothOn", 999);
-				TakeActorInventory(TID_START+tx, "IsInMDIFinale", 999);
 				TakeActorInventory(TID_START+tx, "StunGas", 999);
 				TakeActorInventory(TID_START+tx, "StunGasFinale", 999);
 				TakeActorInventory(TID_START+tx, "VIDIMOST", 999);
@@ -431,7 +466,6 @@ function void resetinventoryMDI(void)
 				TakeActorInventory(TID_START+tx, "SKIPINTRO", 999);
 				TakeActorInventory(TID_START+tx, "IsQuiet", 999);
 				TakeActorInventory(TID_START+tx, "SawVampyr", 999);
-				TakeActorInventory(TID_START+tx, "IsInMDI", 999);
 				TakeActorInventory(TID_START+tx, "CanRecord", 999);
 				TakeActorInventory(TID_START+tx, "LetterRec", 999);
 				TakeActorInventory(TID_START+tx, "FistPenalty", 999);
@@ -463,15 +497,43 @@ function void resetinventoryMDI(void)
 				TakeActorInventory(TID_START+tx, "VoteNo", 99);
 				TakeActorInventory(TID_START+tx, "20Dollars", 99);
 				TakeActorInventory(TID_START+tx, "WDIMDItosurvive", 99);
+				TakeActorInventory(TID_START+tx, "mutilatorbonusitem", 99);
+				TakeActorInventory(TID_START+tx, "MDIpulse", 99);
+				TakeActorInventory(TID_START+tx, "ClientDrugKitUsed", 99);
+				TakeActorInventory(TID_START+tx, "RandomWeaponKit", 99);
+				TakeActorInventory(TID_START+tx, "IsSneaking", 99);
+				TakeActorInventory(TID_START+tx, "IsRunning", 99);
+				TakeActorInventory(TID_START+tx, "InvInvCloak", 99);
+				TakeActorInventory(TID_START+tx, "LatentFlashlight", 99);
+				TakeActorInventory(TID_START+tx, "ClientCanVote", 99);
 				
 				TakeActorInventory(TID_START+tx, APROP_Mass, 0x7fffffff);
-				if ((GetLevelInfo(LEVELINFO_LEVELNUM)>=40) && (GetLevelInfo(LEVELINFO_LEVELNUM)<=50))
+				if (MUTILATOR_MOD() > 0)
 {
 				TakeActorInventory(TID_START+tx, "Smallkit", 999);
 				TakeActorInventory(TID_START+tx, "FistWithFlashlight", 999);
 }
 }
 }
+
+
+str GoalBonus[15] =
+{"StunGas",
+"Drugkit",
+"Smallkit",
+"Drugkit",
+"SmokebombMDI",
+"Flare",
+"Drugkit",
+"SoundEmitterMDI",
+"Drugkit",
+"SmokeBombMDI",
+"Bigkit",
+"RaveKit",
+"",
+"",
+""};
+
 
 
 Script "MDI_EXIT" (VOID)
@@ -523,6 +585,7 @@ Thing_Activate(endcam[0]);
 
 function void givemutilatorequipment(int who)   //MDI EDIT takes/gives items right after givemurdererequipment function
 {
+	GiveActorInventory(who, "Slot1Filled", 1);
     GiveActorInventory(who, "PersonaLuck", 4);
 	TakeActorInventory(who, "MurderKnife", 999);
 	TakeActorInventory(who, "Victim1", 999);
@@ -548,118 +611,36 @@ function void givemutilatorequipment(int who)   //MDI EDIT takes/gives items rig
 	//
      GiveActorInventory(who, "RemoteCameraMDI", 1); // Remote Camera x1
 	 GiveActorInventory(who, "MurderDoorUnblocker", 1); // Remote Camera x1
-
-
-}
-
-
-script "MDI_nowdiMusic" open ////////////////////////////////////////////////global
+	 GiveActorInventory(who, MutilatorType[0],1);
+	 GiveActorInventory(who, "RemoteCameraMDI", 1);
+     
+	 //GiveActorInventory(who, "MutilatorSpecial", 1);
+if (CheckInventory("mutilatorbonusitem")) 
 {
-if ((GetLevelInfo(LEVELINFO_LEVELNUM)>=40) && (GetLevelInfo(LEVELINFO_LEVELNUM)<=50))
-{
-ResetInventory(); //precaut!on
-resetinventoryMDI(); //precaut!on
-//SetCVAR("MDIisACTIVE", false);
-delay(5);
-WDI_SetFinaleMusic("");
-TELEPPSEED = random(0,15);
-}
-else {}
-}
-
-
-///////////////////////////////////////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////////////////////////////////////   core game regulation
-
-script "gamepulse" (void)
-{
-	for(int m = 0; m < 32; m++)
-	{
-		if(CheckActorInventory(TID_START+gameinfo[2], "MurderMarker"))
-		{
-		}
-		else if((!CheckActorInventory(TID_START+gameinfo[2], "MurderMarker"))  && MDIFINALE == FALSE)
-		{
-		ACS_NamedExecuteAlways("MDI_ROUND_BEST_VICTIM", 0);
-		delay(1);
-		ACS_NamedExecuteAlways("OkVictimRecord", 0);
-		delay(2);
-		ResetMap();//Exit_Normal(0); resetmap
-		ResetInventory();
-		ResetInventoryMDI();
-		delay(5);
-		SetActivator(0, AAPTR_NULL);
-		ResetMap();//Exit_Normal(0);
-		}
-		else if((!CheckActorInventory(TID_START+gameinfo[2], "MurderMarker"))  && MDIFINALE == TRUE)
-		{
-		terminate;
-		}
-		delay(sek);
-		restart;
-		}
-		}
-
-
-
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////////////////////////////////////  DEATH SCRIPTS
-///////////////////////////////////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-
-
-script "MDIDEATH_STOPMUS" death
-{
-mdigame[16] = 1;
-if ((GetLevelInfo(LEVELINFO_LEVELNUM)>=40) && (GetLevelInfo(LEVELINFO_LEVELNUM)<=50))
-{
-LocalSetMusic("*");
-}
-if (checkInventory("IsAssist"))
-{
-Print(s:"Mutilator doesn't need your help anymore. It's time to die...");
+GiveInventory("TripShotgun", 1); GiveInventory("BeartrapStealth", 1); GiveInventory("Beartrap", 1);GiveInventory("UndeadCome", 1);
 }
 }
+
+
+
+
+
+
 
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////////      Additional Mutilator Behavior
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-int laughdel = 35;
-
-//int GotAssistant[2]={0,0};
 
 
-
-script "S_MutilatorNoSelfHear" (void) CLIENTSIDE
-{
-if (PlayerNumber() == ConsolePlayerNumber())
-{
-While(true)
-{
-StopSound(0, 6);
-delay(1);
-}
-}
-}
 
 script "S_ManiacLaugh" (void)
 {
-if(checkInventory("Assist1"))
-{ActivatorSound("CERBSEE", 127);}
-else
+while(true)
 {
-//ActivatorSound(MutilatorType[2], 127); 
 PlaySound(0,MutilatorType[2], 5 , 1.0,  false, ATTN_NORM, 0 );
-}
 delay(laughdel*35);
-restart;
+}
 }
 
 
@@ -667,19 +648,15 @@ restart;
 script "MutiRegen" (void)
 
 {
-If (GetCVAR("MDISTATE") < 2)
+while (GetCVAR("MDISTATE") < 3)
 {
 SetActorProperty(0, APROP_Health, 999);
 delay(35);
-restart;
 }
-else If (GetCVAR("MDISTATE") > 1)
-{
 delay(4*35);
 SetActorProperty(0, APROP_Health, (PlayerCount()*100)/2);
-//SetActorProperty(0, APROP_Health, ((GetActorProperty(TID_START+0, APROP_Health) + GetActorProperty(TID_START+1, APROP_Health) + GetActorProperty(TID_START+2, APROP_Health) + GetActorProperty(TID_START+3, APROP_Health) + GetActorProperty(TID_START+4, APROP_Health) + GetActorProperty(TID_START+5, APROP_Health) + GetActorProperty(TID_START+6, APROP_Health) + GetActorProperty(TID_START+7, APROP_Health) + GetActorProperty(TID_START+8, APROP_Health) + GetActorProperty(TID_START+9, APROP_Health) + GetActorProperty(TID_START+10, APROP_Health) + GetActorProperty(TID_START+11, APROP_Health) + GetActorProperty(TID_START+12, APROP_Health) + GetActorProperty(TID_START+13, APROP_Health) + GetActorProperty(TID_START+14, APROP_Health) + GetActorProperty(TID_START+15, APROP_Health) + GetActorProperty(TID_START+16, APROP_Health) + GetActorProperty(TID_START+17, APROP_Health) + GetActorProperty(TID_START+18, APROP_Health) + GetActorProperty(TID_START+19, APROP_Health) + GetActorProperty(TID_START+20, APROP_Health) + GetActorProperty(TID_START+21, APROP_Health) + GetActorProperty(TID_START+22, APROP_Health) + GetActorProperty(TID_START+23, APROP_Health) + GetActorProperty(TID_START+24, APROP_Health) + GetActorProperty(TID_START+25, APROP_Health) + GetActorProperty(TID_START+26, APROP_Health) + GetActorProperty(TID_START+27, APROP_Health) + GetActorProperty(TID_START+28, APROP_Health) + GetActorProperty(TID_START+29, APROP_Health) + GetActorProperty(TID_START+30, APROP_Health) + GetActorProperty(TID_START+31, APROP_Health) + GetActorProperty(TID_START+32, APROP_Health))/2 ));   //count mutilator's health with alive playas
 }
-}
+
 
 
 /////////////////////////////////////////////////////////////////////////////////////
@@ -688,11 +665,11 @@ SetActorProperty(0, APROP_Health, (PlayerCount()*100)/2);
 Script "S_UndeadCome" (void)
 {
 AmbientSound("YZLAUGHA", 127);
-SpawnspotForced("Trite", 3200+TELEPP[random(0,15)][random(0,30)], 11444, 0);
+SpawnspotForced("Trite", MDITELEPORTA+random(0,14), 11444, 0);
 delay(35);
-SpawnspotForced("FemaleZombie", 3200+TELEPP[random(0,15)][random(0,30)], 11444, 0);
-SpawnspotForced("FemaleZombie", 9102, 11444, 0);
-SpawnspotForced("Trite", 9101, 11444, 0);
+SpawnspotForced("FemaleZombie", MDITELEPORTA+random(15,31), 11444, 0);
+SpawnspotForced("FemaleZombie", mdigame[16] + 1, 11444, 0);
+SpawnspotForced("Trite", mdigame[16], 11444, 0);
 }
 
 Script "S_MutilatorGotItem" (void)
@@ -704,56 +681,11 @@ fadeto(0, 0, 0, 0.0, 2.0);
 }
 
 
-str MutilatorMusic[4] =
-{
-    "MutilatorMusic1",
-	"MutilatorMusic2",
-	"MutilatorMusic3",
-    "MutilatorMusic4"
-};
-
-	script "StopMutilatorMusic" (void)
-{
-LocalSetMusic("*");
-}
 
 
-	script "MutilatorMusic" (void)
-{
-ACS_NamedExecute(MutilatorMusic[Random(0,3)], 0);
-}
 
-	script "MutilatorMusic1" (void)
-{
-LocalSetMusic("MUTIMUS1");
-SetHudSize(640, 480, FALSE);
-SetFont("MUTIMUS1");
-hudmessage(s:"A";HUDMSG_FADEINOUT,7142,CR_UNTRANSLATED, 320.0, 240.0, 4.0, 1.0, 1.0);
-}
 
-	script "MutilatorMusic2" (void)
-{
-LocalSetMusic("MUTIMUS2");
-SetHudSize(640, 480, FALSE);
-SetFont("MUTIMUS2");
-hudmessage(s:"A";HUDMSG_FADEINOUT,7142,CR_UNTRANSLATED, 320.0, 240.0, 4.0, 1.0, 1.0);
-}
 
-	script "MutilatorMusic3" (void)
-{
-LocalSetMusic("MUTIMUS3");
-SetHudSize(640, 480, FALSE);
-SetFont("MUTIMUS3");
-hudmessage(s:"A";HUDMSG_FADEINOUT,7142,CR_UNTRANSLATED, 320.0, 240.0, 4.0, 1.0, 1.0);
-}
-
-	script "MutilatorMusic4" (void)
-{
-LocalSetMusic("MUTIMUS4");
-SetHudSize(640, 480, FALSE);
-SetFont("MUTIMUS4");
-hudmessage(s:"A";HUDMSG_FADEINOUT,7142,CR_UNTRANSLATED, 320.0, 240.0, 4.0, 1.0, 1.0);
-}
 
 
 	script "S_StunMutilator" (void)
@@ -769,8 +701,6 @@ delay(35*(random(mdigame[13],mdigame[14])));
 fadeto(64, 16, 16, 0.0, 3.0);
 SetPlayerProperty(0,  OFF, PROP_FROZEN);
 }
-else
-{}
 }
 
 	script "S_GreyMutilator" (void)
@@ -783,8 +713,6 @@ fadeto(96, 96, 96, 0.90, 1.0);
 delay(35*2);
 fadeto(96, 96, 96, 0.0, 10.0);
 }
-else
-{}
 }
 
 script "711MDI" (void) //if STATEMENTS AAAAAAAAAA
@@ -1007,191 +935,7 @@ script "712MDI" (void) ClientSide //onoff: 0 = OFF. 1 = ON. 2 = destroyed.
 
 
 
-script "SPEEDBOX" ENTER //NET CLIENTSIDE
-{
-if ((GetLevelInfo(LEVELINFO_LEVELNUM)>=40) && (GetLevelInfo(LEVELINFO_LEVELNUM)<=50))
-  {
-  While(true)
-  {
-  int xx, yy, zz, speeed;
-  {
-    xx = GetActorVelX(0);
-    yy = GetActorVelY(0);
-    zz = GetActorVelZ(0);
-    speeed = FixedMul(xx, xx) + FixedMul(yy, yy) + FixedMul(zz, zz);
-	{
-	if (FixedSqrt(speeed) == 0.0)
-	{
-	TakeInventory("VIDIMOST", 6);
-	}
-	else if ((FixedSqrt(speeed) >0.0) && (FixedSqrt(speeed) <=3.0)) //low
-	{
-	GiveInventory("IsQuiet", 1);
-	}
-	else if ((FixedSqrt(speeed) >3.0) && (FixedSqrt(speeed) <=6.0)) //normal
-	{
-		if (checkInventory("IsInWater"))
-	         { ActivatorSound("STEPWAS", 127); GiveInventory("VIDIMOST", 40);TakeInventory("IsQuiet", 99);}
-		   else if (!checkInventory("IsInWater"))
-	         { GiveInventory("VIDIMOST", 40);TakeInventory("IsQuiet", 99);}
-			if (CheckInventory("IsMutilator"))
-	         {
-TakeInventory("IsQuiet", 99);
-if ((!checkInventory("Assist1")) && (!checkInventory("Assist2")))
-{PlaySound(0,MutilatorType[3], 6 , 5.0,  false, ATTN_NORM, 0 );}
-else if (checkInventory("Assist1"))
-{PlaySound(0,"ASSISTA1", 6 , 5.0,  false, ATTN_NORM, 0 );}
-else if (checkInventory("Assist2"))
-{PlaySound(0,"ASSISTA2", 6 , 5.0,  false, ATTN_NORM, 0 );}
-SetFont("M_HEARD");
-HudMessage(s:"A"; HUDMSG_FADEOUT, 2449, CR_UNTRANSLATED, 0.977, 0.977, 0.3, 0.3);
-			 }
-			}
-	else if (FixedSqrt(speeed) >6.0) //fast
-	{
-			if (checkInventory("IsInWater"))
-	         { ActivatorSound("STEPWAS", 127);GiveInventory("VIDIMOST", 80); TakeInventory("IsQuiet", 99);}
-		   else if (!checkInventory("IsInWater"))
-	         { ActivatorSound("STEPRUN", 127); GiveInventory("VIDIMOST", 80); TakeInventory("IsQuiet", 99);}
-			if (CheckInventory("IsMutilator"))
-	         {
-TakeInventory("IsQuiet", 99);
-if ((!checkInventory("Assist1")) && (!checkInventory("Assist2")))
-{PlaySound(0,MutilatorType[3], 6 , 5.0,  false, ATTN_NORM, 0 );}
-else if (checkInventory("Assist1"))
-{PlaySound(0,"ASSIST1", 6 , 5.0,  false, ATTN_NORM, 0 );}
-else if (checkInventory("Assist2"))
-{PlaySound(0,"ASSIST2", 6 , 5.0,  false, ATTN_NORM, 0 );}
-SetFont("M_HEARD");
-HudMessage(s:"A"; HUDMSG_FADEOUT, 2449, CR_UNTRANSLATED, 0.977, 0.977, 0.3, 0.3);
-			 }
-	}
-	}
-	//print(f:FixedSqrt(speeed));
-    delay(10);
-  }
-}
-}
-else {}}
 
-
-
-script "MDI_SPEED" ENTER
-{
-int buttonz;
- while ((GetLevelInfo(LEVELINFO_LEVELNUM)>=40) && (GetLevelInfo(LEVELINFO_LEVELNUM)<=50))
- {
- buttonz = GetPlayerInput(-1, INPUT_BUTTONS);
- if (GetCVAR("MDISTATE") < 2)
-   {
-    if (checkinventory("IsVictim"))   /////////////////////////////////////////// VICTIMS
-	{
-
-
-         if ((buttonz & BT_FORWARD)|(buttonz & BT_BACK))
-
-				  {
-
-				  	if (buttonz & BT_ATTACK)
-
-	                        {
-	                        if (CheckInventory("SStamina")>=5)  {SetActorProperty(0, APROP_Speed, 0.65); TakeInventory("SStamina",mdigame[6]);}
-
-	                        else   {SetActorProperty(0, APROP_Speed, 0.35); 
-							if((checkinventory("victim1"))|(checkinventory("victim2"))) {ActivatorSound("SNDBRE", 127);}
-							if((checkinventory("victim3"))|(checkinventory("victim4"))) {ActivatorSound("SNDBREF", 127);}
-							delay(150); 
-							GiveInventory("SStamina",mdigame[5]);}
-							}
-
-                    else if (buttonz & BT_ALTATTACK)
-
-							{
-							SetActorProperty(0, APROP_Speed, 0.2);GiveInventory("SStamina",mdigame[5]);
-							}
-
-
-
-					 else
-
-						    {
-							SetActorProperty(0, APROP_Speed, 0.35); ;
-							}
-
-				  }
-
-          else
-
-
-				{
-				SetActorProperty(0, APROP_Speed, 0.2); GiveInventory("SStamina",mdigame[5]+random(-1,1));
-		        }
-
-      }
-	  else
-	  {
-	   if ((buttonz & BT_ATTACK)&&(CheckWeapon("Mutilator1")==true)) 
-	   {
-	      if (CheckInventory("gasoline")<32) {Print(s:"\cgNo Gasoline!"); delay(70);}//ACS_NAMEDEXECUTE("YESGASOLINE", 0);} //to fix that stupid skin switching bug when no gasoline cuz CountInv is not backported
-	      else  { LineAttack(0,GetActorAngle(ActivatorTID()), GetActorPitch( ActivatorTID()), 3, "FMBulletPuff2", "None", 32.0, FHF_NORANDOMPUFFZ| FHF_NOIMPACTDECAL, 0); TakeInventory("Gasoline", 4);
-	              LineAttack(0,GetActorAngle(ActivatorTID()), GetActorPitch( ActivatorTID()), 1, "MutilatorPuff", "None", 32.0, FHF_NORANDOMPUFFZ| FHF_NOIMPACTDECAL, 0); TakeInventory("Gasoline", 3);}
-		}
-		if (CheckInventory("Mutilator1")) {GiveInventory("Gasoline", 1);}
-	  //SetActorProperty(0, APROP_Speed, 0.5);  //isMutilator
-
-{/*if(CheckInventory("IsAssist1")) {SetActorProperty(0, APROP_Speed, 0.42);} else*/ {SetActorProperty(0, APROP_Speed, 0.5);}} //isMutilator
-
-      }
-	 }
-  else if (GetCVAR("MDISTATE") > 1)
-  {
-  if ((buttonz & BT_ATTACK)&&(CheckWeapon("Mutilator1")==true)) 
-	   {
-	      if (CheckInventory("gasoline")<32) {Print(s:"\cgNo Gasoline!"); delay(70);}//ACS_NAMEDEXECUTE("YESGASOLINE", 0);} //to fix that stupid skin switching bug when no gasoline cuz CountInv is not backported
-	      else  { LineAttack(0,GetActorAngle(ActivatorTID()), GetActorPitch( ActivatorTID()), 4, "FMBulletPuff2", "None", 32.0, FHF_NORANDOMPUFFZ| FHF_NOIMPACTDECAL, 0); TakeInventory("Gasoline", 5);}
-	    }
-		if (CheckInventory("Mutilator1")) {GiveInventory("Gasoline", 1);}
-   SetActorProperty(0, APROP_Speed, 0.8);
-  }
- delay(1);
- }
-}
-
-
-
-/*Script "YESGASOLINE" (void)
-{
-if (mdigame[16] == 1)
-{
-mdigame[16] = 0; delay(70); mdigame[16] = 1;
-}
-}*/
-script "test" (void)
-{
-TakeInventory("IsVictim", 99);
-Giveinventory("IsMutilator",1);
-}
-//////////
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////////////////////////////////////      Mutilator & Victims Speeds
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-
-script "LowSpeed" (void)
-{
-SetAmmoCapacity("SpeedPTS", 4);
-}
-
-script "NormalSpeed" (void)
-
-{
-SetAmmoCapacity("SpeedPTS", 7);
-}
-
-script "FastSpeed" (void)
-{
-SetAmmoCapacity("SpeedPTS", 12);
-}
 
 
 
@@ -1200,26 +944,12 @@ SetAmmoCapacity("SpeedPTS", 12);
 /////////////////////////////////////////////////////     In/Off Water
 ////////////////////////////////////////////////////////////////////////
 
-script "S_IsInWater" (void)
-{
-GiveInventory("IsInWater", 1);
-if (CheckClass("SpecHound") == true) {AMBIENTSOUND("SD_ACCD2", 127);}
-}
+script "S_IsInWater" (void) { GiveInventory("IsInWater", 1); }
 
 
-script "S_IsOnGround" (void)
-{
-TakeInventory("IsInWater", 999);
-//if (CheckClass("SpecHound") == true) {SetCVAR("defHoundSpeed", 5.0);}
-}
+script "S_IsOnGround" (void) { TakeInventory("IsInWater", 999); }
 
 
-
-
-
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////////////////////////////////////      additional stamina regulations
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
 
@@ -1236,11 +966,11 @@ TakeInventory("IsInWater", 999);
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
-
+int chasedist = 1536;
 
 script "define_gplayacount" OPEN
 {
-if ((GetLevelInfo(LEVELINFO_LEVELNUM)>=40) && (GetLevelInfo(LEVELINFO_LEVELNUM)<=50))
+if (MUTILATOR_MOD() == 1)
   {
 	While(true)
 	{
@@ -1257,17 +987,11 @@ delay(sek*2);
 }
 else{}
 }
-/*
-str MissionPlayersINFO[7] = {"\n\n\n\nYou're playing single.",  //0
-"\n\n\n\n\cgIt's just you and the Mutilator, nobody to help you out. Stay sharp!",//1
-	"\n\n\n\n\cgJust about a quarter of your friends alive after the bus crash.. \n\n\n\n And remember, The more victims die, the easier game will become.", //3
-	"\n\n\n\n\cgRight now it's almost a dozen of players in game, so you have good chances to make it through! \n\n\n\n The more victims die, the easier game will become.", //3
-	"\n\n\n\n\cgMany players on a server right now, it will be challenging to find desired items and evade the villain. Be cautious enough! \n\n\n\n The more victims die, the easier game will become.",//4
-	"\n\n\n\n\cgA lot of players on a server right now, so it will be harder to find desired items and evade the villain. Be very cautious! \n\n\n\n The more victims die, the easier game will become.",//5
-	"\n\n\n\n\cgIt's too many players on a server, so it will be much much harder to find desired items and evade the villain. Be extremely careful! \n\n\n\n The more victims die, the easier game will become."};//6
-*/
+
+
 script "define_MDIgame" (VOID)
 {
+
 for(int ca = 0; ca < 32; ca++)
 {/////////////////////////   Game Tempo     add.victimPTS  MTLR Laugh delay   Give Stamina    Take Stamina                                                           normal TakeSpeed ; if it bugs off
      if (mdigame[0] == 6) {mdigame[1] = 35; mdigame[2] = 0; mdigame[3] = 20; mdigame[5] = 2; mdigame[6] = 20; GiveActorInventory(TID_START+ca, "StageRangeMDI3", 1);}   
@@ -1291,48 +1015,25 @@ Script "S_StageRangeMDI0" (void) {SetAmmoCapacity("stagerange", 6400);}
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////////      OutlastMusic
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-str chasesongs[5] =
-{
-    "MZCHASE1",
-    "MZCHASE2",
-	"MZCHASE3",
-	"MZCHASE4",
-	"MZCHASE5"
-};
 
-Script "CHASEMUSIC" ENTER
-{
-While((GetLevelInfo(LEVELINFO_LEVELNUM)>=40) && (GetLevelInfo(LEVELINFO_LEVELNUM)<=50))
-{
-	if ((CheckInventory("Murdererkey"))|(CheckInventory("IsMutilator")))
-{LocalSetMusic("*"); delay(1); Terminate;}
-	if ((!CheckInventory("IsMutilator")) && (CheckInventory("IsInMDIFinale")))
-	{
-}
-else if ((!CheckInventory("IsMutilator")) && (CheckInventory("BEINGCHASED") == 0))
-{
-TakeInventory("STARTEDCHASE", 99);
-}
-else if ((!CheckInventory("IsMutilator")) && (CheckInventory("BEINGCHASED") == 1))
-{
-LocalAmbientSound("MZCHASE0", 127);
-LocalSetMusic("D_TISHIN");
-TakeInventory("STARTEDCHASE", 99);
-}
-else if ((!CheckInventory("IsMutilator")) && (CheckInventory("BEINGCHASED") > 1) && (!CheckInventory("STARTEDCHASE")))
-{
-LocalSetMusic(chasesongs[Random(0,4)]);
-GiveInventory("BEINGCHASED", 25);
-GiveInventory("STARTEDCHASE", 1);
-}
-else if ((!CheckInventory("IsMutilator")) && (CheckInventory("BEINGCHASED") > 1) && (CheckInventory("STARTEDCHASE")))
-{
-}
-If (CheckInventory("truNMARER")) {terminate;}
-delay(35);
-TakeInventory("BEINGCHASED", 1);
-}
-}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// //// /// // /
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// //// /// // /
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// //// /// // /
@@ -1345,145 +1046,10 @@ TakeInventory("BEINGCHASED", 1);
 
 
 
-
 ///////////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////////   PLAYER PREPARATIONS
 
-str RandVictim[4] =
-{
-"Victim1",
-"Victim2",
-"Victim3",
-"Victim4"};
 
-
-
-script "MDI_PLAYERS_ENTER" ENTER
-{
-delay(1);
-SetActorProperty(0, APROP_DamageFactor, 1.0);
-if ((GetLevelInfo(LEVELINFO_LEVELNUM)>=40) && (GetLevelInfo(LEVELINFO_LEVELNUM)<=50))
-  {
-delay(2);
-GiveInventory("IsInMDI", 1); 
-delay(3);
-ACS_NAMEDEXECUTE("MDI_PrintScoreboard_ENTER", 0);
-SetAmmoCapacity("LessRange", 1);
-GiveInventory(RandVictim[random(0,3)], 1);
-SetAmmoCapacity("PersonaLuck", random(1,4));
-SetAmmoCapacity("ClothStatus", 0);
-SetAmmoCapacity("UsedDrugs", 1);
-setAmmoCapacity("SpeedPTS", 7);
-GiveInventory("SpeedPTS", 12);
-GiveInventory("SStamina", 9999);
-SetFont("confont");
-HudMessage(s: MDIadvice[random(0,3)]; HUDMSG_FADEOUT, 1777, CR_DARKGREEN, 0.5, 0.97, 3.0, 1.0 );
-}
-else {}}
-
-
-
-
-
-
-
-
-
-
-
-
-
-script "GENERAL_START" OPEN
-{
-if ((GetLevelInfo(LEVELINFO_LEVELNUM)>=40) && (GetLevelInfo(LEVELINFO_LEVELNUM)<=50))
-  {
-	  While(true)
-	  {
-	for(int m = 0; m < 32; m++)
-	{
-		if(CheckActorInventory(TID_START+gameinfo[2], "MurderMarker"))
-		{
-
-			delay(35); //give a time to reload murder equipment to Mutilator's
-		ACS_NamedExecuteAlways("S_whoismaniac", 0);
-		//ACS_NamedExecuteAlways("gamepulse", 0);
-		terminate;
-		}
-		else if(!CheckActorInventory(TID_START+gameinfo[2], "MurderMarker"))
-		{
-		delay(1);
-		}}}}
-else{}
-}
-
-
-
-script "S_whoismaniac" (void)
-{
-	for(int m = 0; m < 32; m++)
-	{
-		GiveActorInventory(TID_START+m, "deco_areyoumaniac", 1);
-	}
-}
-
-script "S_areyoumaniac" (void)
-{
-
-	if (CheckInventory("MurdererKey"))
-	{
-		//teleport(90, 0, 1);
-		ACS_TERMINATE(411, 0); //no tk in MDI
-		SetPlayerProperty(0,  ON, PROP_FROZEN);
-		//ClearInventory();
-		delay(1);
-		//SpawnspotForced(MutilatorType, ActivatorTID(),0,0);
-		//GiveInventory(MutilatorType, 1);
-		wdimdiadd[4]=3;
-		GiveMutilatorEquipment(ActivatorTID());
-		GiveInventory("Slot1Filled",1);
-		delay(1);
-		GiveInventory("Cassette_Player",999);
-		GiveInventory(MutilatorType[0],1);
-	TakeInventory("SmallKit", 999);
-	TakeInventory("Flare", 999);
-	TakeInventory("BigKit", 999);
-ACS_NamedExecuteAlways("S_MutilatorNoSelfHear", 0);
-//ACS_NamedExecute("S_Take_murd_wdi_shit", 0);
-ACS_NamedExecuteAlways("S_ManiacLaugh", 0);
-ACS_NamedExecute("MutiRegen", 0);
-ACS_NamedExecute("TakeQuestTimer", 0);
-SetPlayerProperty(0,  ON, PROP_FROZEN);
-			//SetFont("confont");
-			//HudMessage(s:" \cgFind and kill as many victims as possible until \ci05:00\cg AM! \n\n\n\n\n \cgThe more victims you get, the better will be your chances to win the round at the end. \n\n\n\n\n Good Hunting!"; HUDMSG_FADEOUT, 2000, CR_RED, 0.5, 0.5, 10.0, 1.0, 0.25);
-
-		SetActivator(0, AAPTR_NULL);  /////////////////////////////////////ActivatorBeyond
-ACS_NamedExecute("MDI_INTRO2", 0);
-//ACS_NamedExecute("TeleportPlayerstoNull2", 0);
-delay(1);
-Thing_Move(TID_START+gameinfo[2], 3333, 1);
-	}
-	else if (!CheckInventory("MurdererKey"))
-      {
-GiveInventory("SStamina", 9999);
-SetFont("confont");
-if (PlayerCount() > 4) {GiveInventory("NMARER", 1);}
-//HudMessage(s:" \cgSurvive till \ci05:00\cg AM. \n\n\n\n\n Follow the instructions below to gain \cjPOINTS \n\n\n \cgThe more POINTS you get until that time, the higher chances You'll have to defeat The Mutilator in the final battle.", s: MissionPlayersINFO[mdigame[0]], s:"  \n\n\n\n\n\n\n \cjLMB to run. \n\n\cjAltFire to sneak."; HUDMSG_FADEOUT, 2000, CR_RED, 0.5, 0.5, 15.0, 1.0, 0.25);
-
-if ((checkInventory("Victim1"))||(checkInventory("Victim2"))||(checkInventory("Victim3"))||(checkInventory("Victim4")))
- {
- }
-else { GiveInventory(RandVictim[random(0,3)], 1);} //give victim shit to this ignorant motherfucker already
-
-if (!checkInventory("IsInMDI"))
-{
-GiveInventory("IsInMDI", 1);
-SetAmmoCapacity("ClothStatus", 0); 
-}
-	}
-}
-
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////////////////////////////////////      SINGLEPLAYER
 int RandArea[4] =
 {
 0,
@@ -1493,16 +1059,381 @@ int RandArea[4] =
 
 
 
+
+script "MDI_PLAYERS_ENTER" ENTER
+{
+delay(1);
+SetActorProperty(0, APROP_DamageFactor, 1.0);
+if (MUTILATOR_MOD() > 0)
+  {
+delay(3);
+SetAmmoCapacity("LessRange", 1);
+SetAmmoCapacity("BeingChased", 0);
+GiveInventory(strparam(s:"VICTIM", i:random(1,4)), 1); 
+SetAmmoCapacity("PersonaLuck", random(1,4));
+SetAmmoCapacity("ClothStatus", 0);
+GiveInventory("SStamina", 9999);
+}
+}
+
+
+// this script plays slightly before Mutilator was chosen. Time of it happening is defined by    wdimdiadd[17]
+Script "MDI_INTRO" (void) 
+{
+if (MUTILATOR_MOD() == 0) Terminate;
+//USED ONLY IN MAPS!!!!
+}
+
+
+// this script plays while mutilator is being chosen
+script "MurdChoosingEX" (void) 
+{
+if (MUTILATOR_MOD() == 0) Terminate;
+//USED ONLY IN MAPS!!!!
+}
+
+
+
+//Script commences once mutilator was chosen
+script "MurdChosenEX" (int Murderer)
+{
+if (MUTILATOR_MOD() == 0) Terminate;
+SetCVAR("MDISTATE", 1);
+GiveMutilatorEquipment(TID_START+gameinfo[2]);
+wdimdiadd[4]=3;
+SetPlayerProperty(1,  ON, PROP_TOTALLYFROZEN);
+
+AmbientSound("Game/MurdererChosen",127);
+SetLineBlocking(16898, BLOCK_NOTHING);
+SetLineTexture(16899, SIDE_FRONT, TEXTURE_MIDDLE, "TELR1");
+ACS_NamedExecute("MDI_PROLOGUE", 0);
+if(mdiprologue == true)
+{
+  while((mdigame[12] <= (PlayerCount()/2))  &&  (mdiprologue == true))
+   {
+   delay(1);
+   }
+
+mdiprologue = false;
+ACS_NamedTerminate("MDI_PROLOGUE", 0);
+ACS_NamedExecuteAlways("MDI_START", 0);
+}
+}
+
+
+
+
+
+
+Script "MDI_PROLOGUE" (void) 
+{
+}
+
+
+Script "MDI_TeleportToMap" (void)
+{
+int counter;
+While(counter < 32)
+ {
+ Thing_move(TID_START + counter, MDITELEPORTA + counter, 1);
+ SetActorAngle(TID_START + counter, Getactorangle(MDITELEPORTA + counter));
+ counter++;
+ }
+}
+
+Script "MDI_START" (void)
+{
+GiveActorInventory(TID_START+gameinfo[2], "MutilatorSpecial", 1);
+ACS_NamedExecute("TakeQuestTimer", 0);
+for(int v = 0; v < 32; v++)
+   {
+	   if (!CheckActorInventory(TID_START+v, "murdererkey")) //Victims
+	      {
+	        if (CheckActorInventory(TID_START+v, "mutilatorbonusitem")) {GiveActorInventory(TID_START+v, GoalBonus[random(0,1)], 1); GiveActorInventory(TID_START+v, "SmokebombMDI", 1); } 
+			GiveActorInventory(TID_START+v, "SStamina", 9999);
+			GiveActorInventory(TID_START+v, "VictimSpecial", 1);
+   }
+}
+
+FadeTo(0, 0, 0, 1.0, 0.0);
+
+ACS_NamedExecute("MDI_TeleportToMap", 0);
+delay(35);
+SetPlayerProperty(1,  OFF, PROP_TOTALLYFROZEN);
+changecamera(0, 1, 0);
+ACS_NamedExecute("MDI_GAME_STARTS_additionals", 0);
+ACS_NamedExecute("zebtimer", 0);
+ACS_NamedExecute("draw_clockicon", 0);
+FadeTo(0, 0, 0, 0.0, 2.0);
+SetCVAR("MDISTATE", 2);
+}
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////    HARDMODE    /////////////  SKIP INTRO CUTSCENE
+/////////////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+
+
+
+
+
+Script "MDI_SKIP_NIGHTMARE" (void)
+{
+//int buttonzz;
+//bool skip = false;
+//bool nightmare = false;
+ while(mdiprologue == true)
+ {
+SetFont("confont");
+if(mdigame[12] <= (PlayerCount()/2))
+HudMessageBold(s: "\cr", d: (FixedDiv(Int2Fix(mdigame[12]), Int2Fix(PlayerCount()))* 100) >> 16 , s: "% want to skip"; HUDMSG_FADEOUT, 1722, CR_DARKRED, 0.5, 0.90, 2.0, 1.0 );
+delay(35);
+}
+if(mdigame[12] > (PlayerCount()/2)) HudMessageBold(s: "Skipping..."; HUDMSG_FADEOUT, 1722, CR_RED, 0.5, 0.90, 2.0, 1.0 ); 
+TERMINATE;
+}
+
+
+
+
+
+
+
+
+
+script "S_MutilatorSpecial" (void)
+{
+if (MUTILATOR_MOD() == 2) Terminate;
+ACS_NamedExecute("S_ManiacLaugh",0);
+ACS_NamedExecute("S_ManiacLaugh", 0);
+ACS_NamedExecute("MutiRegen", 0);
+
+//SetPlayerProperty(0,  ON, PROP_TOTALLYFROZEN);
+ACS_NamedExecute("MutilatorWait",0);
+GiveInventory("IsMutilator",1);
+GiveInventory("FistPenalty",2);
+ACS_NamedExecute("MutilarMapAdd",0);
+TakeInventory("MarkMe", 99);
+LocalSetMusic("*");
+
+}
+
+
+script "S_VictimSpecial" (void)
+{
+if (MUTILATOR_MOD() == 2) Terminate;
+if ((checkInventory("Victim1"))||(checkInventory("Victim2"))||(checkInventory("Victim3"))||(checkInventory("Victim4")))  {}
+else { GiveInventory(strparam(s:"VICTIM", i:random(1,4)), 1) ;} //give victim shit to this ignorant motherfucker already
+ACS_NamedExecuteAlways("S_SetMission",0);
+SetActorProperty(0, APROP_Mass, 100);
+SetAmmoCapacity("AreaTarget", RandArea[random(1,3)]);
+SetAmmoCapacity("StageStatus", 100);
+//TakeInventory("SKIPINTRO", 99);
+//TakeInventory("NMARER", 99);
+SetAmmoCapacity("PersonaLuck", random(1,4));
+SetAmmoCapacity("StageIcon", mdigame[7]+1);
+GiveInventory("IsVictim",1);
+SetAmmoCapacity("PTSchance", 0);
+GiveInventory("QuestTimer",60);
+GiveInventory("FistPenalty",2);
+GiveInventory("SStamina", 9999);
+ACS_NamedExecuteALWAYS("VictimMapAdd",0);
+			delay(15);
+			//ACS_NamedExecuteAlways("STAGE",0);
+			ACS_NamedExecuteAlways("STAGEinfo",0);
+			delay(5);
+//SetPlayerProperty(1,  OFF, PROP_TOTALLYFROZEN);
+}
+
+
+
+//int mdigamestarted = false;
+Script "MutilarMapAdd" (VOID)
+{}
+
+
+
+
+Script "VictimMapAdd" (VOID)
+{
+If (CheckInventory("Flare")>1)
+{TakeInventory("Flare", 1); }
+delay(70);
+restart;
+}
+
+
+
+int mutititid = 14390;
+
+script "MutilatorWait" (void)
+{
+int wait = 12;
+while (mdiprologue == true) delay(5);
+
+//then continue
+SpawnForced("dec_MutiWaitRemain", GetActorX(0), GetActorY(0), GetActorZ(0)+64.0, mutititid, 0);
+
+while(wait > 0)
+{
+str MutiWaitRemain = StrParam(s: "MUTITI", i: wait);
+PlaySound(0,MutilatorType[3], 6 , 1.0,  false, ATTN_NORM, 0 );
+SetPlayerProperty(0,  ON, PROP_TOTALLYFROZEN);
+FadeTo(0, 0, 0, 1.0, 0.0);
+SetActorState (mutititid, MutiWaitRemain, TRUE);
+SetFont("confont");
+HudMessage(s: "Alive in ", i: wait; HUDMSG_FADEOUT, 17321, CR_RED, 0.5, 0.90, 2.0, 1.0 );
+
+delay(35);
+wait--;
+}
+
+SetActorState (mutititid, "MUTITI0", TRUE);
+SetActorProperty(0, APROP_Mass, 50);
+SetPlayerProperty(0,  OFF, PROP_TOTALLYFROZEN);
+FadeTo(0, 0, 0, 0.0, 3.0);
+}
+
+
+
+Script "MDI_TakeSanity" (void)
+{
+While(gameinfo[1] != GAMESTATE_GAMEOVER)
+{
+TakeActorInventory(TID_START+gameinfo[2], "MadMeter", 1);
+delay(15);
+}
+}
+
+str fnlphsmus[7] =
+{"B9KQ3V9H",
+"MZCHASE1",
+"MZCHASE3",
+"MZCHASE5",
+"D_HLMS02",
+"INCU7XW1",
+"D_FINAL5"};
+
+
+script "FINAL_PHASE_add" (void) {}
+
+SCript "FINAL_PHASE" (VOID)
+{
+ACS_NamedExecute("FINAL_PHASE_add", 0);   
+for(int i = 0; i < 32; i++)
+{
+if (checkActorInventory(TID_START+i, "IsVictim")) {GiveActorInventory(TID_START+i,"MDI_BEHINDYOU", 1);}
+}
+wdimdiadd[4]=1;
+
+wdimdiadd[9] = (tallycounts[0]+playinfo[3]); //counting murdkills before finaphase
+
+//wdimdiadd[9]=(tallycounts[0]+(playinfo[3]); //then we reduce kills cost when cavegame starts
+SetPlayerProperty(1,  ON, PROP_TOTALLYFROZEN);
+Wdi_Setinvulnerable(TRUE);
+delay(60);
+for(int k = 0; k < 32; k++){GiveActorInventory(TID_START+k,"FINAL_PHASE_PLAYERS", 1);}
+SetActivator(0, AAPTR_NULL);
+SetMusic("*");
+mdigame[13] -= 5; //decrease stun time
+mdigame[14] -= 8; //decrease stun time
+ACS_NAMEDEXECUTE("MDI_ROUND_BEST_VICTIM", 0);
+fadeto(0, 0, 0, 1.0, 0.0);
+delay(140);
+Thing_Remove(5577);
+fadeto(0, 0, 0, 0.0, 2.0);
+AmbientSound(MutilatorType[10], 127);
+delay(105);
+SetPlayerProperty(1,  OFF, PROP_TOTALLYFROZEN);
+ for(int n = 0; n < 32; n++)
+	{
+      	if(CheckActorInventory(TID_START+n, "StunGas"))
+			{
+			    TakeActorInventory(TID_START+n, "StunGas", 99);
+				GiveActorInventory(TID_START+n, "StunGasFinale", 1);
+			}
+}
+Wdi_Setinvulnerable(FALSE);
+SetMusic(fnlphsmus[random(0,6)]);
+Ceiling_MoveToValue(118, 3, 328, 0);
+delay(15*35);
+ACS_NamedExecute("MDI_TakeSanity", 0);
+delay(20*50);
+SpawnSpotForced("FakePlank", mdigame[19], 0, 0);
+}
+
+
+script "S_FINAL_PHASE_PLAYERS" (void)
+{
+//str GetVictimType = StrParam( s:"Victim", c:GetChar(GetWeapon(), 6));
+if (Checkinventory("MurdererKey"))
+{
+TakeInventory("IsInWater", 99);
+SetFont("confont");
+HudMessage(s: "ENOUGH! \n\n\nIt's time to play for real now!"; HUDMSG_FADEOUT, 1557, CR_RED, 0.5, 0.7, 4.0, 1.0 );
+Teleport(mdigame[17], 0, 1);
+delay(1);
+SetActorProperty(0, APROP_Health, (50*PlayerCount())-50); 
+LocalAmbientSound(MutilatorType[2], 127);
+delay(140);
+delay(3*35);
+SetAmmoCapacity("StageStatus", 666);
+ACS_NamedExecuteAlways("STAGEinfo",0);
+}
+else if (!Checkinventory("MurdererKey"))
+{
+If (Checkinventory("IsMutilator"))
+{
+resetinventoryself();
+delay(1);
+TakeInventory("SmallKit",99);
+GiveInventory("Slot1Filled",1);//mutilatorssisters
+SetFont("confont");
+HudMessage(s: "Help Mutilator, kill the victims!"; HUDMSG_TYPEON, 1557, CR_RED, 0.5, 0.5/*320.0, 242.0*/, 2.0, 0.03, 1.0);
+}
+if ((CheckWeapon("Victim1"))|(CheckWeapon("Victim2"))) {LocalAmbientSound("P1Death", 127);}
+if ((CheckWeapon("Victim3"))|(CheckWeapon("Victim4"))) {LocalAmbientSound("MKFSTUN", 127);}
+delay(1);
+SetAmmoCapacity("StageStatus", 555);
+TakeInventory("IsInWater", 99);
+TakeInventory("FistPenalty", 99);
+TakeInventory("Victim1", 999);TakeInventory("Victim2", 999);TakeInventory("Victim3", 999);TakeInventory("Victim4", 999);
+delay(1);
+thing_move(ActivatorTID(), mdigame[18]+PlayerNumber(), 1);
+delay(1);
+ACS_NAMEDEXECUTEALWAYS("SwitchWeapon", 0);
+SetActorProperty(0, APROP_Health, 100);
+LocalAmbientSound("SDCONTUS", 127);
+delay(140);
+ACS_NAMEDTERMINATE("OKSPIN", 0);
+
+
+delay(3*35);
+}
+}
+
+
+
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////      SINGLEPLAYER
+
+
 Script "SINGLE" (VOID)
 {
+int ran = random(0,31);
 SetCvar("dwangostart", 777);
 fadeto(0,0,0, 1.0, 1.0);
 delay(40);
 /////////////////////////
 //Print(d: 3200+TELEPP[TELEPPSEED][ActivatorTID()-600]); //teleport tid
 /////////////////////////
-thing_move(ActivatorTID(), 3200+TELEPP[TELEPPSEED][ActivatorTID()-600], 1);
-SetActorAngle(ActivatorTID(), Getactorangle(3200+TELEPP[TELEPPSEED][ActivatorTID()-600]));
+thing_move(ActivatorTID(), 3200+ran, 1);
+SetActorAngle(ActivatorTID(), Getactorangle(3200+ran));
 ACS_NamedExecute("FADE_TimeAreaS", 0);
 delay(1);
 delay(35);
@@ -1522,110 +1453,7 @@ ACS_NamedExecute("MDI_GAME_STARTS_additionals", 0);
 }
 
 
-script "SetAreaTarget_START" (int arg3)
-{
-SetAmmoCapacity("AreaTarget", arg3);
-}
 
-
-///////////////////////////////////////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////////////////////////////////////   mini-tutorial
-//int mdigamestarted = false;
-Script "MutilarMapAdd" (VOID)
-{}
-
-
-
-Script "S_TUTORIAL" (VOID)
- {
-//mdigamestarted = true;
-if (Checkinventory("MurdererKey"))
- {
- AmbientSound("Game/MurdererChosen",127);
-SetLineBlocking(16898, BLOCK_NOTHING);
-SetLineTexture(16899, SIDE_FRONT, TEXTURE_MIDDLE, "TELR1");
-FadeTo(0, 0, 0, 1.0, 0.0);
-SetPlayerProperty(0,  ON, PROP_FROZEN);
-changecamera(0, 1, 0);
-ACS_NamedExecuteALWAYS("MutilatorWait",0);
-GiveInventory("IsMutilator",1);
-GiveInventory("FistPenalty",2);
-TakeInventory("SKIPINTRO", 99);
-//ACS_NamedExecuteALWAYS("Deassistation",0);
-ACS_NamedExecuteALWAYS("SwitchWeaponForced",0);
-ACS_NamedExecuteALWAYS("LookAtVictims",0);
-ACS_NamedExecuteALWAYS("MutilarMapAdd",0);
-Spawn("dec_MutiWaitRemain", GetActorX(0), GetActorY(0), GetActorZ(0)+64.0, 14390, 0);
-if (mdigame[0]>2) 
-{
-//GotAssistant[0] = 1;
-}
-/*if (mdigame[0]>5) 
-{
-GotAssistant[1] = 1;
-}*/
-delay(35);
-TakeInventory("MarkMe", 99);
-LocalSetMusic("*");
- }
- else if (!Checkinventory("MurdererKey"))
- {
-ACS_NamedExecuteAlways("S_SetMission",0);
-			SetActorProperty(0, APROP_Mass, 100);
-SetAmmoCapacity("AreaTarget", RandArea[random(1,3)]);
-SetAmmoCapacity("StageStatus", 100);
-TakeInventory("SKIPINTRO", 99);
-TakeInventory("NMARER", 99);
-SetAmmoCapacity("PersonaLuck", random(1,4));
-SetAmmoCapacity("StageIcon", mdigame[7]+1);
-GiveInventory("IsVictim",1);
-SetAmmoCapacity("PTSchance", 0);
-GiveInventory("QuestTimer",60);
-GiveInventory("FistPenalty",2);
-GiveInventory("SStamina", 9999);
-ACS_NamedExecuteALWAYS("VictimMapAdd",0);
-			delay(15);
-			ACS_NamedExecuteAlways("STAGE",0);
-			ACS_NamedExecuteAlways("STAGEinfo",0);
-			delay(5);
-FadeTo(0, 0, 0, 0.0, 2.0);
-SetPlayerProperty(1,  OFF, PROP_FROZEN);
-changecamera(0, 1, 0);
- }
-}
-
-Script "VictimMapAdd" (VOID)
-{
-If (CheckInventory("Flare")>1)
-{TakeInventory("Flare", 1); }
-delay(70);
-restart;
-}
-
-
-script "MutilatorWait" (void)
-{
-str MutiWaitRemain = StrParam(s: "MUTITI", d: GetAmmoCapacity("mutiwait"));
-if (GetAmmoCapacity("mutiwait") > 0)
-{SetAmmoCapacity("mutiwait", GetAmmoCapacity("mutiwait")-1);
-PlaySound(0,MutilatorType[3], 6 , 1.0,  false, ATTN_NORM, 0 );
-SetPlayerProperty(0,  ON, PROP_FROZEN);
-FadeTo(0, 0, 0, 1.0, 0.0);
-SetActorState (14390, MutiWaitRemain, TRUE);
-SetFont("confont");
-HudMessage(s: "Alive in ", i: GetAmmoCapacity("mutiwait"); HUDMSG_FADEOUT, 17321, CR_RED, 0.5, 0.90, 2.0, 1.0 );
-}
-else if (GetAmmoCapacity("mutiwait") <= 0)
-{
-SetActorState (14390, "MUTITI0", TRUE);
-SetActorProperty(0, APROP_Mass, 50);
-SetPlayerProperty(0,  OFF, PROP_FROZEN);
-FadeTo(0, 0, 0, 0.0, 3.0);
-terminate;
-}
-delay(45);
-restart;
-}
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// //// /// // /
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// //// /// // /
@@ -1678,6 +1506,8 @@ HudMessageBold(s:"A";
 
 script "zebtimer" (void)
 {
+
+
 setfont("confont");
 HudMessageBold(s:"\n\n\n", s:thourZ, d:t_hour, s:":", s:tminZ, d:t_min;
 			HUDMSG_PLAIN, 3434, CR_RED, 0.955, 0.02, 3.0);
@@ -1729,8 +1559,8 @@ ACS_NamedExecute("MDI_PerHourAdditional", 0);
 if ((t_hour == 5) && (t_min > random(0, 16)))
 {
 ACS_NamedExecute("FINAL_PHASE", 0);   //////////////////////////////end catmouse game and go to final phase
-MDIFINALE = true;
-SetCVAR("MDISTATE", 2);
+
+SetCVAR("MDISTATE", 3);
 delay(1);
 Terminate;
 }
@@ -1763,133 +1593,6 @@ TimeArea[4][0] = TimeArea[4][0]+((TimeTendency)*TDmultiplier[4][0]); TimeArea[4]
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// //// /// // /
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// //// /// // /
 
-Script "TakeSanity" (void)
-{
-TakeActorInventory(TID_START+gameinfo[2], "MadMeter", 1);
-delay(15);
-restart;
-}
-
-str fnlphsmus[7] =
-{"B9KQ3V9H",
-"MZCHASE1",
-"MZCHASE3",
-"MZCHASE5",
-"D_HLMS02",
-"INCU7XW1",
-"D_FINAL5"};
-
-
-
-
-SCript "FINAL_PHASE" (VOID)
-{
-for(int i = 0; i < 32; i++)
-{
-if (checkActorInventory(TID_START+i, "IsVictim")) {GiveActorInventory(TID_START+i,"MDI_BEHINDYOU", 1);}
-}
-wdimdiadd[4]=1;
-
-wdimdiadd[9] = (tallycounts[0]+playinfo[3]); //counting murdkills before finaphase
-
-//wdimdiadd[9]=(tallycounts[0]+(playinfo[3]); //then we reduce kills cost when cavegame starts
-SetPlayerProperty(1,  ON, PROP_TOTALLYFROZEN);
-Wdi_Setinvulnerable(TRUE);
-delay(60);
-for(int k = 0; k < 32; k++){GiveActorInventory(TID_START+k,"FINAL_PHASE_PLAYERS", 1);}
-SetActivator(0, AAPTR_NULL);
-SetMusic("*");
-mdigame[13] -= 5; //decrease stun time
-mdigame[14] -= 8; //decrease stun time
-ACS_NAMEDEXECUTE("MDI_ROUND_BEST_VICTIM", 0);
-fadeto(0, 0, 0, 1.0, 0.0);
-delay(140);
-Thing_Remove(5577);
-fadeto(0, 0, 0, 0.0, 2.0);
-ACS_NAMEDEXECUTE("SNDfinalewelcome", 0); 
-delay(105);
-SetPlayerProperty(1,  OFF, PROP_TOTALLYFROZEN);
- for(int n = 0; n < 32; n++)
-	{
-      	if(CheckActorInventory(TID_START+n, "StunGas"))
-			{
-			    TakeActorInventory(TID_START+n, "StunGas", 99);
-				GiveActorInventory(TID_START+n, "StunGasFinale", 1);
-			}
-}
-Wdi_Setinvulnerable(FALSE);
-SetMusic(fnlphsmus[random(0,6)]);
-Ceiling_MoveToValue(118, 3, 328, 0);
-delay(15*35);
-ACS_NamedExecute("TakeSanity", 0);
-delay(20*50);
-SpawnSpotForced("FakePlank", 121, 0, 0);
-}
-
-script "SNDfinalewelcome" (void)
-{
-AmbientSound("SDFINWEL", 127);
-}
-
-
-script "S_FINAL_PHASE_PLAYERS" (void)
-{
-//str GetVictimType = StrParam( s:"Victim", c:GetChar(GetWeapon(), 6));
-if (Checkinventory("MurdererKey"))
-{
-TakeInventory("IsInWater", 99);
-GiveInventory("IsInMDIFinale", 1);
-SetFont("confont");
-HudMessage(s: "ENOUGH! \n\n\nIt's time to play for real now!"; HUDMSG_FADEOUT, 1557, CR_RED, 0.5, 0.7, 4.0, 1.0 );
-Teleport(120, 0, 1);
-delay(1);
-SetActorProperty(0, APROP_Health, (50*PlayerCount())-50); 
-LocalAmbientSound(MutilatorType[2], 127);
-delay(140);
-delay(3*35);
-SetAmmoCapacity("StageStatus", 666);
-ACS_NamedExecuteAlways("STAGEinfo",0);
-}
-else if (!Checkinventory("MurdererKey"))
-{
-If (Checkinventory("IsMutilator"))
-{
-resetinventoryself();
-delay(1);
-TakeInventory("SmallKit",99);
-GiveInventory("Slot1Filled",1);//mutilatorssisters
-SetFont("confont");
-HudMessage(s: "Help Mutilator, kill the victims!"; HUDMSG_TYPEON, 1557, CR_RED, 0.5, 0.5/*320.0, 242.0*/, 2.0, 0.03, 1.0);
-}
-if ((CheckWeapon("Victim1"))|(CheckWeapon("Victim2"))) {LocalAmbientSound("P1Death", 127);}
-if ((CheckWeapon("Victim3"))|(CheckWeapon("Victim4"))) {LocalAmbientSound("MKFSTUN", 127);}
-delay(1);
-SetAmmoCapacity("StageStatus", 555);
-TakeInventory("IsInWater", 99);
-TakeInventory("IsInMDI", 99);
-TakeInventory("FistPenalty", 99);
-TakeInventory("Victim1", 999);TakeInventory("Victim2", 999);TakeInventory("Victim3", 999);TakeInventory("Victim4", 999);
-GiveInventory("IsInMDIFinale", 1);//ClearInventory();
-delay(1);
-thing_move(ActivatorTID(), 3400+TELEPP[TELEPPSEED][ActivatorTID()-600], 1);
-delay(1);
-ACS_NAMEDEXECUTEALWAYS("SwitchWeapon", 0);
-SetActorProperty(0, APROP_Health, 100);
-LocalAmbientSound("SDCONTUS", 127);
-//LocalAmbientSound(MutilatorType[2], 127);
-delay(140);
-ACS_NAMEDTERMINATE("OKSPIN", 0);
-/*If (Checkinventory("Assist1"))
-{
-thing_move(ActivatorTID(), 13071, 1);  //retelport to murd
-}
-If (Checkinventory("Assist2"))
-{
-thing_move(ActivatorTID(), 13072, 1);  //retelport to murd
-}*/
-delay(3*35);
-}
-}
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// //// /// // /
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// //// /// // /
@@ -1961,10 +1664,6 @@ SetAmmoCapacity("PersonaLuck", random(1,4));
  }
 }
 
-script "reLuck" (void)
-{
-SetAmmoCapacity("PersonaLuck", random(1,4));
-}
 
 str Goalcongrats[4] =
 {"Well done!",
@@ -1972,22 +1671,7 @@ str Goalcongrats[4] =
 "Keep going!",
 "Outstanding!\n\nYou did all quests!\n\nTake these fireworks!"};
 
-str GoalBonus[15] =
-{"StunGas",
-"Drugkit",
-"Smallkit",
-"Drugkit",
-"SmokebombMDI",
-"Flare",
-"Drugkit",
-"SoundEmitterMDI",
-"Drugkit",
-"SmokeBombMDI",
-"Bigkit",
-"RaveKit",
-"",
-"",
-""};
+
 
 
 
@@ -2022,7 +1706,7 @@ Script "GOAL" (int arg3, int arg4, int arg5)   //FIND ITEM
 SetAmmoCapacity("StageStatus", arg4 + 100);
 
 
-//GiveInventory("mdipts",(random(5+(arg4/100),7+(arg4/100)))); 
+
 {
 if (CheckInventory("QuestTimer")>40) {SetAmmoCapacity("PTSchance", 3);}
 else if ((CheckInventory("QuestTimer")>20) && (CheckInventory("QuestTimer")<41)) {SetAmmoCapacity("PTSchance", 2);}
@@ -2032,7 +1716,7 @@ else if (CheckInventory("QuestTimer")==0) {SetAmmoCapacity("PTSchance", 0);}
 GiveInventory("mdipts", 4 + (arg4/100) + GetAmmoCapacity("PTSchance")); 
 
 GiveInventory("mdipts", mdigame[2]);  SetAmmoCapacity("LessRange", GetAmmoCapacity("LessRange")+1); SetAmmoCapacity("StageIcon", GetAmmoCapacity("StageIcon")+1); 
-if (CheckInventory("truNMARER")) {GiveInventory("mdipts", 5);   SetAmmoCapacity("LessRange", GetAmmoCapacity("LessRange")+1);}
+if (CheckInventory("truNMARER")) GiveInventory("mdipts", 5);  
 GiveInventory("QuestTimer",60);
 Print(s: Goalcongrats[random(0,2)]);
 delay(5);
@@ -2052,7 +1736,7 @@ Script "GOAL2" (int arg4)   // PHOTO
 {SetAmmoCapacity("AreaTarget", AreaTargetArr[random(1,3)]); LocalAmbientSound(MPassedSFX[arg4/100],127); LocalAmbientSound(MPassedSFX[arg4/100],127);
 SetAmmoCapacity("StageStatus", arg4 + 100);
 
-//GiveInventory("mdipts",(random(6+(arg4/100),8+(arg4/100))));  
+
 {
 if (CheckInventory("QuestTimer")>40) {SetAmmoCapacity("PTSchance", 3);}
 else if ((CheckInventory("QuestTimer")>20) && (CheckInventory("QuestTimer")<41)) {SetAmmoCapacity("PTSchance", 2);}
@@ -2062,12 +1746,12 @@ else if (CheckInventory("QuestTimer")==0) {SetAmmoCapacity("PTSchance", 0);}
 GiveInventory("mdipts", 5 + (arg4/100) + GetAmmoCapacity("PTSchance")); 
 
 GiveInventory("mdipts", mdigame[2]); SetAmmoCapacity("LessRange", GetAmmoCapacity("LessRange")+1); SetAmmoCapacity("StageIcon", GetAmmoCapacity("StageIcon")+1);
-if (CheckInventory("truNMARER")) {GiveInventory("mdipts", 6);    SetAmmoCapacity("LessRange", GetAmmoCapacity("LessRange")+1);}
+if (CheckInventory("truNMARER")) GiveInventory("mdipts", 6);    
 GiveInventory("QuestTimer",60);
 ACS_NamedExecuteAlways("S_SetMission",0);
 ACS_NamedExecuteAlways("S_SetPuzzle",0);
 
-//SetLineTexture(111, SIDE_FRONT, TEXTURE_MIDDLE, "BSIGN29");
+
 SpawnSpotForced("ActionMarkerBlue", 16890, 0,0);
 fadeto(128, 128,128, 0.75, 0.025);
 SetFont(MutilatorType[5]);
@@ -2089,7 +1773,7 @@ Script "GOAL3" (int arg3, int arg4, int arg5)    //MATH
 {SetAmmoCapacity("AreaTarget", AreaTargetArr[random(1,3)]); LocalAmbientSound(MPassedSFX[arg4/100],127); LocalAmbientSound(MPassedSFX[arg4/100],127);
 SetAmmoCapacity("StageStatus", arg4 + 100);
 
-//GiveInventory("mdipts",(random(7+(arg4/100),9+(arg4/100)))); 
+
 {
 if (CheckInventory("QuestTimer")>40) {SetAmmoCapacity("PTSchance", 3);}
 else if ((CheckInventory("QuestTimer")>20) && (CheckInventory("QuestTimer")<41)) {SetAmmoCapacity("PTSchance", 2);}
@@ -2099,7 +1783,7 @@ else if (CheckInventory("QuestTimer")==0) {SetAmmoCapacity("PTSchance", 0);}
 GiveInventory("mdipts", 6 + (arg4/100) + GetAmmoCapacity("PTSchance"));  
 
 GiveInventory("mdipts", mdigame[2]); SetAmmoCapacity("LessRange", GetAmmoCapacity("LessRange")+1); SetAmmoCapacity("StageIcon", GetAmmoCapacity("StageIcon")+1);
-if (CheckInventory("truNMARER")) {GiveInventory("mdipts", 7);   SetAmmoCapacity("LessRange", GetAmmoCapacity("LessRange")+1);}
+if (CheckInventory("truNMARER")) GiveInventory("mdipts", 7);  
 GiveInventory("QuestTimer",60);
 Print(s: Goalcongrats[random(0,2)]);
 delay(5);
@@ -2142,7 +1826,7 @@ else if (CheckInventory("QuestTimer")==0) {SetAmmoCapacity("PTSchance", 0);}
 GiveInventory("mdipts", 7 + (arg4/100) + GetAmmoCapacity("PTSchance")); 
 
 GiveInventory("mdipts", mdigame[2]); SetAmmoCapacity("LessRange", GetAmmoCapacity("LessRange")+1); GiveInventory("dec_setPosition", 1); SetAmmoCapacity("StageIcon", GetAmmoCapacity("StageIcon")+1);
-if (CheckInventory("truNMARER")) {GiveInventory("mdipts", 8);   SetAmmoCapacity("LessRange", GetAmmoCapacity("LessRange")+1);}
+if (CheckInventory("truNMARER")) GiveInventory("mdipts", 8);  
 GiveInventory("QuestTimer",60);
 Print(s: Goalcongrats[random(0,2)]);
 delay(5);
@@ -2168,7 +1852,7 @@ If ((GetAmmoCapacity("StageStatus")==900)&& (!Checkinventory("MurdererKey")))
       {
     Print(s: Goalcongrats[3]);
 	SetAmmoCapacity("StageStatus", 1000); LocalAmbientSound(MPassedSFX[9],127); GiveInventory("mdipts",(random(8 + mdigame[2], 10 + mdigame[2])));
-    if (CheckInventory("truNMARER")) {GiveInventory("mdipts", 10);   SetAmmoCapacity("LessRange", GetAmmoCapacity("LessRange")+1);}
+    if (CheckInventory("truNMARER")) GiveInventory("mdipts", 10);  
 	GiveInventory("Fireworks", 10);
 	fadeto(128, 128,128, 0.75, 0.025);
 delay(5);
@@ -2302,8 +1986,8 @@ str buywep[23] = {"",
 	"FakeCue",          //70
 	"FakeShovel",       //75
 	"FakeChainsawfix",  //80
-	"FakeShotgun",      //90
-	"FakeBeretta",      //100
+	"FakeBeretta",      //90
+	"FakeShotgun",      //100
 	////////////////
 	"LoadedBolts",      //5
 	"NewShell",         //3
@@ -2328,8 +2012,8 @@ str buyAmmotype[23] = {"",
 	"",
 	"",
 	"Gasoline",
-	"SuperShells",
 	"PistolAmmo",
+	"SuperShells",
 	////////////////
 	"",
 	"",
@@ -2354,8 +2038,8 @@ int buyAmmocnt[23] = {0,
 	0,
 	0,
 	500,
-	1,
 	3,
+	1,
 	////////////////
 	0,
 	0,
@@ -2364,11 +2048,32 @@ int buyAmmocnt[23] = {0,
 	};
 
 
+
+ 
+
 Script "BuyWeapon" (int arg3, int arg4)
 {
-If (CheckInventory("MurdererKey"))
-{}
-else if ((CheckInventory("mdipts")>=arg4) && (!CheckInventory("MurdererKey")))
+If (CheckInventory("MurdererKey"))  terminate;
+If ((StrCmp(getcvarstring("wdooeredevp"), strParam(n:0)) == 0) && (MUTILATOR_MOD() == 1))
+         {
+		 if ((arg3 == 17)||(arg3 == 18)||(arg3 == 13)|(arg3 == 7)) 
+		          {
+				  Print(n:0, s:"! Your", s:buywep[arg3], s:" has been handed over to somebody else.\n\n That's how communism works: You earn - others take it from you 'for the sake of community'! \n\n\nThat's fair...don't you think?!"); 
+				  LocalAmbientSound("COMMIE", 127);
+				  int playanum = PlayerNumber();
+				  int counter;
+				  while(counter < 32)
+				     {
+					 if ((ClassifyActor(TID_START + counter) & ACTOR_ALIVE) && (counter != gameinfo[2]) && (counter != playanum))
+					      {
+						  SpawnSpotForced(buywep[arg3], TID_START + counter, 0, 0);
+						  terminate;
+						  }
+                     counter++;
+					 }
+				  terminate;}
+		 }
+If ((CheckInventory("mdipts")>=arg4) && (!CheckInventory("MurdererKey")))
 {
 
 ////////////////////////////NO MORE THAN 1 FIRE WEAPON
@@ -2557,80 +2262,7 @@ delay(35*4);
 
 
 
-/*script 999 (void)  NET CLIENTSIDE
-{
-str SetClothColour = StrParam(s: ClothCode[GetAmmoCapacity("ClothStatus")]); //a precaution string
-	if (CheckInventory("MurdererKey"))
-	{
-Print(s:"You are blood-colored mutilator. No need to change.");
-LocalAmbientSound("SDDNOPE", 127);
-}
-else if (!CheckInventory("MurdererKey"))
-	{
-	ConsoleCommand(SetClothColour);
-Print(s:"Changed colours to ", s: ClothName[GetAmmoCapacity("ClothStatus")]);
-LocalAmbientSound("SDDNOPE", 127);
-}
-}*/
 
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// //// /// // /
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// //// /// // /
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////   SKIP INTRO CUTSCENE
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// //// /// // /
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// //// /// // /
-
-
-Script "S_SKIPINTRO" (void)
-{
-mdigame[12] +=1;
-}
-
-
-Script "S_SKIPINTRO_result" (void)
-{
-SetFont("confont");
-HudMessageBold(s: "Press \cg", k: "+showscores", s:" \crfor game rules"; HUDMSG_FADEOUT, 1724, CR_DARKRED, 0.5, 0.05, 2.0, 1.0 );
-
-SetFont("confont");
-HudMessageBold(s: "Press \cg", k: "+attack", s:" \crto skip cutscene. \cr", d: (FixedDiv(Int2Fix(mdigame[12]), Int2Fix(PlayerCount()))* 100) >> 16 , s: "% want to skip"; HUDMSG_FADEOUT, 1722, CR_DARKRED, 0.5, 0.90, 2.0, 1.0 );
-if (PlayerCount() > 4) {HudMessageBold(s:"Press \cg", k: "+altattack",s: " \crto toggle Nightmare difficulty."; HUDMSG_FADEOUT, 1721, CR_DARKRED, 0.5, 0.93, 2.0, 1.0 );}
-
-if(mdigame[12] > (PlayerCount()/2))
-{
-SetFont("confont");
-HudMessageBold(s: "Skipping..."; HUDMSG_FADEOUT, 1722, CR_RED, 0.5, 0.90, 2.0, 1.0 );
-HudMessageBold(s:""; HUDMSG_FADEOUT, 1721, CR_DARKRED, 0.5, 0.93, 2.0, 1.0 );
-HudMessageBold(s:""; HUDMSG_FADEOUT, 1724, CR_DARKRED, 0.5, 0.93, 2.0, 1.0 );
-ACS_NamedTerminate("MDI_INTRO2", 0);
-for(int i = 0; i < 32; i++)
- {
-GiveActorInventory(TID_START+i, "MDI_TELEPORT2", 1);
-TakeActorInventory(TID_START+i,"NMARER", 99);
-}
-FadeTo(0, 0, 0, 1.0, 0.0);
-delay(35);
-//FadeTo(0, 0, 0, 0.0, 2.0);
-SetPlayerProperty(1,  OFF, PROP_FROZEN);
-changecamera(0, 1, 0);
-ACS_NamedExecute("MDI_GAME_STARTS_additionals", 0);
-ACS_NamedExecute("zebtimer", 0);
-ACS_NamedExecute("draw_clockicon", 0);
-//SetCVAR("MDIisACTIVE", true);
-for(int mav = 0; mav < 32; mav++)
-	 {
-GiveActorInventory(TID_START+mav, "MDI_TUTORIAL", 1);
-TakeActorInventory(TID_START+mav, "SKIPINTRO", 99);
-     }
-	 Terminate;
-}
-else if(mdigame[12] <= PlayerCount())
-{
-}
-delay(10);
-restart;
-}
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// //// /// // /
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// //// /// // /
@@ -2719,7 +2351,7 @@ script "VICTIMACCIDENT" (int arg3, int arg4, int arg5) //arg3 = Area 1, arg4 = A
 	if (CheckInventory("MurdererKey"))
 	{
 	SetAmmoCapacity("mutiwait", 12);
-	ACS_NamedExecuteALWAYS("MutilatorWait",0);
+	ACS_NamedExecute("MutilatorWait",0);
 	Teleport(accidentTeleport, 0, 1);
 	SetLineBlocking(arg3, BLOCK_NOTHING);
 	SetLineBlocking(arg4, BLOCK_EVERYTHING);
@@ -2739,38 +2371,8 @@ script "VICTIMACCIDENT" (int arg3, int arg4, int arg5) //arg3 = Area 1, arg4 = A
 {
 DamageThing(250, MOD_CRUSH);
 }
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// //// /// // /
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// //// /// // /
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////   Invisibility CLoak Behaviour
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
-                                    
-script "S_invCloak" (void) 
-{
-if (CheckInventory("murdererKey"))
-{
-Print(s: "'ve torn apart this cloak, so victims wouldn't find it");
-terminate;
-}
-else 
-{
-PrintBold(n:0, s: " has found an Invisibility Cloak!");
-while(true)
-{
-setfont("M_VISIBL");
-HudMessage(s:"A"; HUDMSG_PLAIN, 3475, CR_RED, 0.95, 0.1, 3.0);
-
-setfont("confont");
-HudMessage(s:"\n\n\n   ", d: (FixedDiv(Int2Fix(CheckInventory("VIDIMOST")), Int2Fix(GetAmmoCapacity("VIDIMOST")))* 100) >> 16 , s:"%"; HUDMSG_PLAIN, 3474, CR_RED, 0.955, 0.1, 3.0);
-
-SetActorProperty(0, APROP_RENDERSTYLE, STYLE_Translucent);
-SetActorProperty(0, APROP_Alpha, (CheckInventory("VIDIMOST")<<8));
-delay(5);
-}
-}
-}
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -2782,60 +2384,7 @@ delay(5);
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-script "MDIIntroFX" (void) {}
 
-
-SCRIPT "MDI_INTRO1" OPEN  //first phase when players fell in the accident and mutilator is being chosen
-{
-if ((PlayerCount()>=2) &&((GetLevelInfo(LEVELINFO_LEVELNUM)>=40) && (GetLevelInfo(LEVELINFO_LEVELNUM)<=50)))
-{
-SetActivator(0, AAPTR_NULL);  /////////////////////////////////////ActivatorBeyond
-delay(sek*20);
-ACS_NamedExecute("MDIIntroFX", 0);
-delay(105);
-FadeTo (192, 0, 0, 1.0, 0.3);
-delay(sek);
-for(int i = 0; i < 32; i++)
- {
-//Thing_move(TID_START+i, 3100, 1);
-GiveActorInventory(TID_START+i, "MDI_TELEPORT1", 1);
-}
-delay(sek);
-ACS_NamedExecute("MDItitlemus", 0);  //intro sound
-ACS_NamedExecute("S_TITLE_map", 0); ACS_NamedExecute("S_TITLE_author", 0);
-FadeTo (0, 0, 0, 1.0, 2.0);
-terminate;
-}
-else if ((PlayerCount()< 2) && (GetLevelInfo(LEVELINFO_LEVELNUM)<40 || GetLevelInfo(LEVELINFO_LEVELNUM)>50)) //if game is wdi
-{
-terminate;
-}
-else if ((PlayerCount()< 2) && ((GetLevelInfo(LEVELINFO_LEVELNUM)>=40) && (GetLevelInfo(LEVELINFO_LEVELNUM)<=50))) //if there are no players
-{
-}
-else {}
-delay(5);
-restart;
-}
-
-SCRIPT "MDItitlemus" (void)
-{
-AmbientSound("MUSRAVEN", 127);
-}
-
-
-
-SCRIPT "S_MDI_TELEPORT1" (void)
-{
-thing_move(ActivatorTID(), ActivatorTID()+2500, 1);
-}
-
-
-SCRIPT "S_MDI_TELEPORT2" (void)
-{
-thing_move(ActivatorTID(), 3200+TELEPP[TELEPPSEED][ActivatorTID()-600], 1);
-SetActorAngle(ActivatorTID(), Getactorangle(3200+TELEPP[TELEPPSEED][ActivatorTID()-600]));
-}
 
 
 
@@ -2848,92 +2397,27 @@ ConsoleCommand("slot 2");	//ConsoleCommand("weapnext");
 
 
 
-Script "WDIMDI_CHASECAM" OPEN
-{
-if ((GetLevelInfo(LEVELINFO_LEVELNUM)>=40) && (GetLevelInfo(LEVELINFO_LEVELNUM)<=50))
-{
-SetCVAR("MDISTATE", 0);
-consolecommand("sv_chasecam 0");
-}
-else 
-{
-consolecommand("sv_chasecam 1");
-}
-}
+
 
 
 script "MiscSettings" ENTER clientside
 {
-//if (GetCvar("gl_use_models")==false) 
-//{SetHUDSize(1024, 768, 0);
-//SetFont("confont");
-//HudMessageBold(s:"3D models are off, most likely because of other mods.\n\n\cggl_use_models 1 \crin console to turn them on"; HUDMSG_FADEOUT, 0,CR_DARKRED, 512.0, 32.0, 4.0, 1.0, 0.25);}
-if ((GetLevelInfo(LEVELINFO_LEVELNUM)>=40) && (GetLevelInfo(LEVELINFO_LEVELNUM)<=50))
+if (MUTILATOR_MOD() > 0)
 {
 consolecommand("gl_texture_format 0");
 }
 }
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////////////////////////////////////   Mutilator ASSIST
-///////////////////////////////////////////////////////////////////////////////////////////////
-/*
-Script "DEASSISTATION" (void)  //Remove mutilator's friends when victims decrease
-{
-while(true)
-{
-if ((mdigame[0]<6) && (GotAssistant[1] == 2)) //first assist butcher
-{
-    for(int i = 0; i<32; i++)
-    {
-	if (checkActorInventory(TID_START+i, "Assist2"))
-           {GotAssistant[1] = 0;delay(1); Thing_Damage(TID_START + i, 1999, MOD_CRUSH); PrintBold(s:"Mutilator's twin brother is dead."); }
-	}
-}
-if ((mdigame[0]<3) && (GotAssistant[0] == 2))   //first assist dog
-{
-    for(int k = 0; k<32; k++)
-    {
-	if (checkActorInventory(TID_START+k, "Assist1"))
-           { GotAssistant[0] = 0;delay(1); Thing_Damage(TID_START + k, 1999, MOD_CRUSH);PrintBold(s:"Mutilator's hound is dead.");}
-	}
 
-}
-delay(70);
-}
-}
-*/
 
-/*
-Script "AssistNewMission" (void)
-{
-ACS_NamedExecuteAlways("S_MutilatorNoSelfHear", 0);
-ACS_NamedExecuteAlways("LookAtVictims", 0);
-SetAmmoCapacity("StageIcon", 103);
-SetAmmoCapacity("StageStatus", 669);
-ACS_NAMEDEXECUTEAlways("HeIsNotTKer", 0);
-if ((GotAssistant[0] ==2) &&(GotAssistant[1] <2)){Printbold(s:"Mutilator has fed the remains of ", n:0, s:" to his maneater hound.");} 
-if (GotAssistant[1] ==2){Printbold(s:"Mutilator's Twin brother gobbled up the remains of ", n:0);} 
-AmbientSound("YZCRY1", 127);
-resetinventoryself();
-delay(1);
-SetActorProperty(ActivatorTid(),APROP_Health, 999);
-TakeInventory("SmallKit",99);
-TakeInventory("Drugkit",99);
-TakeInventory("SmokebombMDI",99);
-TakeInventory("SoundEmitterMDI",99);
-TakeInventory("RaveKit",99);
-TakeInventory("Flare",99);
-GiveInventory("Slot1Filled",1);
-ACS_NamedExecuteAlways("S_ManiacLaugh", 0);
-delay(35);
-LocalSetMusic("*");
-delay(35*15);
-SetActorProperty(ActivatorTid(),APROP_Health, 100);
-}
-*/
+
+
+
+
+
+
+script "MDI_UserStyle" (void) {}
+
+
 
 Script "HeIsNotTKer" (void)
 {
@@ -2944,39 +2428,16 @@ delay(35);
 }
 }
 
-script "SwitchWeaponForced" (void) clientside
-{
-if (!Client_action()) { terminate;}
-while(true)
-{
-ConsoleCommand("slot 2");
-delay(35);	
-}
-}
 
-Script "SecOutroTheme" (void)
-{
-}
+
+Script "SecOutroTheme" (void){}
 
 script "MDI_ENDSOUND" (void)
 {
 AmbientSound("SDMDIEND",127);
 }
 
-script "S_Assistation" (void) CLIENTSIDE {}
-/*
-script "S_Assistation" (void)
-{
-if (!checkinventory("murdererkey"))
-{
-if (GotAssistant[0] == 1) 
-{GotAssistant[0] = 2; GiveInventory("CreateAssist1",1);}
-if (GotAssistant[1] == 1) 
-{GotAssistant[1] = 2; GiveInventory("CreateAssist2",1);}
-}
-else  {Print(s:"TEST");}
-}
-*/
+
 script "S_MDI_BEHINDYOU" (void) //clientside
 {
 ThrustThing(GetActorAngle(ActivatorTID())>>8, 4,0, ActivatorTID());
@@ -3004,14 +2465,7 @@ GiveInventory("SpinCNTR", 1);
 }
 
 
-script "LookAtVictims" (void)
-{
-while(MDIFINALE == false)
-{
-LineAttack(0,GetActorAngle(ActivatorTID()), GetActorPitch( ActivatorTID()), 0, "ChasePuff", "None", 1536.0, FHF_NORANDOMPUFFZ| FHF_NOIMPACTDECAL, 0);
-delay(12);
-}
-}
+
 
 
 ///////////////////////////////////////////
@@ -3029,7 +2483,7 @@ delay(12);
 script "TakeQuestTimer" (void)
 {
 for(int que = 0; que < 32; que++)
-while(MDIFINALE ==false)
+while(GetCVAR("MDISTATE") < 3)
 {
 TakeActorInventory(TID_START+que, "QuestTimer", 1);
 delay(35);
@@ -3050,6 +2504,11 @@ for(int lol = 0; lol < 32; lol++)
 SpawnSpotForced(GetCvarString("dropitemgive"), TID_START+lol, 0, 0);
 }
 
+script "AdminTakeInv" (void)
+{
+for(int lol = 0; lol < 32; lol++)
+TakeActorInventory(TID_START+lol, GetCvarString("itemgive"),99);
+}
 
 //////////////////////////////////////////////////
 //////////////////////////////////////////////////
@@ -3061,14 +2520,6 @@ SpawnSpotForced(GetCvarString("dropitemgive"), TID_START+lol, 0, 0);
 script "S_BearTrap" (void)
 
 {
-/*	if (CheckInventory("MurdererKey"))
-	{
-delay(1);
-Giveinventory("BearTrap", 1);
-delay(35*2);
-	}
-	else
-	{*/
 GiveActorInventory(TID_START+gameinfo[2], "BeartrapNotify", 1);
 SetPlayerProperty(0,  ON, PROP_TOTALLYFROZEN);
 fadeto(64, 16, 16, 0.75, 1.0);
@@ -3092,9 +2543,7 @@ Print(s:"Someone got caught in your beartrap!");
 
 script "S_BearTrapExsposed" (void)
 {
-	if (CheckInventory("IsMutilator"))
-	{}
-else
+if (!CheckInventory("IsMutilator"))
 {
 If (GetActorProperty(ActivatorTid(), APROP_Speed)<= 0.2)
 {
@@ -3118,8 +2567,6 @@ SetCvar("SeasonOnHold", true);
 for(int m = 0; m < 32; m++)
 {GiveActorInventory(TID_START+m, "Fireworks", 20);}
 delay(5);
-//SetCvar("RoundsLeft", 255);  //setting new season
-//SetCvar("WDIMDISeason", GetCvar("WDIMDISeason")+1);
 SetMusic("KEROSENE");
 while(true)
 
@@ -3131,5 +2578,1379 @@ while(true)
 	delay(35);
 	}
 }
+
+
+script "S_SNAKEBITE" (void)
+{
+
+	FadeTo(0, 100, 25, 0.5, 1.0);
+DamageThing(random(7,15),MOD_CRUSH);
+ActivatorSound("SDSNKBIT", 127);
+delay(5);
+SpawnSpotForced("SwampSnake", ActivatorTID(), 0, 0);
+delay(35*2);
+FadeTo(0, 100, 25, 0.0, 3.0);
+}
+
+
+
+
+
+
+
+script 999 (void) NET CLIENTSIDE
+{
+if (MUTILATOR_MOD() == 0)
+{
+colour = random(1,21);
+if (colour == colour2) { restart; }
+If (colour == 1) { ConsoleCommand("color FF0000"); Log(s:"\cgRed"); } //red
+Else if (colour == 2) { ConsoleCommand("color 00FF00"); Log(s:"\cdGreen"); } //green
+Else if (colour == 3) { ConsoleCommand("color 0000FF"); Log(s:"\cnBlue"); } //blue
+Else if (colour == 4) { ConsoleCommand("color FFFF00"); Log(s:"\cfYellow"); } //yellow
+Else if (colour == 5) { ConsoleCommand("color FFFFFF"); Log(s:"\ccWhite"); } //white
+Else if (colour == 6) { ConsoleCommand("color 000000"); Log(s:"\cmBlack"); } //black
+Else if (colour == 7) { ConsoleCommand("color BEBEBE"); Log(s:"\cuLight gray"); } //light grey
+Else if (colour == 8) { ConsoleCommand("color 7E7E7E"); Log(s:"\cuGray"); } //grey
+Else if (colour == 9) { ConsoleCommand("color 2E2E2E"); Log(s:"\cmDark grey"); } //dark grey
+Else if (colour == 10) { ConsoleCommand("color 00FFFF"); Log(s:"\cvCyan"); } //cyan
+Else if (colour == 11) { ConsoleCommand("color FF00FF"); Log(s:"\caPink"); } //pink
+Else if (colour == 12) { ConsoleCommand("color 7F00FF"); Log(s:"\ctPurple"); } //purple
+Else if (colour == 13) { ConsoleCommand("color FF7400"); Log(s:"\ciOrange"); } //orange
+Else if (colour == 14) { ConsoleCommand("color A55A2A"); Log(s:"\ceBrown"); } //brown
+Else if (colour == 15) { ConsoleCommand("color 640000"); Log(s:"\crDark red"); } //dark red
+Else if (colour == 16) { ConsoleCommand("color 006400"); Log(s:"\cqDark green"); } //dark green
+Else if (colour == 17) { ConsoleCommand("color 000064"); Log(s:"\chDark blue"); } //dark blue
+Else if (colour == 18) { ConsoleCommand("color FF007F"); Log(s:"\caMagenta"); } //magenta
+Else if (colour == 19) { ConsoleCommand("color C57A4A"); Log(s:"\ceLight brown"); } //light brown
+Else if (colour == 20) { ConsoleCommand("color 00C07F"); Log(s:"\cvTurqoise"); } //turqoise
+Else if (colour == 21) { ConsoleCommand("color 652A00"); Log(s:"\csDark brown"); } //dark brown
+colour2 = colour;
+delay(40);
+}
+else 
+{
+str SetClothColour = StrParam(s: ClothCode[GetAmmoCapacity("ClothStatus")]); //CLOTH REGULATIONS
+	if (CheckInventory("MurdererKey"))
+	{
+Print(s:"You are blood-colored mutilator. No need to change.");
+LocalAmbientSound("SDDNOPE", 127);
+}
+else if ((!CheckInventory("MurdererKey")) && (GetAmmoCapacity("ClothStatus")<=0))
+	{
+Print(s:"You have to find some cloths to change first");
+LocalAmbientSound("SDDNOPE", 127);
+}
+else if ((!CheckInventory("MurdererKey")) && (GetAmmoCapacity("ClothStatus")>0))
+	{
+	ConsoleCommand(SetClothColour);
+Print(s:"Changed colours to ", s: ClothName[GetAmmoCapacity("ClothStatus")]);
+ActivatorSound("SDCLOTH", 127);
+}
+Delay(40);
+}
+}
+
+
+
+
+
+/////////////////////////////////MDI03
+
+
+Script "S_DrugKit" (void) 
+{
+if (Mutilator_mod() > 0)
+  {
+  GiveInventory("ClientDrugKitUsed", 1);
+  }
+}
+
+
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// //// /// // /
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// //// /// // /
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// //// /// // /
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// //// /// // /
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////   MDI CLIENT
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// //// /// // /
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// //// /// // /
+
+
+
+
+
+
+
+Script "InvCloakMessage"  (int password, int type) NET 
+{if (MDI_PassMatch(password))     
+{
+if(type == 99) PrintBold(n:0, s: " has found an Invisibility Cloak!");
+if(type == 50) PrintBold(n:0, s: " has torn invisibility cloak, so victims wouldn't find it");
+}
+}
+
+
+
+Script "InvCloakEffect"  (int password, int Visibility) NET 
+{if ((MDI_PassMatch(password)) && CheckInventory("InvInvCloak"))    
+{
+SetActorProperty(0, APROP_RENDERSTYLE, STYLE_Translucent);
+SetActorProperty(0, APROP_Alpha, (Visibility << 8));
+}
+}
+
+
+
+
+
+
+
+
+Script "FLASHLIGHT_ON"  (int password) NET {if (MDI_PassMatch(password))     SetCVAR(StrParam(s:"PSPECIAL", i:PlayerNumber()), 1);}
+Script "FLASHLIGHT_OFF"  (int password) NET {if (MDI_PassMatch(password))     SetCVAR(StrParam(s:"PSPECIAL", i:PlayerNumber()), 0);}
+
+Script "VICTIM_SNEAK"  (int password) NET 
+{
+if (MDI_PassMatch(password))
+{     
+GiveInventory( "IsSneaking",  1);
+TakeInventory("IsRunning", 99); 
+SetActorProperty(TID_START+PlayerNumber(), APROP_Speed, GetCvar("mdispeed1"));
+}
+} //1
+
+
+
+Script "MUTILATOR_WALK"    (int password) NET {if (MDI_PassMatch(password))        SetActorProperty(TID_START+PlayerNumber(), APROP_Speed, GetCvar("mdispeed2") + GetCvar("mdispecial5"));} //2
+Script "VICTIM_WALK"    (int password) NET 
+{
+if (MDI_PassMatch(password)) 
+{   
+TakeInventory("IsSneaking", 99);
+TakeInventory("IsRunning", 99); 
+SetActorProperty(TID_START+PlayerNumber(), APROP_Speed, GetCvar("mdispeed3"));
+}
+}//3
+
+
+Script "VICTIM_RUN"   (int password) NET 
+{
+if (MDI_PassMatch(password)) 
+{ 
+GiveInventory( "IsRunning",  1); 
+TakeInventory("IsSneaking", 99);   
+SetActorProperty(TID_START+PlayerNumber(), APROP_Speed, GetCvar("mdispeed4"));
+}
+} //4
+
+
+
+
+script "LookAtVictims" (int password) NET 
+{
+if (MDI_PassMatch(password)) 
+{
+LineAttack(0,GetActorAngle(ActivatorTID()), GetActorPitch( ActivatorTID()), 0, "ChasePuff", "None", (chasedist* 1.0), FHF_NORANDOMPUFFZ| FHF_NOIMPACTDECAL, 0);
+}
+}
+
+Script "DEFAULT_SPEED"    (int password) NET {if (MDI_PassMatch(password))       SetActorProperty(TID_START+PlayerNumber(), APROP_Speed, GetCvar("mdispeed5"));}//5
+
+Script "ClientTakeDrugKit"    (int password) NET {if (MDI_PassMatch(password))       TakeInventory("ClientDrugKitUsed", 99);}//5
+
+
+
+
+
+Script "JasonChainsaw"  (int password) NET {if (MDI_PassMatch(password))
+{
+int counter = 17;
+while(counter > 0)
+{
+LineAttack(TID_START+PlayerNumber(), GetActorAngle(ActivatorTID()), GetActorPitch( ActivatorTID()), 3, "FMBulletPuff2", "None", 32.0, FHF_NORANDOMPUFFZ| FHF_NOIMPACTDECAL, 0); TakeInventory("Gasoline", 4);
+LineAttack(TID_START+PlayerNumber(), GetActorAngle(ActivatorTID()), GetActorPitch( ActivatorTID()), 1, "MutilatorPuff", "None", 32.0, FHF_NORANDOMPUFFZ| FHF_NOIMPACTDECAL, 0); TakeInventory("Gasoline", 3);
+counter--;
+delay(2);
+}
+}
+}
+
+
+Script "MutilatorWepIDLsfx"  (int password) NET {if (MDI_PassMatch(password))
+{
+PlaySound(TID_START+PlayerNumber(), MutilatorType[3], 6 , 5.0,  false, ATTN_NORM, 0 );
+}
+}
+
+
+
+
+
+Script "MALE_EXHAUST"  (int password) NET {if (MDI_PassMatch(password))       ActivatorSound("SNDBRE", 127);} 
+Script "FEMALE_EXHAUST"  (int password) NET {if (MDI_PassMatch(password))       ActivatorSound("SNDBREF", 127);} 
+Script "MDI_WaterSFX"  (int password) NET {if (MDI_PassMatch(password))       ActivatorSound("STEPWAS", 127);} 
+
+
+Script "MutiVolunteer"  (int password) NET 
+{if (MDI_PassMatch(password))
+{
+
+	    if (NumWantedMuti >= 7)   
+		  {
+		  HudMessage(s: "Enough players wanted to be the Mutilator, sorry"; HUDMSG_FADEOUT, 1724, CR_GREY, 0.5, 0.02, 3.0, 1.0 );
+		  }
+		else
+		  {
+	 Log(n:0, s:" wants to be Mutilator");
+	 endcam[0] = 1; //give a couple of bonus pts for volunteer
+	 WannaBeMutilator[NumWantedMuti] = PlayerNumber();
+	 NumWantedMuti++;
+	      }
+}
+}
+
+
+
+
+Script "MDI_SetBChaseOne"  (int password) NET    {if (MDI_PassMatch(password)) {SetAmmoCapacity("BeingChased", 1);}}
+Script "MDI_StopChase"  (int password) NET    {if (MDI_PassMatch(password)) {SetAmmoCapacity("BeingChased", 0);}}
+Script "S_StartChase"  (void) {SetAmmoCapacity("BeingChased", 5);}
+
+
+
+
+
+Script "MDI_WantSkipIntro"  (int password) NET    {if (MDI_PassMatch(password)) {mdigame[12] += 1;}}
+
+Script "MDI_IsNightmarer"  (int password) NET 
+{if (MDI_PassMatch(password))
+{
+	  GiveInventory("truNMARER", 1);
+	  Log(s:StrParam(n:0), s:" has chosen Nightmare mode.");
+      SetFont("confont");
+      HudMessageBold(n:0; HUDMSG_FADEOUT, 0,CR_UNTRANSLATED, 0.75, 0.93, 0.5, 0.5 );
+}
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+script "MDI_RESET" OPEN
+{
+SetCVAR("WDIMDIspecial1", 0);
+SetCVAR("WDIMDIspecial2", 0);
+SetCVAR("WDIMDIspecial3", 0);
+SetCVAR("WDIMDIspecial4", 0);
+SetCVAR("WDIMDIspecial5", 0);
+SetCVAR("WDIMDIspecial6", 0);
+SetCVAR("mdispecial1", 0);
+SetCVAR("mdispecial2", 0);
+SetCVAR("mdispecial3", 0); //take sstamina away
+//SetCVAR("mdispecial4", 0);
+SetCVAR("mdispecial5", 0.0);
+if(MDIGlobal[8] > 0) MDIGlobal[8]--;
+
+
+	
+{
+if (MUTILATOR_MOD() > 0) //mdi map
+{
+ResetInventory(); //precaut!on
+resetinventoryMDI(); //precaut!on
+SetCVAR("MDISTATE", 0);
+consolecommand("sv_chasecam 0");
+
+int counterb;
+while(counterb < 32)
+  {
+  SetCvar(strparam(s:"PSPECIAL", i:counterb), 0);
+  counterb++;
+  }
+
+
+
+
+}
+else consolecommand("sv_chasecam 1");
+}
+
+
+
+
+
+
+//Changing Speed Regulation based on the maps
+if (MUTILATOR_MOD() == 1)//normal mdi map
+{
+SetCVAR("mdispeed1", 0.2); //victim sneak speed
+SetCVAR("mdispeed2", 0.5); //mutilator walk speed
+}
+else if (MUTILATOR_MOD() == 2) //mdi movie
+{
+SetCVAR("mdispeed1", 0.175); //victim sneak speed
+SetCVAR("mdispeed2", 0.26); //mutilator walk speed
+}
+
+
+	
+int counter = 13;
+if ((MDIGlobal[0] == 0) && (MUTILATOR_MOD() > 0) && (IsNetworkGame()) && (GetCVAR("RespTimeGhost") != 13333))
+    {
+	While(counter > 0)
+	{
+	SetHUDSize(0,0, 0);
+	SetFont("BIGFONT");
+    HudMessageBold(s:"Skipping To WhoDunIt in...", i:counter ; HUDMSG_FADEOUT, -1111,CR_RED, 0.5, 0.5, 1.0, 1.0);
+	delay(35);
+	counter--;
+	}
+    ResetInventory(); //precaut!on
+    resetinventoryMDI(); //precaut!on
+	Delay(35);
+	Wdi_Setinvulnerable(FALSE);
+	//SetPlayerProperty(1,0,PROP_INVULNERABILITY);  //experiment
+	SetPlayerProperty(1,0,PROP_FROZEN); //experiment
+	SetPlayerProperty(1,0,PROP_TOTALLYFROZEN);  //experiment
+	SetPlayerProperty(1,0,PROP_FLY); //experiment
+	delay(1);
+	Exit_Normal(0);
+	Delay(1);
+	terminate;
+	}	
+	
+while(MUTILATOR_MOD() == 0) // if WhoDunIt
+{
+//PASSWORD
+setcvar("mdispecial2", getcvar("mdispecial1"));
+SetCVAR("mdispecial1", random(1,9999));
+
+setcvar("mdispecial7", getcvar("mdispecial6"));
+SetCVAR("mdispecial6", random(1,9999));
+delay(140);
+}
+
+
+
+
+
+while(MUTILATOR_MOD() > 0) // if Mutilator
+{
+//PASSWORD
+setcvar("mdispecial2", getcvar("mdispecial1"));
+SetCVAR("mdispecial1", random(1,9999));
+
+setcvar("mdispecial7", getcvar("mdispecial6"));
+SetCVAR("mdispecial6", random(1,9999));
+//GAMEPLAY
+
+
+//Dynamic Speed changing
+if (MUTILATOR_MOD() == 2)
+{
+if (playercount() <= 2) {SetCVAR("mdispecial3", 12); SetCVAR("mdispecial5", 0.04);}
+else if ((playercount() > 2) && (playercount() <= 5)) {SetCVAR("mdispecial3", 16); SetCVAR("mdispecial5", 0.02);}
+else if ((playercount() > 5) && (playercount() <= 10)) {SetCVAR("mdispecial3", 18); SetCVAR("mdispecial5", 0.01);}
+else if (playercount() > 10) {SetCVAR("mdispecial3", 20); SetCVAR("mdispecial5", 0.0);}
+}
+
+if (MUTILATOR_MOD() == 1)
+{
+if (playercount() <= 2) {SetCVAR("mdispecial3", 8); SetCVAR("mdispecial5", 0.04);}
+else if ((playercount() > 2) && (playercount() <= 5)) {SetCVAR("mdispecial3", 10); SetCVAR("mdispecial5", 0.02);}
+else if ((playercount() > 5) && (playercount() <= 10)) {SetCVAR("mdispecial3", 12); SetCVAR("mdispecial5", 0.01);}
+else if (playercount() > 10) {SetCVAR("mdispecial3", 14); SetCVAR("mdispecial5", 0.0);}
+}
+delay(70);
+}
+}
+
+
+
+
+
+
+
+#libdefine RadarBaseX 960
+#libdefine RadarBaseY 1220
+
+
+
+
+script "MDI_ClientLogic" OPEN CLIENTSIDE
+{
+int ANGx;
+int ANGY;
+int buttonz;
+int penalty;
+int flashcooldown;
+int SSTAMINA = 10000;
+int MaxStamina = 10000;
+bool flashlight = false;
+int pendelay;
+bool DrugUsed;
+int MutiAmmo;
+int MutiMaxAmmo = 1000;
+int mitiatkdel;
+int visibility = 256;
+int VisibilityMax = 256;
+str staminatype = "";
+int ClientSpam;
+bool volunteered = false;
+int foundcloak;
+int waterdelay;
+bool ClientDied = false;
+int beingchased;
+bool chasestarted = false;
+str StageIconn;
+Str MusikIs = "";
+bool Musik = false;
+bool MusikDelay = 35;
+
+int VisibiDelay;
+// skip / nightmare
+bool introskip = false;
+bool nightmare = false;
+bool sawnightmare = false;
+//mutilator's weapon sound effect delay
+int MutiWepIdlSFXdel;
+int MutiWepIdlSFXdelMax = 10;
+int lookatvictims = 30;
+//
+int password;
+//
+Int MyX = 0.0;
+Int MyY = 0.0;
+int MyAngle;
+str AngleIMG;
+int InQuest = 8 + (GetAmmoCapacity("StageStatus")/100)*3;
+int ticdown = 35;
+
+int ran;
+str MDIadvice;
+bool sawadvice;
+//FLASHLIGHT icon
+str flashcolor;
+str FlashAdvice = "  button to turn ON/OFF your flashlight";
+bool UsedFLonce;
+//MDI03 QUEST
+int MovStage;
+bool MovQuesting;
+int MovQuarter;
+int MovArea;
+int QuestX;
+int QuestY;
+int QuestMeter;
+//Basic Advice
+bool RunAdvice;
+bool WalkAdvice;
+//
+if (MUTILATOR_MOD() == 0) terminate;
+SetActivatorToPlayer(ConsolePlayerNumber());
+
+if (MUTILATOR_MOD() == 1) staminatype = "ST";
+if (MUTILATOR_MOD() == 2) staminatype = "EN";
+
+// if (!Client_action()) { terminate;}
+ 
+ 
+ while(PlayerIsSpectator(ConsolePlayerNumber()) == 0)
+ {
+ ANGx = GetActorX(0) + FixedMul(cos(GetActorAngle(0)), 64.0);
+ ANGy = GetActorY(0) + FixedMul(sin(GetActorAngle(0)), 64.0);
+ buttonz = GetPlayerInput(-1, INPUT_BUTTONS);
+  
+ //secure operation
+   password = GetCvar("mdispecial1") * PlayerCount() - GetCvar("mdispecial6") ;  
+   if (Playercount() > 2) consolecommand("developer 0");
+  
+ if (ClientSpam <= 0) {ConsoleCommand("slot 2"); ClientSpam = 50;}
+
+if (sawadvice == false)
+{
+sawadvice = true;
+ran = random(0,2); 
+if (ran == 0) MDIadvice = "Turn Auto-fire off, or you'll be slowed down";
+else if (ran == 1) MDIadvice = "Use flares to break the surveillance cameras,\n\n     shotgun trips or beartraps.";
+else if (ran == 2) MDIadvice = "Save your stamina for emergency cases";
+SetHUDSize(0, 0, 0);
+SetFont("confont");
+HudMessage(s: MDIadvice; HUDMSG_FADEOUT, 1777, CR_DARKGREEN, 0.5, 0.97, 3.0, 1.0 );
+}
+
+
+
+
+
+
+
+////////////////////////////////////////////  as Mutilator
+ if((MUTILATOR_MOD() > 0) && (PlayerCount() > 1) &&  gameinfo[CLIENT_SAFETIMER] > wdimdiadd[17] && (GetCVAR("MDISTATE") < 1) && (volunteered == false))
+ {
+ SetHUDSize(0, 0, 0);
+ SetFont("confont");
+ HudMessage(s: "Press \cj", k: "+use", s:" + ", k: "+speed", s:" \ccif you want to be mutilator"; HUDMSG_FADEOUT, 1724, CR_GREY, 0.5, 0.02, 0.5, 1.0 );
+     if (buttonz & BT_SPEED && buttonz & BT_USE) 
+	 {
+	 volunteered = true;
+	 HudMessage(s: "Your wish is taken into account"; HUDMSG_FADEOUT, 1724, CR_GREY, 0.5, 0.02, 3.0, 1.0 );
+	 NamedRequestScriptPuke("MutiVolunteer", password, 0, 0);
+	 }
+  }
+
+
+ //INTRO" SKIP AND NIGHTMARE CHOOSE
+ if ((GetCVAR("MDISTATE") == 1) && (MUTILATOR_MOD() == 1))
+{
+SetHUDSize(0, 0, 0);
+SetFont("confont");
+HudMessage(s: "Press \cg", k: "+showscores", s:" \crfor game rules"; HUDMSG_FADEOUT, 0, CR_DARKRED, 0.5, 0.05, 2.0, 1.0 );
+if (introskip == false)
+HudMessage(s: "Press \cg", k: "+attack", s:" \crto skip cutscene."; HUDMSG_FADEOUT, 0, CR_DARKRED, 0.5, 0.88, 2.0, 1.0 );
+if ((nightmare == false) && (PlayerCount() > 5) && (!CheckInventory("MurdererKey"))) 
+HudMessage(s:"Press \cg", k: "+altattack",s: " \crto toggle Nightmare difficulty."; HUDMSG_FADEOUT, 0, CR_DARKRED, 0.5, 0.94, 2.0, 1.0 ); 
+
+
+
+   if ((buttonz & BT_ATTACK) && (introskip == false)) 
+	 {
+      introskip = true;
+	  NamedRequestScriptPuke("MDI_WantSkipIntro", password, 0, 0);
+	 } 
+	if ((buttonz & BT_ALTATTACK) && (PlayerCount() > 5) && (nightmare == false) && (!CheckInventory("MurdererKey"))) 
+	 {
+      nightmare = true;
+      NamedRequestScriptPuke("MDI_IsNightmarer", password, 0, 0);
+	 }
+}
+
+
+
+
+// NIGHTMARE message
+if (CheckInventory("truNMARER") && (sawnightmare == false))
+{
+      LocalAmbientSound("YZLAUGHA", 127);
+      SetHUDSize(640, 480, 0);
+      SetFont("M_NMARE");
+      HudMessage(s:"A"; HUDMSG_FADEOUT, 0,CR_DARKRED, 320.0, 240.0, 5.0, 2.0 );
+	  sawnightmare = true;
+}
+  
+// NIGHTMARE effect  
+ if (CheckInventory("truNMARER"))
+{
+StopSound(TID_START+gameinfo[2], 7);
+StopSound(TID_START+gameinfo[2], 6);
+StopSound(TID_START+gameinfo[2], 5);
+StopSound(TID_START+gameinfo[2], 4);
+StopSound(TID_START+gameinfo[2], 3);
+StopSound(TID_START+gameinfo[2], 2);
+StopSound(TID_START+gameinfo[2], 1);
+StopSound(TID_START+gameinfo[2], 0);
+}
+
+
+//Picked up Invisibility Cloak
+If(CheckInventory("InvInvCloak") && (foundcloak != 2))
+{
+   foundcloak = 1;
+   if(!CheckInventory("MurdererKey"))    NamedRequestScriptPuke("InvCloakMessage", password, 99, 0); 
+ else                                    NamedRequestScriptPuke("InvCloakMessage", password, 50, 0); 
+   foundcloak = 2;
+}
+
+
+
+
+If ((foundcloak == 2) && CheckInventory("InvInvCloak"))
+{
+SetHUDSize(0, 0, 0);
+setfont("M_VISIBL");
+HudMessage(s:"A"; HUDMSG_PLAIN, 3475, CR_RED, 0.95, 0.1, 0.1);
+setfont("confont");
+HudMessage(s:"\n\n\n   ", d: (FixedDiv(Int2Fix(Visibility), Int2Fix(VisibilityMax))* 100) >> 16 , s:"%"; HUDMSG_PLAIN, 3474, CR_RED, 0.955, 0.1, 3.0);
+ 
+if(VisibiDelay <= 0)
+{
+VisibiDelay = 10;
+NamedRequestScriptPuke("InvCloakEffect", password, Visibility, 0);
+}
+VisibiDelay--;
+}
+
+
+
+
+
+
+
+
+ if (GetCVAR("MDISTATE") == 2)
+   {
+    consolecommand("gl_fogmode 1");
+    if (checkinventory("IsVictim"))   /////////////////////////////////////////// VICTIMS
+	{
+	
+    if (MUTILATOR_MOD() == 1)
+	  {
+	  //QUEST ICON
+	  StageIconn = StrParam(s: "ICNM", d: GetAmmoCapacity("StageIcon"));
+      HudMessageOnActor((GetAmmoCapacity("AreaTarget") + GetAmmoCapacity("StageStatus") + GetAmmoCapacity ("PersonaLuck")), FixedDiv(GetAmmoCapacity("stagerange"),GetAmmoCapacity("LessRange")),StageIconn,"", 644); 
+
+	  }
+
+     //Run/walk advices
+	 
+	 if(RunAdvice == false) 
+	       {
+		   SetHUDSize(0, 0, 0);
+		   setfont("confont");
+           HudMessage(s:"Hold ",  k:"+attack", s:" to run"; HUDMSG_FADEOUT, 0, CR_GREY, 0.95, 0.5, 0.1, 1.0);
+		   }
+	if(WalkAdvice == false) 
+	       {
+		   SetHUDSize(0, 0, 0);
+		   setfont("confont");
+           HudMessage(s:"Hold ",  k:"+altattack", s:" to sneak"; HUDMSG_FADEOUT, 0, CR_GREY, 0.95, 0.55, 0.1, 1.0);
+		   }
+/////////////////////////////////////////// 
+/////////////////////////////////////////// 
+/////////////////////////////////////////// Chase Music
+/////////////////////////////////////////// 
+
+If (!CheckInventory("truNMARER"))  //if not in nightmare mode
+{
+
+
+
+     if (GetAmmoCapacity("BeingChased") > 1)   //Mutilator just noticed player
+     {
+	 beingchased = 35*GetCvar("MDIchasetime");
+	 NamedRequestScriptPuke("MDI_SetBChaseOne", password, 0, 0);
+	 }
+
+else if (GetAmmoCapacity("BeingChased") == 1)   
+     {
+	     if (chasestarted == false)
+	         {
+		     chasestarted = true;
+		     LocalSetMusic(strparam(s:GetCvarString("MDIchasemusic"), i:random(1,4)));
+		     }
+	else if (chasestarted == true)
+	         {
+			 if (beingchased > 1)  beingchased--;
+		else if	(beingchased == 1) NamedRequestScriptPuke("MDI_StopChase", password, 0, 0);
+			 
+			 
+             
+		     }
+	 }
+
+else if (GetAmmoCapacity("BeingChased") <= 0) 
+       {
+	   if (chasestarted == true) 
+	       {
+		    chasestarted = false;
+			beingchased = 0;
+		   	LocalAmbientSound("MZCHASE0", 127);
+		    LocalSetMusic(strparam(s:GetCvarString("MDIroundmusic")));	
+		   }
+       }
+
+}
+
+
+
+
+
+if (MUTILATOR_MOD() == 2)
+{
+MyX = ((GetActorX(0)>>16)/16)*1.0;
+MyY = ((GetActorY(0)>>16)/16)*(-1.0);
+MyAngle = GetActorAngle(0) >> 8;
+AngleIMG = strparam(s:"MDIPAA", i:MyAngle/10);
+SetHUDSize(1920, 1440, 0);
+SetFont("MDIRADAR");
+HudMessage (s:"A"; HUDMSG_PLAIN, 1751, CR_GREY, (RadarBaseX*1.0),       (RadarBaseY*1.0),       1.5);
+SetFont(AngleIMG);
+HudMessage (s:"A"; HUDMSG_PLAIN, 1749, CR_GREY, (RadarBaseX*1.0) + MyX, (RadarBaseY*1.0) + MyY, 1.5);
+
+if (MovStage < 10)
+{
+SetFont("MDIQUEST");
+HudMessage (s:"A"; HUDMSG_PLAIN, 1750, CR_GREY, QuestX*1.0, QuestY*1.0, 1.5);
+}
+
+//debug
+/*SetHUDSize(0, 0, 0);
+SetFont("Confont");
+HudMessage (
+s:"MovQuesting: ",i:MovQuesting, s:"\n\n",
+s:"MovStage: ",i:MovStage, s:"\n\n",  
+s:"QuestMeter: ",i:QuestMeter, s:"\n\n",  
+s:"MovQuarter: ",i:MovQuarter, s:"\n\n",  
+s:"MovArea: ",i:MovArea, s:"\n\n", 
+s:"InQuest: ",i:InQuest, s:"\n\n"; 
+HUDMSG_PLAIN, 3456, CR_GREY, 0.5, 0.5, 1.5);
+*/
+
+//assigning quest
+if ((MovQuesting == false) && (!CheckInventory("MurdererKey"))) 
+{
+MovQuesting = true;
+MovStage++;
+QuestMeter = random(1,25);
+MovQuarter = SetMovQuarter(MovQuarter);
+
+MovArea = SetMovArea(MovQuarter);
+QuestX = SetMovQuestAreaX(MovArea);
+QuestY = SetMovQuestAreaY(MovArea);
+}
+
+
+
+//Quest Area
+if ((MovStage < 10) && (!CheckInventory("MurdererKey")))
+{
+if (CheckGoalDistance(160, MovArea, 13) == false) //If player is close to quest
+InQuest = 8 + (MovStage*3);
+
+
+
+
+if (CheckGoalDistance(32, MovArea, QuestMeter) == true) // If player is right at the Quest spot
+  {
+  MovQuesting = false;
+  NamedRequestScriptPuke("MDI3QuestDone", password, MovStage, 0); 
+  //InQuest = 8 + (MovStage*3);
+  }
+else if (CheckGoalDistance(160, MovArea, 13) == true) //If player is close to quest
+   {
+	if (InQuest > 0) {SetFont("BIGFONT"); SetHUDSize(800, 600, 0);HudMessage (s:"AUTO-SEARCH: ", i:InQuest; HUDMSG_FADEOUT, 1748, CR_GREY, 400.0, 64.0, 1.0, 0.5);}
+	else {MovQuesting = false; NamedRequestScriptPuke("MDI3QuestDone", password, MovStage, 0); /*InQuest = 8 + (MovStage*3);*/}
+   }
+
+
+
+}
+{
+if (ticdown > 0) ticdown--;
+else {ticdown = 35; InQuest--;}
+}
+
+
+//FLASHLIGHT ICON
+{
+     if (GetCVAR(StrParam(s:"PSPECIAL", i:ConsolePlayerNumber())) == 0) flashcolor = "c"; 
+else if (GetCVAR(StrParam(s:"PSPECIAL", i:ConsolePlayerNumber())) == 1) {flashcolor = "k"; UsedFLonce = true;} 
+}
+if (UsedFLonce == true) FlashAdvice = "";
+{
+SetHUDSize(0, 0, 0);
+setfont(strparam(s:"M_FLASH", i: GetCVAR(StrParam(s:"PSPECIAL", i:ConsolePlayerNumber()))));
+HudMessage(s:"A"; HUDMSG_PLAIN, 3475, CR_YELLOW, 0.95, 0.1, 0.5);
+setfont("confont");
+HudMessage(s:"\c", s:flashcolor, k:"+use", s:FlashAdvice; HUDMSG_FADEOUT, 3474, CR_UNTRANSLATED, 0.95, 0.135, 0.1, 1.0);
+}
+}
+
+
+
+
+
+////////////////////////////////////////////STAMINA
+SetHUDSize(1920, 1440, 0);
+SetFont(strparam(s:"MDI", s:staminatype, i:SSTAMINA/100));
+HudMessage (s:"A"; HUDMSG_FADEOUT, 1747, CR_GREY, (RadarBaseX*1.0), (RadarBaseY*1.0), 0.1, 1.0);
+
+
+
+
+
+//DRUGKIT
+{
+     if(CheckInventory("ClientDrugKitUsed") && (DrugUsed == false))  {DrugUsed = true; SSTAMINA = MaxStamina;}
+
+else if(CheckInventory("ClientDrugKitUsed") && (DrugUsed == true))  NamedRequestScriptPuke("ClientTakeDrugKit", password, 0, 0);
+
+else if (!CheckInventory("ClientDrugKitUsed") && (DrugUsed == true)) DrugUsed = false;
+
+}
+
+
+          if ((flashcooldown <= 0) && (MUTILATOR_MOD() == 2))
+            {
+         if ((buttonz & BT_USE) && (GetCvar(strparam(s:"PSPECIAL", i:ConsolePlayerNumber())) == 0) && (pendelay <=0)) {  NamedRequestScriptPuke("FLASHLIGHT_ON", password, 0, 0);      flashcooldown = 15; penalty = 30; LocalAmbientSound("SDFLSHON", 48); }
+	else if ((buttonz & BT_USE) && (GetCvar(strparam(s:"PSPECIAL", i:ConsolePlayerNumber())) == 1))  { NamedRequestScriptPuke("FLASHLIGHT_OFF", password, 0, 0);     flashcooldown = 15; penalty = 35; LocalAmbientSound("SDFLSHOF", 48); }
+            }
+
+
+			 if (GetCvar(strparam(s:"PSPECIAL", i:ConsolePlayerNumber())) == 1)
+			    {
+				if (SSTAMINA < 5) { NamedRequestScriptPuke("FLASHLIGHT_OFF", password, 0, 0);  flashcooldown = 15;LocalAmbientSound("SDFLSHOF", 48); if (pendelay <= 0) pendelay = 150;}
+	          else {
+			        SSTAMINA -= (5 + penalty);
+					if (penalty > 0) penalty--;
+					}
+			    }
+			 else
+			    {
+				if (penalty > 0) penalty--;
+			    }
+
+		  if (flashcooldown > 0) flashcooldown--;
+
+         if ((buttonz & BT_FORWARD)|(buttonz & BT_BACK)|(buttonz & BT_MOVELEFT)|(buttonz & BT_MOVERIGHT))
+
+				  {
+
+				  	if (buttonz & BT_ATTACK)
+	                        {
+							RunAdvice = true;
+	                        if ((SSTAMINA >= 5) && (pendelay <=0)) 
+							   {  SSTAMINA -= (15 + GetCvar("mdispecial3"));  
+							     if(!CheckActorProperty(0, APROP_Speed, GetCvar("mdispeed4"))) NamedRequestScriptPuke("VICTIM_RUN", password, 0, 0); 
+								 if (visibility < VisibilityMax)  visibility+= 18;  
+									 
+							   }
+
+	                        else   { if(!CheckActorProperty(0, APROP_Speed, GetCvar("mdispeed3"))) NamedRequestScriptPuke("VICTIM_WALK", password, 0, 0);
+							if (pendelay <= 0) pendelay = 150;
+							if((checkinventory("victim1"))|(checkinventory("victim2")) && (pendelay == 150)) NamedRequestScriptPuke("MALE_EXHAUST", password, 0, 0); 
+							if((checkinventory("victim3"))|(checkinventory("victim4")) && (pendelay == 150)) NamedRequestScriptPuke("FEMALE_EXHAUST", password, 0, 0); 
+
+							if (SSTAMINA < MaxStamina) SSTAMINA += 3;}
+							}
+
+                    else if (buttonz & BT_ALTATTACK)
+
+							{
+							WalkAdvice = true;
+							 if (visibility < VisibilityMax)  visibility+=random(3,4);
+							 if (SSTAMINA < MaxStamina) SSTAMINA += 5;    if(!CheckActorProperty(0, APROP_Speed, GetCvar("mdispeed1"))) NamedRequestScriptPuke("VICTIM_SNEAK", password, 0, 0);
+							}
+
+
+
+					 else
+
+						    {
+										
+                            if (visibility < VisibilityMax)  visibility+=8;
+							if (GetCvar(strparam(s:"PSPECIAL", i:ConsolePlayerNumber())) == 1) SSTAMINA -= (5 + GetCvar("mdispecial3"));
+							if(!CheckActorProperty(0, APROP_Speed, GetCvar("mdispeed3"))) NamedRequestScriptPuke("VICTIM_WALK", password, 0, 0);
+							}
+
+				  }
+
+          else
+
+
+				{
+				if (visibility > 0)  visibility-=random(0,1);
+				if (SSTAMINA < MaxStamina) SSTAMINA += 5; 
+		        }
+
+      }
+	  ////////////////////////////////////////////    MUTILATOR
+	  ///////////////////////////////////////////
+	  //////////////////////////////////////////
+	  /////////////////////////////////////////
+	  else if (checkinventory("IsMutilator"))
+	  {
+/*	  								 if (checkInventory("IsInWater"))   
+								     {
+									 If (waterdelay <= 0) { NamedRequestScriptPuke("MDI_waterSFX", password, 0, 0); waterdelay = 10; }
+									 else waterdelay --;
+	                                 }     
+*/    
+	  //No Self Hear
+      StopSound(0, 6);
+      delay(1);	  
+	  SetHUDSize(0, 0, 0);
+      setfont(strparam(s:"MDITRAC", i: Musik));
+      HudMessage(s:"A"; HUDMSG_PLAIN, 3475, CR_YELLOW, 0.95, 0.18, 0.5);
+//      setfont("confont");
+//      HudMessage(k:"+altattack"; HUDMSG_FADEOUT, 3474, CR_GREY, 0.95, 0.215, 0.1, 1.0);
+	  if ((buttonz & BT_ALTATTACK) && (musikDelay <= 0))
+	     {
+		  MusikDelay = 35;
+		  if (Musik == false)
+		  {
+		 Musik = true;
+	     MusikIs = strparam(s:"MUTIMUS", i:random(1,4));
+		 LocalSetMusic(MusikIs);
+         SetHudSize(640, 480, FALSE);
+         SetFont(MusikIs);
+         Hudmessage(s:"A";HUDMSG_FADEINOUT,7142,CR_UNTRANSLATED, 320.0, 240.0, 4.0, 1.0, 1.0);
+          }
+		 else  {Musik = false; LocalSetMusic(strparam(s:GetCvarString("MDIroundmusic")));}
+		  }
+	  
+
+	  if (musikDelay > 0) musikDelay--;
+	  
+	  if (lookatvictims > 0) lookatvictims--;
+	  if (lookatvictims <=0) {lookatvictims = 15; NamedRequestScriptPuke("LookAtVictims", password, 0, 0);}
+	  
+	  ////////////////////////////////////////////    if map is mdi03
+	  if ((MUTILATOR_MOD() == 2) &&(ClientSpam <= 0)) consolecommand("fov 110"); 
+
+
+	  
+	  
+	  
+
+
+
+
+	  
+	   if ((buttonz & BT_FORWARD)|(buttonz & BT_BACK)|(buttonz & BT_MOVELEFT)|(buttonz & BT_MOVERIGHT)|(buttonz & BT_JUMP))  
+	   
+	   {
+	   ////////////////////////////////////////////    making sound when mutilator is moving
+	    if (MUTILATOR_MOD() == 1)
+		{
+	   	if (MutiWepIdlSFXdel <= 0) {MutiWepIdlSFXdel = MutiWepIdlSFXdelMax; NamedRequestScriptPuke("MutilatorWepIDLsfx", password, 0, 0);}
+		if (MutiWepIdlSFXdel > 0) MutiWepIdlSFXdel--; //dicreament  mutilator weapon sound effect delay
+		}
+       /////// ---
+
+		
+		
+		
+		
+		
+		
+	  if (MUTILATOR_MOD() == 2) 
+	  {		  
+
+		
+	 //Mutilator FLASHLIGHT pt1 
+	  flashcooldown = 50;
+	   if (GetCvar(strparam(s:"PSPECIAL", i:ConsolePlayerNumber())) != 2)
+	       {
+	       if(GetCvar(strparam(s:"PSPECIAL", i:ConsolePlayerNumber())) != 1)  NamedRequestScriptPuke("FLASHLIGHT_ON", password, 0, 0); 
+           }
+      }
+
+     
+
+		
+		////////////////////////////////////////////    other Mutilator's stuff (for all)
+		
+		
+		
+        if(!CheckActorProperty(0, APROP_Speed, GetCvar("mdispeed2") + GetCvar("mdispecial5"))) NamedRequestScriptPuke("MUTILATOR_WALK", password, 0, 0);//isMutilator 0.5  
+        }
+	   
+	   
+	   //Mutilator FLASHLIGHT pt2 
+	   if (flashcooldown <= 0)  
+	        {
+	        if (GetCvar(strparam(s:"PSPECIAL", i:ConsolePlayerNumber())) != 2)
+	             {
+			     if(GetCvar(strparam(s:"PSPECIAL", i:ConsolePlayerNumber())) != 0)   NamedRequestScriptPuke("FLASHLIGHT_OFF", password, 0, 0);  
+			     }
+	        }
+	   if (flashcooldown > 0) flashcooldown--; 
+
+	   }
+	   
+	 
+	 
+	 
+	 
+}	 
+	 
+	  ////////////////////////////////////////////
+	  ///////////////////////////////////////////
+	  //////////////////////////////////////////
+	  /////////////////////////////////////////	 
+	  ////////////////////////////////////////        FINAL PHASE
+	  ///////////////////////////////////////
+	  //////////////////////////////////////
+	  /////////////////////////////////////
+	  
+	  
+  else if (GetCVAR("MDISTATE") == 3)  //When a final phase
+  {
+   consolecommand("gl_fogmode 1");
+   visibility = 256;
+   if ((checkinventory("IsMutilator")) && (ClientSpam <= 0)) consolecommand("fov 90");
+   
+   ////////////////////////////////////////////    Set a normal speed for everyone
+   if(!CheckActorProperty(0, APROP_Speed, GetCvar("mdispeed5"))) NamedRequestScriptPuke("DEFAULT_SPEED", password, 0, 0);
+  }
+  
+  else if (GetCVAR("MDISTATE") == 4) terminate;	
+	
+if (CheckWeapon("Mutilator1")==true)
+{
+////////////////////////////////////////////CHAINSAW
+SetHUDSize(1920, 1440, 0);
+SetFont(strparam(s:"MDIST", i:MutiAmmo/10));
+HudMessage (s:"A"; HUDMSG_FADEOUT, 1747, CR_GREY, (RadarBaseX*1.0), (RadarBaseY*1.0) + 180.0, 0.1, 1.0);
+
+	
+	  ////////////////////////////////////////////    Chainsaw Attack
+	  if  (buttonz & BT_ATTACK)
+		{
+	    if ((mitiatkdel <= 0) && (MutiAmmo > 8*35))
+		{
+		mitiatkdel = 35; //delay for next poss. attacl
+		MutiAmmo-=8*35;  //Take Mutilator's ammo
+		NamedRequestScriptPuke("JasonChainsaw", password, 0, 0);
+		}
+		if (MutiAmmo < 8*35)
+		{
+		SetFont("MDICHARG");
+        HudMessage (s:"A"; HUDMSG_PLAIN, 0, CR_UNTRANSLATED, (RadarBaseX*1.0), (RadarBaseY*1.0) + 180.0, 0.75);
+		}
+	    } /////// end FIRE input	of chainsaw
+if (MutiAmmo < MutiMaxAmmo) MutiAmmo+=2;				
+}		
+if (mitiatkdel > 0) mitiatkdel--; //dicreament special mutilator weapon delay 
+  
+  
+  
+  
+ ClientSpam--;
+ if (pendelay > 0) pendelay--; 
+ delay(1);
+ }
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ if ((PlayerIsSpectator(ConsolePlayerNumber()) == 2) && (ClientDied == false)) //Player died
+    {
+	ClientDied = true;
+    LocalSetMusic(strparam(s:GetCvarString("MDIroundmusic")));
+	//consolecommand(strparam(s:"changemus ", s:GetCvarString("MDIroundmusic")));
+    fadeto(0,0,0,0.0,0.0);
+	terminate;
+	}
+ 
+ if ((PlayerIsSpectator(ConsolePlayerNumber()) == 1) && (ClientDied == false)) //Player connected
+   {
+   ClientDied = true;
+   NamedRequestScriptPuke("MDI_ShowVotes", 0, 0, 0);
+   LocalSetMusic(strparam(s:GetCvarString("MDIroundmusic")));
+   terminate;
+   }
+ 
+ 
+delay(35);
+restart;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+function int SetMovQuestAreaX(int num)
+{
+int rett;
+switch(num)
+{
+case 1: rett = RadarBaseX - 70; break;  case 2: rett = RadarBaseX - 50; break;  case 3: rett = RadarBaseX - 30; break;  case 4: rett = RadarBaseX - 10; break;
+case 5: rett = RadarBaseX + 10; break;  case 6: rett = RadarBaseX + 30; break;  case 7: rett = RadarBaseX + 50; break;  case 8: rett = RadarBaseX + 70; break;
+case 9: rett = RadarBaseX - 70; break;  case 10: rett = RadarBaseX - 50; break; case 11: rett = RadarBaseX - 30; break; case 12: rett = RadarBaseX - 10; break;
+case 13: rett = RadarBaseX + 10; break; case 14: rett = RadarBaseX + 30; break; case 15: rett = RadarBaseX + 50; break; case 16: rett = RadarBaseX + 70; break;
+
+case 17: rett = RadarBaseX - 70; break; case 18: rett = RadarBaseX - 50; break; case 19: rett = RadarBaseX - 30; break; case 20: rett = RadarBaseX - 10; break; 
+case 21: rett = RadarBaseX + 10; break; case 22: rett = RadarBaseX + 30; break; case 23: rett = RadarBaseX + 50; break; case 24: rett = RadarBaseX + 70; break;
+case 25: rett = RadarBaseX - 70; break; case 26: rett = RadarBaseX - 50; break; case 27: rett = RadarBaseX - 30; break; case 28: rett = RadarBaseX - 10; break;
+case 29: rett = RadarBaseX + 10; break; case 30: rett = RadarBaseX + 30; break; case 31: rett = RadarBaseX + 50; break; case 32: rett = RadarBaseX + 70; break;
+
+case 33: rett = RadarBaseX - 70; break; case 34: rett = RadarBaseX - 50; break; case 35: rett = RadarBaseX - 30; break; case 36: rett = RadarBaseX - 10; break;
+case 37: rett = RadarBaseX + 10; break; case 38: rett = RadarBaseX + 30; break; case 39: rett = RadarBaseX + 50; break; case 40: rett = RadarBaseX + 70; break;
+case 41: rett = RadarBaseX - 70; break; case 42: rett = RadarBaseX - 50; break; case 43: rett = RadarBaseX - 30; break; case 44: rett = RadarBaseX - 10; break;
+case 45: rett = RadarBaseX + 10; break; case 46: rett = RadarBaseX + 30; break; case 47: rett = RadarBaseX + 50; break; case 48: rett = RadarBaseX + 70; break;
+
+case 49: rett = RadarBaseX - 70; break; case 50: rett = RadarBaseX - 50; break; case 51: rett = RadarBaseX - 30; break; case 52: rett = RadarBaseX - 10; break;
+case 53: rett = RadarBaseX + 10; break; case 54: rett = RadarBaseX + 30; break; case 55: rett = RadarBaseX + 50; break; case 56: rett = RadarBaseX + 70; break;
+case 57: rett = RadarBaseX - 70; break; case 58: rett = RadarBaseX - 50; break; case 59: rett = RadarBaseX - 30; break; case 60: rett = RadarBaseX - 10; break;
+case 61: rett = RadarBaseX + 10; break; case 62: rett = RadarBaseX + 30; break; case 63: rett = RadarBaseX + 50; break; case 64: rett = RadarBaseX + 70; break;
+}
+return rett;
+}
+
+
+
+
+
+
+function int SetMovQuestAreaY(int num)
+{
+int rett;
+switch(num)
+{
+case 1: rett = RadarBaseY - 70; break;  case 2: rett = RadarBaseY - 70; break;  case 3: rett = RadarBaseY - 70; break;  case 4: rett = RadarBaseY - 70; break;
+case 5: rett = RadarBaseY - 70; break;  case 6: rett = RadarBaseY - 70; break;  case 7: rett = RadarBaseY - 70; break;  case 8: rett = RadarBaseY - 70; break;
+case 9: rett = RadarBaseY - 50; break;  case 10: rett = RadarBaseY - 50; break; case 11: rett = RadarBaseY - 50; break; case 12: rett = RadarBaseY - 50; break;
+case 13: rett = RadarBaseY - 50; break; case 14: rett = RadarBaseY - 50; break; case 15: rett = RadarBaseY - 50; break; case 16: rett = RadarBaseY - 50; break;
+
+case 17: rett = RadarBaseY - 30; break; case 18: rett = RadarBaseY - 30; break; case 19: rett = RadarBaseY - 30; break; case 20: rett = RadarBaseY - 30; break; 
+case 21: rett = RadarBaseY - 30; break; case 22: rett = RadarBaseY - 30; break; case 23: rett = RadarBaseY - 30; break; case 24: rett = RadarBaseY - 30; break;
+case 25: rett = RadarBaseY - 10; break; case 26: rett = RadarBaseY - 10; break; case 27: rett = RadarBaseY - 10; break; case 28: rett = RadarBaseY - 10; break;
+case 29: rett = RadarBaseY - 10; break; case 30: rett = RadarBaseY - 10; break; case 31: rett = RadarBaseY - 10; break; case 32: rett = RadarBaseY - 10; break;
+
+case 33: rett = RadarBaseY + 10; break; case 34: rett = RadarBaseY + 10; break; case 35: rett = RadarBaseY + 10; break; case 36: rett = RadarBaseY + 10; break;
+case 37: rett = RadarBaseY + 10; break; case 38: rett = RadarBaseY + 10; break; case 39: rett = RadarBaseY + 10; break; case 40: rett = RadarBaseY + 10; break;
+case 41: rett = RadarBaseY + 30; break; case 42: rett = RadarBaseY + 30; break; case 43: rett = RadarBaseY + 30; break; case 44: rett = RadarBaseY + 30; break;
+case 45: rett = RadarBaseY + 30; break; case 46: rett = RadarBaseY + 30; break; case 47: rett = RadarBaseY + 30; break; case 48: rett = RadarBaseY + 30; break;
+
+case 49: rett = RadarBaseY + 50; break; case 50: rett = RadarBaseY + 50; break; case 51: rett = RadarBaseY + 50; break; case 52: rett = RadarBaseY + 50; break;
+case 53: rett = RadarBaseY + 50; break; case 54: rett = RadarBaseY + 50; break; case 55: rett = RadarBaseY + 50; break; case 56: rett = RadarBaseY + 50; break;
+case 57: rett = RadarBaseY + 70; break; case 58: rett = RadarBaseY + 70; break; case 59: rett = RadarBaseY + 70; break; case 60: rett = RadarBaseY + 70; break;
+case 61: rett = RadarBaseY + 70; break; case 62: rett = RadarBaseY + 70; break; case 63: rett = RadarBaseY + 70; break; case 64: rett = RadarBaseY + 70; break;
+
+}
+return rett;
+}
+
+
+
+
+
+function int SetMovArea(int num)
+{
+int rett;
+if(num == 1) Switch(random(1,16))
+{
+case 1: rett = 1; break;  case 2: rett = 2; break;  case 3: rett = 3; break;  case 4: rett = 4; break;
+case 5: rett = 9; break;  case 6: rett = 10; break;  case 7: rett = 11; break;  case 8: rett = 12; break;
+case 9: rett = 17; break;  case 10: rett = 18; break; case 11: rett = 19; break; case 12: rett = 20; break;
+case 13: rett = 25; break; case 14: rett = 26; break; case 15: rett = 27; break; case 16: rett = 28; break;
+}
+
+else if(num == 2) Switch(random(17,32))
+{
+case 17: rett = 5; break; case 18: rett = 6; break; case 19: rett = 7; break; case 20: rett = 8; break; 
+case 21: rett = 13; break; case 22: rett = 14; break; case 23: rett = 15; break; case 24: rett = 16; break;
+case 25: rett = 21; break; case 26: rett = 22; break; case 27: rett = 23; break; case 28: rett = 24; break;
+case 29: rett = 29; break; case 30: rett = 30; break; case 31: rett = 31; break; case 32: rett = 32; break;
+}
+
+else if(num == 3) Switch(random(33,48))
+{
+case 33: rett = 33; break; case 34: rett = 34; break; case 35: rett = 35; break; case 36: rett = 36; break;
+case 37: rett = 41; break; case 38: rett = 42; break; case 39: rett = 43; break; case 40: rett = 44; break;
+case 41: rett = 49; break; case 42: rett = 50; break; case 43: rett = 51; break; case 44: rett = 52; break;
+case 45: rett = 57; break; case 46: rett = 58; break; case 47: rett = 59; break; case 48: rett = 60; break;
+}
+
+else if(num == 4) Switch(random(49,64))
+{
+case 49: rett = 37; break; case 50: rett = 38; break; case 51: rett = 39; break; case 52: rett = 40; break;
+case 53: rett = 45; break; case 54: rett = 46; break; case 55: rett = 47; break; case 56: rett = 48; break;
+case 57: rett = 53; break; case 58: rett = 54; break; case 59: rett = 55; break; case 60: rett = 56; break;
+case 61: rett = 61; break; case 62: rett = 62; break; case 63: rett = 63; break; case 64: rett = 64; break;
+}
+return rett;
+}
+
+
+
+function int SetMovQuarter(int num)
+{
+int rett;
+int ran;
+     if (num == 0) {rett = random(1,4);}
+else if (num == 1) {rett = random(2,4);}
+else if (num == 2) {ran = random(0,1); if (ran == 0) rett = 1; else rett = random(3,4);}
+else if (num == 3) {ran = random(0,1); if (ran == 0) rett = random(1,2); else rett = 4;}
+else if (num == 4) {rett = random(1,3);}
+return rett;
+}
+
+function bool CheckGoalDistance(int Radius, int AreaBlock, int QuestMeter)
+{
+if ((GetActorX(0)  >  GetActorX(AreaBlock*100 + QuestMeter) - (Radius * 1.0)) &&  (GetActorX(0)  <  GetActorX(AreaBlock*100 + QuestMeter) + (Radius * 1.0))
+ && (GetActorY(0)  >  GetActorY(AreaBlock*100 + QuestMeter) - (Radius * 1.0)) &&  (GetActorY(0)  <  GetActorY(AreaBlock*100 + QuestMeter) + (Radius * 1.0)))
+
+return true;
+return false;
+}
+
+
+
+
+function int ShowQuestAreaWhenNearby(int tid, int range)
+{
+	int dist, ang, vang, pitch, xx, yy, rett ;
+
+	xx = GetActorX(tid) - GetActorX(0);
+	yy = GetActorY(tid) - GetActorY(0);
+
+	vang = VectorAngle(xx,yy);
+	ang = (vang - GetActorAngle(0) + 1.0) % 1.0;
+
+	if(((vang+0.125)%0.5) > 0.25) dist = FixedDiv(yy, Sin(vang));
+	else dist = FixedDiv(xx, Cos(vang));
+
+	if (/*(ang < 0.2 || ang > 0.8) && */dist < range)
+	{
+    rett = 1;
+
+	}
+	else  rett = 0;
+
+return rett;
+}
+
+
+
+
+
+
+
+
+
+
+script "MDI3QuestDone" (int password, int stagenum) NET
+{
+if (MDI_PassMatch(password)) 
+ {
+ int NMAREpts;
+/*   {
+   if (CheckInventory("QuestTimer")>40) {SetAmmoCapacity("PTSchance", 3);}
+    else if ((CheckInventory("QuestTimer")>20) && (CheckInventory("QuestTimer")<41)) {SetAmmoCapacity("PTSchance", 2);}
+    else if ((CheckInventory("QuestTimer")>0) && (CheckInventory("QuestTimer")<21)) {SetAmmoCapacity("PTSchance", 1);}
+    else if (CheckInventory("QuestTimer")==0) {SetAmmoCapacity("PTSchance", 0);}
+   }*/
+// if (CheckInventory("truNMARER")) NMAREpts = 4;
+int ran;
+
+ if ((CheckInventory("mdipts")>=80) && (mdigame[15] ==2))
+ {mdigame[15] =3; GiveActorInventory(TID_START+gameinfo[2], "UndeadCome", 1);  GiveActorInventory(TID_START+gameinfo[2], "TripShotgun", 1);  GiveActorInventory(TID_START+gameinfo[2], "MDIpulse", 1); GiveActorInventory(TID_START+gameinfo[2], "MutilatorGotItem", 1); } //and then zombie ressurect give
+  if ((CheckInventory("mdipts")>=60) && (mdigame[15] ==1))
+ {mdigame[15] =2; GiveActorInventory(TID_START+gameinfo[2], "MDIpulse", 1);  GiveActorInventory(TID_START+gameinfo[2], "LatentFlashlight", 1);GiveActorInventory(TID_START+gameinfo[2], "MutilatorGotItem", 1);} //second tripgive
+ if ((CheckInventory("mdipts")>=30) && (mdigame[15] ==0))
+ {mdigame[15] =1; GiveActorInventory(TID_START+gameinfo[2], "MDIpulse", 1);  GiveActorInventory(TID_START+gameinfo[2], "Beartrap", 1);GiveActorInventory(TID_START+gameinfo[2], "MutilatorGotItem", 1);} //first tripgive
+
+  SetAmmoCapacity("mdiptsBONUS", getAmmoCapacity("mdiptsBONUS") + 2);
+  //GiveInventory("mdipts", mdigame[2] + getAmmoCapacity("mdiptsBONUS") + NMAREpts + GetAmmoCapacity("PTSchance"));
+  GiveInventory("mdipts", 10 + random(0,2));//mdigame[2] + 7);
+  //GiveInventory("QuestTimer",60);
+  Print(s: Goalcongrats[random(0,2)]);
+  LocalAmbientSound(MPassedSFX[stagenum],127);
+  LocalAmbientSound("Game/CountStart",127);
+  //delay(5);
+  if((stagenum == 2)|(stagenum == 4)|(stagenum == 6)|(stagenum == 8))
+  SpawnSpotForced(GoalBonus[random(1,9)], ActivatorTID(), 0, 0);
+  SetAmmoCapacity("StageStatus", getAmmoCapacity("StageStatus") + 100);
+  //if (getAmmoCapacity("StageStatus")< 1000)
+  //ACS_NamedExecuteAlways("S_SetMission",0);
+}
+}
+
+
+
+function str StripColors(str input) //DrinkyBird + Mr.Satan
+{
+  str output = ""; bool isCol = false; bool isBracket = false;
+  for (int i = 0; i < StrLen(input); i++)
+  {
+    int c = GetChar(input, i);
+    if (GetChar(input, i) == '\\' && GetChar(input, i + 1) == 'c') { isCol = true; i++; }
+    else if (c == 0x1C) { isCol = true; }
+    else if (isCol)
+    {
+      if (c == '[') { isBracket = true; }
+      else if (c == ']') { isBracket = false; }
+      if (!isBracket) { isCol = false; }
+    }
+    else { output = StrParam(s: output, c: c); }
+  }
+  return output;
+}
+
+
+
+
+
+
+script "BanIfSpecGO" (int Ahead) //Ban if game winner has gone spec
+{
+if (MDIGlobal[7] == 1) terminate;
+int lastplayer;
+str bantime = 20 + (MDIGlobal[6]*5);
+int mapnum =  GetLevelInfo(LEVELINFO_LEVELNUM);
+//lastplayer = StripColours(strparam(n:gameinfo[2] + 1));
+
+if (Ahead > 0) //if murderer spectates midgame
+{
+Printbold(s:strparam(n:lastplayer+1, s:" has been kicked for ragequit as a murderer (", i:bantime, s:" minutes). Please respect the other players."));
+consolecommand(strparam(s:"Ban_IDx ", i:lastplayer, s:" ", i:bantime, s:"minute \"Ragequit as a Murderer\""));
+MDIGlobal[6]++;
+ terminate;
+}
+while(Playercount() > 1) delay(1);
+
+
+
+if(Playercount() == 1) //who's the last player is?
+{
+
+int counter;
+while(counter < 32) 
+   {
+   if (ClassifyActor(TID_START + counter) & ACTOR_ALIVE) lastplayer = counter;
+   counter++;
+   }
+}
+
+
+while(Playercount() > 0) delay(1);
+
+
+if (mapnum != GetLevelInfo(LEVELINFO_LEVELNUM)) terminate;
+
+Printbold(s:strparam(n:lastplayer+1, s:" has been kicked (", i:bantime, s:" minutes), because he quit the game at scoreboard screen. \n\nIt causes map restart or game crash. Please respect the other players."));
+consolecommand(strparam(s:"Ban_IDx ", i:lastplayer, s:" ", i:bantime, s:"minute \"Please wait till the map properly end next time\""));
+MDIGlobal[6]++;
+terminate;
+}
+
+
+script "TestFeature" (int IsOn)
+{
+MDIGlobal[7] = IsOn;
+}
+
+
+
+
+
+
 
 
