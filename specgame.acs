@@ -4,13 +4,8 @@
 #import "classic.acs"
 #import "mdistuff.acs"
 
- 
 
-/*for (int zha=0; zha<32; zha++)
-{
-ConsoleCommand(StrParam(s:"set ZHAPTS",i:zha));
-}*/
-
+//Spectator games by Zeberpal
 /*MMMMMMMMMMMMMMMMMMMMNNMMNMMMMMMMMMNMMMMMMMMMMMMMMMMM
 MMMMMMMMMMMMMMssyNMMh+``hm::+hNMMMMy`mMMMMMMMMMMMMMMMM
 MMMMMMMMMMMMMs   :N+    dM/ ` :yMMN. yMMMMMMMMMMMMMMMM
@@ -22,56 +17,19 @@ MMMMMMMMMMMo:oMMMMMy+sMd///+sdNMMhsNMMMMMMMMMMMMMMMMMM
 MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM*/
 Script "2DWANGO_preparations" OPEN
 {
-if ((GetLevelInfo(LEVELINFO_LEVELNUM)>=40) && (GetLevelInfo(LEVELINFO_LEVELNUM)<=50))
+
+if (MUTILATOR_MOD() > 0)
 {
-/*for (int zha=0; zha<32; zha++)
-{
-//ConsoleCommand(StrParam(s:"set ZHAPTS",i:zha,s:" 0"));
-//ConsoleCommand(StrParam(s:"set ZHAPLAYER",i:zha,s:" -----"));
-//SetCvarString(StrParam(s:"set ZHAPLAYER",i:zha,s:" -----"));
 
-SetCvar(StrParam(s:"ZHAPTS", i:zha), 0);
-SetCvar(StrParam(s:"NOGHOST", i:zha), 0);
-SetCvarString(StrParam(s:"ZHAPLAYER", i:zha), "-----");
-SetCvarString(StrParam(s:"MGSTATE", i:zha), "Nope");
-}
-*/
-SetCvar("ZHAPTS0", 0);SetCvar("ZHAPTS1", 0);SetCvar("ZHAPTS2", 0);SetCvar("ZHAPTS3", 0);
-SetCvar("ZHAPTS4", 0);SetCvar("ZHAPTS5", 0);SetCvar("ZHAPTS6", 0);SetCvar("ZHAPTS7", 0);
-SetCvar("ZHAPTS8", 0);SetCvar("ZHAPTS9", 0);SetCvar("ZHAPTS10", 0);SetCvar("ZHAPTS11", 0);
-SetCvar("ZHAPTS12", 0);SetCvar("ZHAPTS13", 0);SetCvar("ZHAPTS14", 0);SetCvar("ZHAPTS15", 0);
-SetCvar("ZHAPTS16", 0);SetCvar("ZHAPTS17", 0);SetCvar("ZHAPTS18", 0);SetCvar("ZHAPTS19", 0);
-SetCvar("ZHAPTS20", 0);SetCvar("ZHAPTS21", 0);SetCvar("ZHAPTS22", 0);SetCvar("ZHAPTS23", 0);
-SetCvar("ZHAPTS24", 0);SetCvar("ZHAPTS25", 0);SetCvar("ZHAPTS26", 0);SetCvar("ZHAPTS27", 0);
-SetCvar("ZHAPTS28", 0);SetCvar("ZHAPTS29", 0);SetCvar("ZHAPTS30", 0);SetCvar("ZHAPTS31", 0);
+int counter;
+While(counter < 32)
+     {
+	 SetCvar(strparam(s:"ZHAPTS", i:counter), 0);
+	 SetCvarString(strparam(s:"ZHAPLAYER", i:counter), "-----");
+	 SetCvarString(strparam(s:"MGSTATE", i:counter), "Nope");
+	 counter++;
+	 }
 
-SetCvar("SPECPTS0", 0);SetCvar("SPECPTS1", 0);SetCvar("SPECPTS2", 0);SetCvar("SPECPTS3", 0);
-SetCvar("SPECPTS4", 0);SetCvar("SPECPTS5", 0);SetCvar("SPECPTS6", 0);SetCvar("SPECPTS7", 0);
-SetCvar("SPECPTS8", 0);SetCvar("SPECPTS9", 0);SetCvar("SPECPTS10", 0);SetCvar("SPECPTS11", 0);
-SetCvar("SPECPTS12", 0);SetCvar("SPECPTS13", 0);SetCvar("SPECPTS14", 0);SetCvar("SPECPTS15", 0);
-SetCvar("SPECPTS16", 0);SetCvar("SPECPTS17", 0);SetCvar("SPECPTS18", 0);SetCvar("SPECPTS19", 0);
-SetCvar("SPECPTS20", 0);SetCvar("SPECPTS21", 0);SetCvar("SPECPTS22", 0);SetCvar("SPECPTS23", 0);
-SetCvar("SPECPTS24", 0);SetCvar("SPECPTS25", 0);SetCvar("SPECPTS26", 0);SetCvar("SPECPTS27", 0);
-SetCvar("SPECPTS28", 0);SetCvar("SPECPTS29", 0);SetCvar("SPECPTS30", 0);SetCvar("SPECPTS31", 0);
-
-SetCvarString("ZHAPLAYER0", "-----");SetCvarString("ZHAPLAYER1", "-----");SetCvarString("ZHAPLAYER2", "-----");SetCvarString("ZHAPLAYER3", "-----");
-SetCvarString("ZHAPLAYER4", "-----");SetCvarString("ZHAPLAYER5", "-----");SetCvarString("ZHAPLAYER6", "-----");SetCvarString("ZHAPLAYER7", "-----");
-SetCvarString("ZHAPLAYER8", "-----");SetCvarString("ZHAPLAYER9", "-----");SetCvarString("ZHAPLAYER10", "-----");SetCvarString("ZHAPLAYER11", "-----");
-SetCvarString("ZHAPLAYER12", "-----");SetCvarString("ZHAPLAYER13", "-----");SetCvarString("ZHAPLAYER14", "-----");SetCvarString("ZHAPLAYER15", "-----");
-SetCvarString("ZHAPLAYER16", "-----");SetCvarString("ZHAPLAYER17", "-----");SetCvarString("ZHAPLAYER18", "-----");SetCvarString("ZHAPLAYER19", "-----");
-SetCvarString("ZHAPLAYER20", "-----");SetCvarString("ZHAPLAYER21", "-----");SetCvarString("ZHAPLAYER22", "-----");SetCvarString("ZHAPLAYER23", "-----");
-SetCvarString("ZHAPLAYER24", "-----");SetCvarString("ZHAPLAYER25", "-----");SetCvarString("ZHAPLAYER26", "-----");SetCvarString("ZHAPLAYER27", "-----");
-SetCvarString("ZHAPLAYER28", "-----");SetCvarString("ZHAPLAYER29", "-----");SetCvarString("ZHAPLAYER30", "-----");SetCvarString("ZHAPLAYER31", "-----");
-SetCvarString("MGSTATE0", "Nope");SetCvarString("MGSTATE1", "Nope");SetCvarString("MGSTATE2", "Nope");SetCvarString("MGSTATE3", "Nope");
-SetCvarString("MGSTATE4", "Nope");SetCvarString("MGSTATE5", "Nope");SetCvarString("MGSTATE6", "Nope");SetCvarString("MGSTATE7", "Nope");
-SetCvarString("MGSTATE8", "Nope");SetCvarString("MGSTATE9", "Nope");SetCvarString("MGSTATE10", "Nope");SetCvarString("MGSTATE11", "Nope");
-SetCvarString("MGSTATE12", "Nope");SetCvarString("MGSTATE13", "Nope");SetCvarString("MGSTATE14", "Nope");SetCvarString("MGSTATE15", "Nope");
-SetCvarString("MGSTATE16", "Nope");SetCvarString("MGSTATE17", "Nope");SetCvarString("MGSTATE18", "Nope");SetCvarString("MGSTATE19", "Nope");
-SetCvarString("MGSTATE20", "Nope");SetCvarString("MGSTATE21", "Nope");SetCvarString("MGSTATE22", "Nope");SetCvarString("MGSTATE23", "Nope");
-SetCvarString("MGSTATE24", "Nope");SetCvarString("MGSTATE25", "Nope");SetCvarString("MGSTATE26", "Nope");SetCvarString("MGSTATE27", "Nope");
-SetCvarString("MGSTATE28", "Nope");SetCvarString("MGSTATE29", "Nope");SetCvarString("MGSTATE30", "Nope");SetCvarString("MGSTATE31", "Nope");
-SetCvar("TopAssisNum", 0);
-SetCvar("ScoreWinnerMini", 0);
 
 SetCvar("CurrAssisterNum", 33);
 SetCvarString("CurrAssister", "No one");
@@ -109,7 +67,7 @@ CreateTranslation (25, 112:127=251:251); //<130
 script "MDISHOWSCORESINFO" OPEN CLIENTSIDE
 {
 int buttonzz;
- while((GetLevelInfo(LEVELINFO_LEVELNUM)>=40) && (GetLevelInfo(LEVELINFO_LEVELNUM)<=50))
+ while(MUTILATOR_MOD() > 0)
  {
  buttonzz = GetPlayerInput(-1, INPUT_BUTTONS);
    if ((buttonzz & BT_SHOWSCORES))
@@ -124,7 +82,11 @@ else  if (GetCVAR("RESSURECTYPE") == 3) {HudMessage (s:GetCVARString("CurrAssist
 if(PlayerIsSpectator(ConsolePlayerNumber())==0)
 {
    SetFont("confont");
+   if (MUTILATOR_MOD() == 1)
    HudMessage(s:"\ciAs a victim \crsurvive till \ci05:00\cr AM. \n\n\n\nFollow the instructions to solve quests. \n\nAs you progress through the questline, your chances of surviving the final battle will increase. You'll be gifted with additional items as well.\n\nAvoid the villains at all cost! The more people on, the harder the game is.  \n\n\cj", k: "+attack", s:" to run. \n\n\cj", k: "+altattack", s:" to sneak. \n\n\ciAs the Mutilator \crfind and kill as many victims as possible until \ci05:00\cr AM! \n\nThe more victims you get, the better will be your chances to win the round at the end!"; HUDMSG_PLAIN, 2171, CR_DARKRED, 512.0, 580.0, 0.05);
+   else if (MUTILATOR_MOD() == 2)
+   HudMessage(s:"\ciAs a victim \crsurvive till time out. \n\n\n\nHead for the \ckarea \cr. \n\nAs you progress through the questline, your chances of surviving the final battle will increase. You'll be gifted with additional items as well.\n\nAvoid the villains at all cost! The more people on, the harder the game is.  \n\n\cj", k: "+attack", s:" to run. \n\n\cj", k: "+altattack", s:" to sneak. \n\n\ciAs the Mutilator \crfind and kill as many victims as possible until time out! \n\nThe more victims you get, the better will be your chances to win the round at the end!\n\n\n\n\ccTHIS MAP IS SELF-GENERATED, AND CONTAINS 6 VARIOUS SCENARIOS"; HUDMSG_PLAIN, 2171, CR_DARKRED, 512.0, 580.0, 0.05);
+
 }
 }
 delay(1);
@@ -144,11 +106,14 @@ str getnumber = strparam(s:"ZHAPTS", i:PlayerNumber());
 str getnumber2 = strparam(s:"SPECPTS", i:PlayerNumber());
 str getstate = strparam(s:"MGSTATE", i:PlayerNumber());
 str getspeed = strparam(s:"GHSPEED", i:PlayerNumber());
+if ((GetActorX(13300+PlayerNumber())> -5776.0 ) && (GetActorX(13300+PlayerNumber())< -4784.0))
+{
 SetActorPosition(13300+PlayerNumber(), GetActorX(13300+PlayerNumber()) - 32.0, GetActorY(13300+PlayerNumber()), GetActorZ(13300+PlayerNumber())+3.0, 0);
 SetActorAngle(13300+PlayerNumber(), 0.5);
 SetCvar(getnumber, GetCvar(getnumber)+1); 
 SetCvar(getnumber2, GetCvar(getnumber2)+1);
-SetCvar(getspeed, GetCvar(getspeed)+1.0);  
+SetCvar(getspeed, GetCvar(getspeed)+1.0); 
+} 
 if (GetCvar(getspeed)<250.0) { Thing_SetTranslation(13300+PlayerNumber(), GetCvar(getspeed)/10>>16);} 
 if ((GetActorX(13300+PlayerNumber())>(endcam[9]-32.0)) && (GetActorX(13300+PlayerNumber())<(endcam[9]+32.0)))
 {SetCvarString(getstate, MutilatorType[7]);}
@@ -161,11 +126,14 @@ str getnumber = strparam(s:"ZHAPTS", i:PlayerNumber());
 str getnumber2 = strparam(s:"SPECPTS", i:PlayerNumber());
 str getstate = strparam(s:"MGSTATE", i:PlayerNumber());
 str getspeed = strparam(s:"GHSPEED", i:PlayerNumber());
+if ((GetActorX(13300+PlayerNumber())> -5776.0 ) && (GetActorX(13300+PlayerNumber())< -4784.0))
+{
 SetActorPosition(13300+PlayerNumber(), GetActorX(13300+PlayerNumber()) + 32.0, GetActorY(13300+PlayerNumber()), GetActorZ(13300+PlayerNumber())+3.0, 0);
 SetActorAngle(13300+PlayerNumber(), 1.0);
 SetCvar(getnumber, GetCvar(getnumber)+1); 
 SetCvar(getnumber2, GetCvar(getnumber2)+1);
 SetCvar(getspeed, GetCvar(getspeed)+1.0);  
+}
 if (GetCvar(getspeed)<250.0) { Thing_SetTranslation(13300+PlayerNumber(), GetCvar(getspeed)/10>>16);} 
 if ((GetActorX(13300+PlayerNumber())>(endcam[9]-32.0)) && (GetActorX(13300+PlayerNumber())<(endcam[9]+32.0)))
 {SetCvarString(getstate, MutilatorType[7]);}
@@ -207,6 +175,7 @@ else if (GetCvarString(getstate)=="FARM") {SetCvar(getnumber, GetCvar(getnumber)
 
 Script "MGamerRespawn" (void) NET  
 {
+int counter = 3;
 str getname = strparam(s:"ZHAPLAYER", i:PlayerNumber());
 str getnumber = strparam(s:"ZHAPTS", i:PlayerNumber());
 str getstate = strparam(s:"MGSTATE", i:PlayerNumber());
@@ -221,6 +190,15 @@ SetCVAR("TEMPMINICOUNTER", 0); // reloading counter for MINIGAME WINNER
 SetCVAR("TEMPMINIPTS", 0);   // reloading best minigame PTS score
 SetCVAR("TEMPMINIWINNER", 0);  // reloading minigame winner
 	   }
+	While(counter > 0)
+	{
+	SetHUDSize(1024, 768, 0);
+SetFont("Bigfont");
+HudMessage (s:"RESPAWN IN ...", i:counter; HUDMSG_FADEOUT, 0, CR_ORANGE, 540.0, 128.0, 1.0, 0.1);//564
+	delay(35);
+	counter--;
+	}
+	SetActorProperty(13300+PlayerNumber(), APROP_Invulnerable, true);
     SetCvarString(getname, StrParam(n:0));
     SetCvarString(getstate, "SHOTGUN");
     SetCvar(getnumber, 0);
@@ -239,6 +217,7 @@ SetCVAR("TEMPMINIWINNER", 0);  // reloading minigame winner
 	SetActorProperty(13300+PlayerNumber(), APROP_Alpha, 0.0);
 	delay(5);
 	SetActorProperty(13300+PlayerNumber(), APROP_Alpha, 1.0);
+	SetActorProperty(13300+PlayerNumber(), APROP_Invulnerable, false);
 	//}
 }
 
@@ -253,18 +232,22 @@ SetCVAR("TEMPMINIWINNER", 0);  // reloading minigame winner
 
 Script "HOUND_Forward" (void) NET 
 {
+int set; 
+if (MUTILATOR_MOD() == 2) set = 3.0;
 int velx, vely, velz;
-velx = FixedMul(cos(GetActorAngle(8888)), FixedMul(cos(GetActorPitch(8888)), GetCvar("HoundSpeed")));
-vely = FixedMul(sin(GetActorAngle(8888)), FixedMul(cos(GetActorPitch(8888)), GetCvar("HoundSpeed")));
+velx = FixedMul(cos(GetActorAngle(8888)), FixedMul(cos(GetActorPitch(8888)), GetCvar("HoundSpeed") - set));
+vely = FixedMul(sin(GetActorAngle(8888)), FixedMul(cos(GetActorPitch(8888)), GetCvar("HoundSpeed") - set));
 SetActorVelocity(8888, velx, vely, -1.0, FALSE, FALSE);
 //SetActorState(8888, "BASIC");
 }
 
 Script "SPIRIT_Forward" (void) NET 
 {
+int set; 
+if (MUTILATOR_MOD() == 2) set = 2.0;
 int velx, vely, velz;
-velx = FixedMul(cos(GetActorAngle(8889)), FixedMul(cos(GetActorPitch(8889)), GetCvar("SpiritSpeed")));
-vely = FixedMul(sin(GetActorAngle(8889)), FixedMul(cos(GetActorPitch(8889)), GetCvar("SpiritSpeed")));
+velx = FixedMul(cos(GetActorAngle(8889)), FixedMul(cos(GetActorPitch(8889)), GetCvar("SpiritSpeed") - set));
+vely = FixedMul(sin(GetActorAngle(8889)), FixedMul(cos(GetActorPitch(8889)), GetCvar("SpiritSpeed") - set));
 SetActorVelocity(8889, velx, vely, -1.0, FALSE, FALSE);
 //SetActorState(8889, "BASIC");
 }
@@ -272,18 +255,22 @@ SetActorVelocity(8889, velx, vely, -1.0, FALSE, FALSE);
 
 Script "HOUND_Backward" (void) NET 
 {
+int set; 
+if (MUTILATOR_MOD() == 2) set = 3.0;
 int velx, vely, velz;
-velx = FixedMul(cos(GetActorAngle(8888)), FixedMul(cos(GetActorPitch(8888)), GetCvar("HoundSpeed")- 3.0));
-vely = FixedMul(sin(GetActorAngle(8888)), FixedMul(cos(GetActorPitch(8888)), GetCvar("HoundSpeed")- 3.0));
+velx = FixedMul(cos(GetActorAngle(8888)), FixedMul(cos(GetActorPitch(8888)), GetCvar("HoundSpeed")- 3.0 - set));
+vely = FixedMul(sin(GetActorAngle(8888)), FixedMul(cos(GetActorPitch(8888)), GetCvar("HoundSpeed")- 3.0 - set));
 SetActorVelocity(8888, -velx, -vely, -1.0, FALSE, FALSE);
 //SetActorState(8888, "BASIC");
 }
 
 Script "SPIRIT_Backward" (void) NET 
 {
+int set; 
+if (MUTILATOR_MOD() == 2) set = 2.0;
 int velx, vely, velz;
-velx = FixedMul(cos(GetActorAngle(8889)), FixedMul(cos(GetActorPitch(8889)), GetCvar("SpiritSpeed")- 3.0));
-vely = FixedMul(sin(GetActorAngle(8889)), FixedMul(cos(GetActorPitch(8889)), GetCvar("SpiritSpeed")- 3.0));
+velx = FixedMul(cos(GetActorAngle(8889)), FixedMul(cos(GetActorPitch(8889)), GetCvar("SpiritSpeed")- 3.0 - set));
+vely = FixedMul(sin(GetActorAngle(8889)), FixedMul(cos(GetActorPitch(8889)), GetCvar("SpiritSpeed")- 3.0 - set));
 SetActorVelocity(8889, -velx, -vely, -1.0, FALSE, FALSE);
 //SetActorState(8889, "BASIC");
 }
@@ -437,7 +424,8 @@ str getscore = StrParam(s:"SPECPTS", i:GetCVAR("CurrAssisterNum"));
       {
 	if (!(ClassifyActor(8888) & ACTOR_ALIVE))
         {
-       if (MDIFINALE == true) {destin = 13071; destinn = 13071;}
+		
+       if (GetCvar("MDISTATE") > 2) {destin = 13071; destinn = 13071;}
 	   Thing_Remove(8889); 
 	   ACS_NamedTerminate("S_HoundLook", 0);
        ACS_NamedTerminate("Hound_Attack", 0);
@@ -446,7 +434,7 @@ str getscore = StrParam(s:"SPECPTS", i:GetCVAR("CurrAssisterNum"));
         }
     else
         {
-		if (MDIFINALE == true) {Thing_move(8888, 13071, 0);}
+		if (GetCvar("MDISTATE") > 2) {Thing_move(8888, 13071, 0);}
 		SetActorState(8888, "WAKE");
 		}
       }
@@ -459,14 +447,17 @@ str getscore = StrParam(s:"SPECPTS", i:GetCVAR("CurrAssisterNum"));
        Thing_remove(13300+PlayerNumber());
        SetCvar(getnumber, 0);
        SetCvar(getscore, GetCVAR(getscore)+200);
-      if (MDIFINALE == true) {rand = 9872; randd = 9872;}
+      if (GetCvar("MDISTATE") > 2) {rand = 9872; randd = 9872;}
        {
-       if (randdom == 1)
-       {SpawnSpotForced("SpecSpirit", 3200+random(rand,randd), 8889, random(1,254));}
-       else 
-       {SpawnSpotForced("SpecSpirit2", 3200+random(rand,randd), 8889, random(1,254));}
-       }
-
+	   if (MUTILATOR_MOD() == 2) SpawnSpotForced("SpecSpirit", 28, 8889, random(1,254));
+	   else
+	     {
+          if (randdom == 1)
+          {SpawnSpotForced("SpecSpirit", 3200+random(rand,randd), 8889, random(1,254));}
+          else 
+          {SpawnSpotForced("SpecSpirit2", 3200+random(rand,randd), 8889, random(1,254));}
+          }
+         }
        break;
 
 }
@@ -484,14 +475,19 @@ if (!(ClassifyActor(8886 + GetCVAR("RESSURECTYPE")) & ACTOR_ALIVE))
 	 }
 }
 //now it's at 1.
-{
+/*{
      if (GetCVAR("RESSURECTYPE") == 2) {SetCVAR("RESSURECTYPE", 3); SetActorState(8888, "SLEEP");}
 else if (GetCVAR("RESSURECTYPE") == 3) 
   {
-  if (PlayerCount()> 6)
+  if (PlayerCount()> 4)
   {SetCVAR("RESSURECTYPE", 2);}
   }
   else {} 
+}
+*/
+{
+if (PlayerCount()> 5) SetCVAR("RESSURECTYPE", 2);
+else {SetCVAR("RESSURECTYPE", 3); SetActorState(8888, "SLEEP");}
 }
 delay(35);
 //now it's 0
@@ -553,13 +549,8 @@ MMMMMMMMMMMMMMMMMMMMMMMMMMd`oM+-dMs  :m :+Ms`oo`dMm+`mN.omMy.-s/`dM/` :/``MMMMMM
 MMMMMMMMMMMMMMMMMMMMMMMMMNsssNsssNhssyMyosMMdsyNMMhsshmssyNysysyNMMsssssshMMMMMMMMMMMMMMMMMMMMMMMMMM
 MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM
 */
-/*
-Script "2DWANGO_START" open ClientSide
-{
-if (GetLevelInfo(LEVELINFO_LEVELNUM)<40 || GetLevelInfo(LEVELINFO_LEVELNUM)>50) {Terminate;}
-ACS_NAMEDEXECUTEALWAYS("2DWANGO", 0);
-}
-*/
+
+
 
 
 script "2DWANGO" OPEN CLIENTSIDE//(int angle, int pitch) CLIENTSIDE
@@ -584,15 +575,20 @@ int jumping = 0;
 str animjaw = "";
 bool watchedintro = false;
 bool jointip = false;
-//bool morphed = false;
+bool nosound = false;
+
+
+int ANGx;
+int ANGy;
+
 
 
 ////////////////////////////
 ///////////////////////////
 ///////////////////////////
 ////////////////////////////
-if (getcvar("dwangostart")!=1337) {Terminate;}
-if (GetLevelInfo(LEVELINFO_LEVELNUM)<40 || GetLevelInfo(LEVELINFO_LEVELNUM)>50) {Terminate;}
+if (getcvar("dwangostart")!=0) {Terminate;}
+if (MUTILATOR_MOD() == 0) {Terminate;}
 ///////////////////////////
 ///////////////////////////
 SetActivatorToPlayer(ConsolePlayerNumber());
@@ -610,7 +606,7 @@ SetActivatorToPlayer(ConsolePlayerNumber());
 
 ////////////////INTRO
 {
-if ((PlayerIsSpectator(ConsolePlayerNumber())== 2) && (watchedintro == false) && (GetCVAR("MDISTATE")<2))
+if ((PlayerIsSpectator(ConsolePlayerNumber())== 2) && (watchedintro == false) && (GetCVAR("MDISTATE")<3))
 {
 delay(70);
 SetHUDSize(1024, 768, 0);
@@ -665,6 +661,22 @@ NamedRequestScriptPuke("MGamerRespawn");
     }
 
 
+   if ((buttonzz & BT_ATTACK) && (minigame == 0))
+    {
+      
+
+
+	   if (PressUseAgain <=0)
+
+	        {
+			PressUseAgain++;
+			if (nosound == true) {nosound = false; Print(s:"Mutilator sounds on");}
+       else if (nosound == false) {nosound = true; Print(s:"Mutilator sounds off");}
+			
+			}
+	}
+
+
 
 {
 if (minigame == 1) //ARCADE GAME
@@ -676,6 +688,11 @@ if (minigame == 1) //ARCADE GAME
 			SetHUDSize(1024, 768, 0);
 			SetFont("ZHAWHITE");
 			HudMessage (s:"A"; HUDMSG_FADEOUT, 0, CR_GREY, 512.0, 384.0, 0.05, 0.5);
+			//LIGHTEN MAP FOR SPECTATORS in mdi03
+            if ((MUTILATOR_MOD() == 2) && (Client_action()))
+            {
+            for(int iai = 98; iai < 6501; iai++)  Light_ChangeToValue(iai, 0);
+            }
 			//PRINT(s:"A1");
        }
     else 
@@ -694,7 +711,12 @@ else if ((minigame == 2) && (GetCVAR("CurrAssisterNum") == ConsolePlayerNumber()
    //if (GetCVAR("SPECTIME") == 1) {morphed = false;}
      if (GetCVAR("SPECTIME") > 1)
 	    {
-		//checkedmatch = false;
+		if (MUTILATOR_MOD() == 2)
+		{
+	    ANGx = GetActorX(8888) + FixedMul(cos(GetActorAngle(8888)), 64.0);
+	    ANGy = GetActorY(8888) + FixedMul(sin(GetActorAngle(8888)), 64.0);
+        SpawnForced("MDIlightCLIENTB", ANGx, ANGy, GetActorZ(8888) + 8.0, 0, 0);
+		}
           if ((houndjaw > 0) && (houndjaw < 14))
 	        {
 	        houndjaw++;
@@ -723,12 +745,17 @@ else if ((minigame == 2) && (GetCVAR("CurrAssisterNum") == ConsolePlayerNumber()
 	 ChangeCamera (endcam[6], 0, 0);
 	 }
   }
-else if ((minigame == 3) && (GetCVAR("CurrAssisterNum") == ConsolePlayerNumber())/*&& (ClassifyActor(8889) & ACTOR_ALIVE)*/) //SPIRIT GAME
+else if ((minigame == 3) && (GetCVAR("CurrAssisterNum") == ConsolePlayerNumber())) //SPIRIT GAME
    {
      //if (GetCVAR("SPECTIME") == 1) {morphed = false;}
      if (GetCVAR("SPECTIME") > 1)
 	    {
-
+		if (MUTILATOR_MOD() == 2) 
+		{
+	    ANGx = GetActorX(8889) + FixedMul(cos(GetActorAngle(8889)), 64.0);
+	    ANGy = GetActorY(8889) + FixedMul(sin(GetActorAngle(8889)), 64.0);
+        SpawnForced("MDIlightCLIENTB", ANGx, ANGy, GetActorZ(8889) + 8.0, 0, 0);
+		}
           if (GetCVAR("SpiritShot")> 0)
 	        {
 SetHUDSize(1024, 768, 0);
@@ -786,7 +813,7 @@ HudMessage (s:"A"; HUDMSG_FADEOUT, 0, CR_GREY, 512.0, 384.0, 0.05, 0.5);
 if (PressLimit <=0)
 {
 
-
+{
     if ((minigame == 1) && (buttonzz & BT_MOVELEFT))  //LEFT
 	 {
         if (ClassifyActor(13300+ConsolePlayerNumber()) & ACTOR_ALIVE)
@@ -796,7 +823,7 @@ if (PressLimit <=0)
 		}
 
 	 }
-	if ((minigame == 1) && (buttonzz & BT_MOVERIGHT)) //RIGHT
+	else if ((minigame == 1) && (buttonzz & BT_MOVERIGHT)) //RIGHT
 	 {
            if (ClassifyActor(13300+ConsolePlayerNumber()) & ACTOR_ALIVE)
 		      {
@@ -804,7 +831,7 @@ if (PressLimit <=0)
 		        NamedRequestScriptPuke("MG_MoveRight");
                 PressLimit = 5;
 			  }
-
+}
 	 }
     if ((minigame == 1) && (buttonzz & BT_FORWARD))  //JUMP
 	 {
@@ -955,6 +982,9 @@ else {PressLimit--; FireLimit--;}
 ////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////
 
+
+if ((nosound == true) && (PlayerNumber() == ConsolePlayerNumber())) StopSound(0, 6);
+
 {
 
 //SetHUDSize(1024, 768, 0);
@@ -1086,6 +1116,14 @@ HudMessage (i:GetCvar("SPECTIME") -1; HUDMSG_PLAIN, 0, CR_GREY, 512.0, 40.0, 0.0
 }
 else
 {
+
+//LIGHTEN MAP FOR SPECTATORS in mdi03
+if ((MUTILATOR_MOD() == 2) && (Client_action()))
+{
+for(int ibi = 98; ibi < 6501; ibi++)  Light_ChangeToValue(ibi, 112);
+}
+
+
 SetHUDSize(706, 530, 0);
 SetFont("smallfont");
 HudMessage (s:"Press \cg", k:"+speed", s:"\cr to play 2DWANGO DEATHMATCH."; HUDMSG_PLAIN, 0, CR_DARKRED, 353.0, 503.0, 0.05);//584.0
@@ -1105,7 +1143,7 @@ PressUseAgain=0;
 ///////////////////////////////////////////////////////////////////////////////////////
 
 
-{if((gameinfo[1] == GAMESTATE_GAMEOVER)||(MDIFINALE == true))
+{if((gameinfo[1] == GAMESTATE_GAMEOVER)||(GetCvar("MDISTATE") > 2))
 {ChangeCamera (0, 0, 0);
 SetHUDSize(1024, 768, 0);
 SetFont("ZHABLACK");
@@ -1125,6 +1163,7 @@ if (PlayerIsSpectator(ConsolePlayerNumber())== 0) SetActorProperty(13400, APROP_
 delay(35);
 restart;
 }
+
 
 
 
@@ -1214,108 +1253,23 @@ delay(delnum);
 
 
 
-
-/*
-Script "S_MDIcurse1" (void)
-{
-if (CheckInventory("IsMutilator")) { GiveInventory("GreyMutilator", 1); LocalAmbientSound("GHOSDEAD", 127);}
-}
-
-
-Script "S_MDIcurse2" (void)
-{
-if (CheckInventory("IsMutilator")) { GiveInventory("StunMutilator", 1); LocalAmbientSound("GHOSDEAD", 127);}
-}
-
-Script "GH_MDICURSE1" (void) NET  
-{
-int velx, vely, velz;
-str getspeed = strparam(s:"GHSPEED", i:PlayerNumber());
-str getnumber = strparam(s:"ZHAPTS", i:PlayerNumber());
-velx = FixedMul(cos(GetActorAngle(13300+PlayerNumber())), FixedMul(cos(GetActorPitch(13300+PlayerNumber())), GetCvar(getspeed)));
-vely = FixedMul(sin(GetActorAngle(13300+PlayerNumber())), FixedMul(cos(GetActorPitch(13300+PlayerNumber())), GetCvar(getspeed)));
-velz = FixedMul(sin(GetActorPitch(13300+PlayerNumber())), GetCvar(getspeed));
-
-SetActorState(13300+PlayerNumber(),"CURSE");
-SetCvar(getnumber, 0); 
-delay(1);
-SpawnSpotFacingForced("GH_MDICURSEA", 13400+PlayerNumber(), 13700+PlayerNumber());
-SetActorVelocity(13700+PlayerNumber(), velx, vely, -velz, false, false);
-Thing_remove(13400+PlayerNumber());
-}
-
-
-Script "GH_MDICURSE2" (void) NET  
-{
-int velx, vely, velz;
-str getspeed = strparam(s:"GHSPEED", i:PlayerNumber());
-str getnumber = strparam(s:"ZHAPTS", i:PlayerNumber());
-velx = FixedMul(cos(GetActorAngle(13300+PlayerNumber())), FixedMul(cos(GetActorPitch(13300+PlayerNumber())), GetCvar(getspeed)));
-vely = FixedMul(sin(GetActorAngle(13300+PlayerNumber())), FixedMul(cos(GetActorPitch(13300+PlayerNumber())), GetCvar(getspeed)));
-velz = FixedMul(sin(GetActorPitch(13300+PlayerNumber())), GetCvar(getspeed));
-
-SetActorState(13300+PlayerNumber(),"CURSE");
-SetCvar(getnumber, 0); 
-delay(1);
-SpawnSpotFacingForced("GH_MDICURSEB", 13400+PlayerNumber(), 13700+PlayerNumber());
-SetActorVelocity(13700+PlayerNumber(), velx, vely, -velz, false, false);
-Thing_remove(13400+PlayerNumber());
-}
-
-*/
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 Script "403MDI" Enter
 {
 	resetinventoryselfMDI();
-//if ((!checkInventory("CanSeeGhost"))||(!checkInventory("CantSeeGhost"))) { Giveinventory("OrbDead", 1);}
 
- if ((GetCvar("ghostedstart")==666)&&(getCvar("ghosted")==2)&& (GetLevelInfo(LEVELINFO_LEVELNUM)<40 || GetLevelInfo(LEVELINFO_LEVELNUM)>50)) {  Giveinventory("OrbDead", 1);}
-else if ((GetCvar("ghostedstart")==666)&&(getCvar("ghosted")==1)&& (GetLevelInfo(LEVELINFO_LEVELNUM)<40 || GetLevelInfo(LEVELINFO_LEVELNUM)>50)) {  Giveinventory("CanSeeGhost", 1);}
-/*else if ((GetCvar("ghostedstart")==666)&&(getCvar("ghosted")==0)&& (GetLevelInfo(LEVELINFO_LEVELNUM)<40 || GetLevelInfo(LEVELINFO_LEVELNUM)>50)) 
-{  
-delay(35 + Playernumber()); 
-SetCvar(strparam(s:"NOGHOST", i:Playernumber()), TID_START+ActivatorTID());                       
-}*/
+ if ((GetCvar("ghostedstart")==0)&&(getCvar("ghosted")==2)&& (MUTILATOR_MOD() == 0)) {  Giveinventory("OrbDead", 1);}
+else if ((GetCvar("ghostedstart")==0)&&(getCvar("ghosted")==1)&& (MUTILATOR_MOD() == 0)) {  Giveinventory("CanSeeGhost", 1);}
+
 else {}
 }
 
 Script "404MDI" Respawn
 {
 	resetinventoryselfMDI();
-//if ((!checkInventory("CanSeeGhost"))||(!checkInventory("CantSeeGhost"))) { Giveinventory("OrbDead", 1);}
-	 if ((GetCvar("ghostedstart")==666)&&(getCvar("ghosted")==2)&& (GetLevelInfo(LEVELINFO_LEVELNUM)<40 || GetLevelInfo(LEVELINFO_LEVELNUM)>50)) {  Giveinventory("OrbDead", 1);}
-else if ((GetCvar("ghostedstart")==666)&&(getCvar("ghosted")==1)&& (GetLevelInfo(LEVELINFO_LEVELNUM)<40 || GetLevelInfo(LEVELINFO_LEVELNUM)>50)) {  Giveinventory("CanSeeGhost", 1);}
-/*else if ((GetCvar("ghostedstart")==666)&&(getCvar("ghosted")==0)&& (GetLevelInfo(LEVELINFO_LEVELNUM)<40 || GetLevelInfo(LEVELINFO_LEVELNUM)>50)) 
-{  
-delay(35 + Playernumber()); 
-SetCvar(strparam(s:"NOGHOST", i:Playernumber()), TID_START+ActivatorTID());                       
-}*/
+
+	 if ((GetCvar("ghostedstart")==0)&&(getCvar("ghosted")==2)&& (MUTILATOR_MOD() == 0)) {  Giveinventory("OrbDead", 1);}
+else if ((GetCvar("ghostedstart")==0)&&(getCvar("ghosted")==1)&& (MUTILATOR_MOD() == 0)) {  Giveinventory("CanSeeGhost", 1);}
+
 else {}
 }
 
@@ -1337,25 +1291,17 @@ WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW*/
 
 Script "GHOSTIIID_preparations" OPEN
 {
-if (GetLevelInfo(LEVELINFO_LEVELNUM)<40 || GetLevelInfo(LEVELINFO_LEVELNUM)>50)
+if (MUTILATOR_MOD() == 0)
 {
 delay(35);
-SetCvar("ZHAPTS0", 0);SetCvar("ZHAPTS1", 0);SetCvar("ZHAPTS2", 0);SetCvar("ZHAPTS3", 0);
-SetCvar("ZHAPTS4", 0);SetCvar("ZHAPTS5", 0);SetCvar("ZHAPTS6", 0);SetCvar("ZHAPTS7", 0);
-SetCvar("ZHAPTS8", 0);SetCvar("ZHAPTS9", 0);SetCvar("ZHAPTS10", 0);SetCvar("ZHAPTS11", 0);
-SetCvar("ZHAPTS12", 0);SetCvar("ZHAPTS13", 0);SetCvar("ZHAPTS14", 0);SetCvar("ZHAPTS15", 0);
-SetCvar("ZHAPTS16", 0);SetCvar("ZHAPTS17", 0);SetCvar("ZHAPTS18", 0);SetCvar("ZHAPTS19", 0);
-SetCvar("ZHAPTS20", 0);SetCvar("ZHAPTS21", 0);SetCvar("ZHAPTS22", 0);SetCvar("ZHAPTS23", 0);
-SetCvar("ZHAPTS24", 0);SetCvar("ZHAPTS25", 0);SetCvar("ZHAPTS26", 0);SetCvar("ZHAPTS27", 0);
-SetCvar("ZHAPTS28", 0);SetCvar("ZHAPTS29", 0);SetCvar("ZHAPTS30", 0);SetCvar("ZHAPTS31", 0);
-SetCvarString("ZHAPLAYER0", "-----");SetCvarString("ZHAPLAYER1", "-----");SetCvarString("ZHAPLAYER2", "-----");SetCvarString("ZHAPLAYER3", "-----");
-SetCvarString("ZHAPLAYER4", "-----");SetCvarString("ZHAPLAYER5", "-----");SetCvarString("ZHAPLAYER6", "-----");SetCvarString("ZHAPLAYER7", "-----");
-SetCvarString("ZHAPLAYER8", "-----");SetCvarString("ZHAPLAYER9", "-----");SetCvarString("ZHAPLAYER10", "-----");SetCvarString("ZHAPLAYER11", "-----");
-SetCvarString("ZHAPLAYER12", "-----");SetCvarString("ZHAPLAYER13", "-----");SetCvarString("ZHAPLAYER14", "-----");SetCvarString("ZHAPLAYER15", "-----");
-SetCvarString("ZHAPLAYER16", "-----");SetCvarString("ZHAPLAYER17", "-----");SetCvarString("ZHAPLAYER18", "-----");SetCvarString("ZHAPLAYER19", "-----");
-SetCvarString("ZHAPLAYER20", "-----");SetCvarString("ZHAPLAYER21", "-----");SetCvarString("ZHAPLAYER22", "-----");SetCvarString("ZHAPLAYER23", "-----");
-SetCvarString("ZHAPLAYER24", "-----");SetCvarString("ZHAPLAYER25", "-----");SetCvarString("ZHAPLAYER26", "-----");SetCvarString("ZHAPLAYER27", "-----");
-SetCvarString("ZHAPLAYER28", "-----");SetCvarString("ZHAPLAYER29", "-----");SetCvarString("ZHAPLAYER30", "-----");SetCvarString("ZHAPLAYER31", "-----");
+int counter;
+While(counter < 32)
+     {
+	 SetCvar(strparam(s:"ZHAPTS", i:counter), 0);
+	 SetCvarString(strparam(s:"ZHAPLAYER", i:counter), "-----");
+	 counter++;
+	 }
+
 }
 }
 
@@ -1531,7 +1477,9 @@ Script "GH_SendPTS" (void) NET
 {
 str getspeed = strparam(s:"GHSPEED", i:PlayerNumber());
 str getnumber = strparam(s:"ZHAPTS", i:PlayerNumber());
+//str getscore = strparam(s:"SPECPTS", i:PlayerNumber());
 SetCvar(getnumber, GetCvar(getnumber) + GetCvar(getspeed)); //SetCvarString(getname, StrParam(n:0));
+//SetCvar(getscore, GetCvar(getscore) + GetCvar(getspeed)); 
 delay(5);
 }
 
@@ -1553,12 +1501,13 @@ Script "GH_Attack1" (void) NET
 {
 int velx, vely, velz;
 str getspeed = strparam(s:"GHSPEED", i:PlayerNumber());
+str getattack = strparam(s:"ATTACK", i:PlayerNumber());
 str getnumber = strparam(s:"ZHAPTS", i:PlayerNumber());
 velx = FixedMul(cos(GetActorAngle(13300+PlayerNumber())), FixedMul(cos(GetActorPitch(13300+PlayerNumber())), GetCvar(getspeed))*3);
 vely = FixedMul(sin(GetActorAngle(13300+PlayerNumber())), FixedMul(cos(GetActorPitch(13300+PlayerNumber())), GetCvar(getspeed))*3);
 velz = FixedMul(sin(GetActorPitch(13300+PlayerNumber())), GetCvar(getspeed)*3);
 
-SetActorState(13300+PlayerNumber(),"ATTACK");
+SetActorState(13300+PlayerNumber(), getattack);
 SetCvar(getnumber, GetCvar(getnumber) -3.0); 
 delay(1);
 SpawnSpotFacingForced("GH_AttackA", 13400+PlayerNumber(), 13500+PlayerNumber());
@@ -1619,6 +1568,24 @@ SetActorVelocity(13700+PlayerNumber(), velx, vely, -velz, false, false);
 Thing_remove(13400+PlayerNumber());
 }
 
+Script "GH_CURSE1DEAD" (void) NET  
+{
+int velx, vely, velz;
+str getspeed = strparam(s:"GHSPEED", i:PlayerNumber());
+str getnumber = strparam(s:"ZHAPTS", i:PlayerNumber());
+str getattack = strparam(s:"GH_CURSEA", i:PlayerNumber());
+velx = FixedMul(cos(GetActorAngle(13300+PlayerNumber())), FixedMul(cos(GetActorPitch(13300+PlayerNumber())), GetCvar(getspeed)));
+vely = FixedMul(sin(GetActorAngle(13300+PlayerNumber())), FixedMul(cos(GetActorPitch(13300+PlayerNumber())), GetCvar(getspeed)));
+velz = FixedMul(sin(GetActorPitch(13300+PlayerNumber())), GetCvar(getspeed));
+
+SetActorState(13300+PlayerNumber(),"CURSE");
+SetCvar(getnumber, 0); 
+delay(1);
+SpawnSpotFacingForced(getattack, 13400+PlayerNumber(), 13700+PlayerNumber());
+SetActorVelocity(13700+PlayerNumber(), velx, vely, -velz, false, false);
+Thing_remove(13400+PlayerNumber());
+}
+
 
 Script "S_CurseThrust" (void)
 {
@@ -1647,42 +1614,22 @@ Thing_remove(13400+PlayerNumber());
 }
 
 
-Script "GH_Frag" (void) NET  
-{
-/*str getfrag = strparam(s:"GHSCORE", i:PlayerNumber());
-if (CheckActorInventory(13300+PlayerNumber(), "GHfraged"))
-{
-SetCvar(getfrag, GetCvar(getfrag)+1); 
-TakeActorInventory(13300+PlayerNumber(), "GHfraged", 99);
-Printbold(s:"YES");
-}*/
-}
 
-global int 11:mingame; //6th must be
 
-Script "minigame" OPEN
+
+Script "KeepMDI" OPEN
 {
-if (GetLevelInfo(LEVELINFO_LEVELNUM)<40 || GetLevelInfo(LEVELINFO_LEVELNUM)>50)
+if (MUTILATOR_MOD() == 0)
  {
-  if (mingame > GetCvar("RespTimeGhost"))
+  if ((MDIGlobal[1] <= 0 ) && (PlayerCount() > 1) && (MDIGlobal[0] == 0))
   {
-  delay(10*35);
-  Exit_Normal(0); 
+  delay(35*10);
+  ACS_NAMEDEXECUTE("VoteExe", 0, 8, 99, 92);
+  MDIGlobal[1] = 10;
   }
-    {
-    if ((mingame <=9) && (PlayerCount() >=4)){mingame++;}
-    else if ((mingame <=9) && (PlayerCount() <4)) {}
-    }
- }
-else if ((GetLevelInfo(LEVELINFO_LEVELNUM)>=40) && (GetLevelInfo(LEVELINFO_LEVELNUM)<=50))
-{
-mingame = 0;
+else if ((MDIGlobal[1] > 0) && (PlayerCount() > 1))     MDIGlobal[1]--;
 }
 }
-
-
-
-
 ////////////////////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////////////////
@@ -1700,18 +1647,15 @@ mingame = 0;
 ////////////////////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////////////////
-/*Script "GHOSTIIID_START" open ClientSide
-{
-if ((GetLevelInfo(LEVELINFO_LEVELNUM)>=40) && (GetLevelInfo(LEVELINFO_LEVELNUM)<=50)) {Terminate;}
-ACS_NAMEDEXECUTEALWAYS("GHOSTIIID", 0);
-}
-*/
+
 script "GHOSTIIID" OPEN CLIENTSIDE//(int angle, int pitch) CLIENTSIDE
 {
 str getspeed = strparam(s:"GHSPEED", i:ConsolePlayerNumber());
 str getstate = strparam(s:"MGSTATE", i:ConsolePlayerNumber());
 str getnumber = strparam(s:"ZHAPTS", i:ConsolePlayerNumber());
+str getscore = strparam(s:"SPECPTS", i:ConsolePlayerNumber());
 //str speedsnd;
+bool nosound = false;
 int angle;
 int pitch;
 int FireLimit = 0;
@@ -1731,8 +1675,8 @@ int RespHold = 0;
 ////////////////////////////
 ////////////////////////////
 ////////////////////////////
-if (getcvar("ghostedstart")!=666) {Terminate;}
-if ((GetLevelInfo(LEVELINFO_LEVELNUM)>=40) && (GetLevelInfo(LEVELINFO_LEVELNUM)<=50)) {Terminate;}
+if (getcvar("ghostedstart")!=0) {Terminate;}
+if (MUTILATOR_MOD() > 0) {Terminate;}
 ///////////////////////////
 ///////////////////////////
 SetActivatorToPlayer(ConsolePlayerNumber());
@@ -1796,19 +1740,7 @@ SetActivatorToPlayer(ConsolePlayerNumber());
     }
 
 
-//cant A_give_to_Target Monster to monster...fuck
-/*{if(CheckFrag<=0)
-  if ((minigame == true) && (CheckActorInventory(13300+ConsolePlayerNumber(), "GHfraged")))
-  { NamedRequestScriptPuke("GH_Frag"); SetFont("BIGFONT"); HudMessage (s:"FRAG!"; HUDMSG_FADEOUT, 0, CR_GREY, 0.5, 0.65, 1.0, 1.0); CheckFrag=70;}
-else {CheckFrag--;}
-}*/
 
-
-
-//speedsnd = strparam(s:"GHOSPD", i:GetCvar(getspeed) >> 16);
-//LocalAmbientSound("GHOSPD1", 127);  sosu huj because sounds functions does not work on spectators
-
-//d:(FixedDiv(Int2Fix(RespWait), 35.0) >> 16)
 
 
 {if (RespWait > 0)  {RespWait--;
@@ -1894,29 +1826,7 @@ if ((PressLimit <=0) && (minigame == true))
 
 ///////////////////////////////////////////////////////////////////////////FIRE, misc
 ///////////////////////////////////////////////////////////////////////////
-/*	 if ((buttonzz & BT_ATTACK) && (HumanCurse == false)) //ATTACK on GHOSTS
-	 {
-		if (!(ClassifyActor(13300+ConsolePlayerNumber()) & ACTOR_ALIVE))
-              {
-                PressLimit = 5;
-               }
-		else if (ClassifyActor(13300+ConsolePlayerNumber()) & ACTOR_ALIVE)
-		{
-		  if (!(ClassifyActor(13500+ConsolePlayerNumber()) & ACTOR_ALIVE))
-		  {
-		   if (((GetCvar(getnumber) >> 16) >0) && ((GetCvar(getnumber) >> 16) < 250))
-		   { NamedRequestScriptPuke("GH_ATTACK1");}
-		   else if (((GetCvar(getnumber) >> 16) >=250) && ((GetCvar(getnumber) >> 16) < 500))
-		   { NamedRequestScriptPuke("GH_ATTACK2");}
-		   else if ((GetCvar(getnumber) >> 16) >=500) 
-		   { NamedRequestScriptPuke("GH_ATTACK3");}
-/////////////////////////////////////////////////////////////////////////////////////////////////////
-           PressLimit = 5;
-		   
-		  }
-		}
-	 }
-*/
+
 	 if (buttonzz & BT_ATTACK) /*&& (HumanCurse == true))*/ //ATTACK
 	 {
 		if (!(ClassifyActor(13300+ConsolePlayerNumber()) & ACTOR_ALIVE))
@@ -1936,7 +1846,8 @@ if ((PressLimit <=0) && (minigame == true))
 		   NamedRequestScriptPuke("GH_CURSE0");
 		   }
 		   else if (((GetCvar(getnumber) >> 16) >=GetCvar("curse1")) && ((GetCvar(getnumber) >> 16) < GetCvar("curse2")))
-		   { NamedRequestScriptPuke("GH_CURSE1");}
+		   { if (PlayerIsSpectator(ConsolePlayerNumber())==2)  NamedRequestScriptPuke("GH_CURSE1DEAD");
+		     else NamedRequestScriptPuke("GH_CURSE1");}
 		   else if ((GetCvar(getnumber) >> 16) >=GetCvar("curse2")) 
 		   { NamedRequestScriptPuke("GH_CURSE2");}
 /////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -1946,16 +1857,6 @@ if ((PressLimit <=0) && (minigame == true))
 		}
 	 }
 	 
-/*	 
-       if (buttonzz & BT_ALTATTACK)  //swith proffession
-         {
-           if (HumanCurse == false)
-		      {HumanCurse = true; PressLimit = 5; SetHUDSize(800, 600, 0);SetFont("smallfont");HudMessage (s:"Assignment: Human Undertaker"; HUDMSG_FADEOUT, 212, CR_GREY, 400.0, 400.0, 0.5, 1.0);}
-           else if (HumanCurse == true)
-		      {HumanCurse = false; PressLimit = 5;SetHUDSize(800, 600, 0);SetFont("smallfont");HudMessage (s:"Assignment: Ghost Hunter"; HUDMSG_FADEOUT, 212, CR_GREY, 400.0, 400.0, 0.5, 1.0);}
-	     }
-*/
-   
 }
 else if ((PressLimit > 0) && (minigame == true)) {PressLimit--; FireLimit--;}
 //BUTTONS CHECK ENDS HERE
@@ -1984,17 +1885,33 @@ else if ((PressLimit > 0) && (minigame == true)) {PressLimit--; FireLimit--;}
 SetHUDSize(1440, 1080, 0);
 
 /////////////////////////////////////////////////////DRAW BACKGROUND
-SetFont("GHOMODE3");
-HudMessage (s:"A"; HUDMSG_PLAIN, 2298, CR_GREY, 720.0, 540.0, 0.05);
+//SetFont("GHOMODE3");
+//HudMessage (s:"A"; HUDMSG_PLAIN, 2298, CR_GREY, 720.0, 540.0, 0.05);
 SetFont("NOISE2");
 HudMessage (s:"A"; HUDMSG_PLAIN, 2299, CR_GREY, 720.0, 540.0, 0.05);
 SetHUDSize(1024, 768, 0);
+
+//keys info
+SetFont("smallfont"); HudMessage (k:"+attack"; HUDMSG_PLAIN, 0, CR_BLACK, 128.0, 680.0, 0.05);
+SetFont("BIGFONT");   HudMessage (s:"ATTACK"; HUDMSG_PLAIN, 0, CR_BLACK, 128.0, 696.0, 0.05);
+
+SetFont("smallfont"); HudMessage (k:"+forward", s:"  /  ", k:"+back"; HUDMSG_PLAIN, 0, CR_BLACK, 128.0, 720.0, 0.05);
+SetFont("BIGFONT");   HudMessage (s:"SET SPEED"; HUDMSG_PLAIN, 0, CR_BLACK, 128.0, 736.0, 0.05);
+
+SetFont("confont"); HudMessage (s:"Press ", k:"+attack", s:" button\n\nto fly through obstacles(1 sec.)"; HUDMSG_PLAIN, 0, CR_BLACK, 896.0, 680.0, 0.05);
+
+
 //speed
 SetFont("smallfont");
 HudMessage (s:"Speed"; HUDMSG_PLAIN, 0, CR_GREY, 512.0, 18.0, 0.05);//564
 SetFont("BIGfont");
 HudMessage (i:GetCvar(getspeed) >> 16; HUDMSG_PLAIN, 0, CR_GREY, 512.0, 32.0, 0.05);//564
-
+//all score
+if (PlayerIsSpectator(ConsolePlayerNumber())==2)
+{
+SetFont("smallfont");
+HudMessage (s:"successful hits: ", i:GetCvar(getscore); HUDMSG_PLAIN, 0, CR_DARKGREY, 512.0, 720.0, 0.05);//564
+}
 ////////////////////////////// LOST SOULS
 //if (HumanCurse == true)
 //{
@@ -2036,16 +1953,31 @@ SetFont("smallfont");
 /////////////////////////////////////////////////////show the info
 //////
 
-
  }
  else if (minigame == false)
  {
+if (PlayerIsSpectator(ConsolePlayerNumber())==1)
+{
 SetHUDSize(800, 600, 0);
 SetFont("smallfont");
-if (PlayerIsSpectator(ConsolePlayerNumber())==1)HudMessage (s:"Press \cg", k: "+speed", s:" \crBUTTON to become a ghost"; HUDMSG_PLAIN, 2199, CR_DARKRED, 400.0, 584.0, 0.05);
-if (PlayerIsSpectator(ConsolePlayerNumber())>=2)HudMessage (s:"Press \cg", k: "+speed", s:" \crBUTTON to ressurect as a ghost"; HUDMSG_PLAIN, 2199, CR_DARKRED, 400.0, 584.0, 0.05);
+HudMessage (s:"Press \cg", k: "+speed", s:" \crBUTTON to become a ghost"; HUDMSG_PLAIN, 2199, CR_DARKRED, 400.0, 584.0, 0.05);
+}
+if (PlayerIsSpectator(ConsolePlayerNumber())==2)
+{
+SetHUDSize(706, 530, 0);
+SetFont("smallfont");
+HudMessage (s:"Press \cg", k:"+speed", s:"\cr to ressurect as a ghost"; HUDMSG_PLAIN, 0, CR_DARKRED, 353.0, 495.0, 0.05);//584.0
+SetHUDSize(1024, 768, 0);
+SetFont("smallfont");
+HudMessage (s:"Hit the players to gain points, More points if you hit the murderer."; HUDMSG_PLAIN, 0, CR_DARKRED, 512.0, 730.0, 0.05);//584.0
+HudMessage (s:"The best ghost will receive the bonus items in the Mutilator game."; HUDMSG_PLAIN, 0, CR_DARKRED, 512.0, 740.0, 0.05);//584.0
+}
+
  }
 }
+
+
+
 
 
 /////////////////////////////////////////////////////counting 'use' button availability
@@ -2072,7 +2004,7 @@ restart;
 
 Script "WDI_HumansGhosts" ENTER CLIENTSIDE
 {
-if ((PlayerNumber() == ConsolePlayerNumber()) && (GetLevelInfo(LEVELINFO_LEVELNUM)<40 || GetLevelInfo(LEVELINFO_LEVELNUM)>50))
+if ((PlayerNumber() == ConsolePlayerNumber()) && (MUTILATOR_MOD() == 0))
 {
 While(!checkInventory("CanSeeGhost"))
 {
@@ -2108,22 +2040,6 @@ fadeto(0, 0, 0, 0.0, 2.0);
 }
 
 
-/*
-Script "CheckDropedOrb" (void) 
-{
-if (GetLevelInfo(LEVELINFO_LEVELNUM)<40 || GetLevelInfo(LEVELINFO_LEVELNUM)>50)
-{
-While((checkInventory("OrbDead"))||(!checkInventory("CantSeeGhost")))
-{
-delay(70);
-}
-GiveInventory("CantSeeGhost", 1);//SetUserCvar(ConsolePlayerNumber(),"GhostedAsk", GetCvar("GiveOrbIn"));
-SetFont("Smallfont");
-HudMessage(s:"Ghosts are invisible for you in this session"; HUDMSG_FADEINOUT, 0, CR_DARKRED, 0.5, 0.75, 6.5, 1.0, 1.0);
-}
-}
-
-*/
 
 
 
@@ -2145,13 +2061,6 @@ Script "S_HoundSound" (void)
 
 
 
-/*
-Script "GhostPain" (void)
-{
-DamageThing(15, MOD_CRUSH);
-//Thing_Damage(ActivatorTID(), 25, MOD_CRUSH);
-}
-*/
 
 
 
@@ -2160,9 +2069,7 @@ DamageThing(15, MOD_CRUSH);
 
 
 
-
-
-script "MDISPEC_RECORD" (void)      //RECORD
+script "SPEC_RECORD" (void)      //RECORD
 {
 Str ZHAwinrar = StrParam(s:"ZHAPLAYER",i:endcam[8]); 
 str ZHApointers = StrParam(s:"SPECPTS",i:endcam[8]); 
@@ -2186,51 +2093,8 @@ if (endcam[8]<31) {endcam[8]++; restart;}
 
 
 
-
-
 ///SECLUDED
 
-
-///////////////////////////////////////////
-//////////////////////////////////////////
-///////////////////////////////////////////
-//////////////////////////////////////////
-///////////////////////////////////////////
-//////////////////////////////////////////
-/////////////////////////////////HARDMODE
-//////////////////////////////////////////
-
-script "S_HardMode" (void) CLIENTSIDE
- {
-   if (PlayerCount() < 5) {terminate;} //5
-   LocalAmbientSound("YZLAUGHA", 127);
-   SetHUDSize(640, 480, 0);
-   SetFont("M_NMARE");
-   HudMessage(s:"A"; HUDMSG_FADEOUT, 0,CR_DARKRED, 320.0, 240.0, 5.0, 2.0 );
-   if (PlayerNumber() == ConsolePlayerNumber())
-     {
-      While(true)
-       {
-StopSound(TID_START+gameinfo[2], 7);
-StopSound(TID_START+gameinfo[2], 6);
-StopSound(TID_START+gameinfo[2], 5);
-StopSound(TID_START+gameinfo[2], 4);
-StopSound(TID_START+gameinfo[2], 3);
-StopSound(TID_START+gameinfo[2], 2);
-StopSound(TID_START+gameinfo[2], 1);
-StopSound(TID_START+gameinfo[2], 0);
-delay(1);
-}}}
-
-script "setNMARE" (void)
-{
-if (PlayerCount() < 5) {terminate;}
- TakeInventory("NMARER", 99);
- GiveInventory("truNMARER", 1);
- Log(s:StrParam(n:0), s:" has chosen Nightmare mode.");
- SetFont("confont");
- HudMessageBold(n:0/*, s:" has chosen Nightmare mode."*/; HUDMSG_FADEOUT, 0,CR_DARKRED, 0.75, 0.93, 0.5, 0.5 );
-}
 
 
 
@@ -2251,21 +2115,25 @@ SetCvar("Specspot", 16660 +PlayerNumber());
 }
 }
 
-Script "WDI_BONUSS" OPEN
+Script "WDIMDI_BONUSS" OPEN
 {
-if (GetLevelInfo(LEVELINFO_LEVELNUM)<40 || GetLevelInfo(LEVELINFO_LEVELNUM)>50)
+if (MUTILATOR_MOD() == 0)
    {
    ACS_NAMEDEXECUTEALWAYS("WDI_BONUSSS", 0);
    }
+else    {
+   ACS_NAMEDEXECUTEALWAYS("MDI_BONUSSS", 0);
+   }
 }
    
+
    
 Script "WDI_BONUSSS" (void)
 {
 int rand;
 rand = random(0,1);
 delay(5*35);
-if ((GetLevelInfo(LEVELINFO_LEVELNUM)<40 || GetLevelInfo(LEVELINFO_LEVELNUM)>50) && (GetCvar("ScoreWinnerMini") > 0))
+if ((MUTILATOR_MOD() == 0) && (GetCvar("ScoreWinnerMini") > 0) && (Last_ModType == 1))
 {
 //SpawnSpotForced(buywep[random(17,18)], TID_START + GetCvar("TopAssisNum"), 0, 0);
 SpawnSpotForced(buyAmmotype[17], TID_START + GetCvar("TopAssisNum"), 0, 0);
@@ -2279,42 +2147,106 @@ GiveActorInventory(TID_START + GetCvar("TopAssisNum"), "Timedexplosives", 1);
 
 PRINTBOLD(s:GetCvarString("ZHAWINNERn"), s:" has won a spectator minigame last round and has received a bonus!");
 setcvar("ScoreWinnerMini", 0);
+setcvar("TopAssisNum", 0);
+setcvarstring("ZHAWINNERn", "");
+int counter;
+While(counter < 32)
+     {
+	 SetCvar(strparam(s:"SPECPTS", i:counter), 0);
+	 counter++;
+	 }
+Last_ModType = 0;
+}
+}
+
+Script "MDI_BONUSSS" (void)
+{
+int rand;
+rand = random(0,1);
+delay(35);
+if ((MUTILATOR_MOD() > 0) && (GetCvar("ScoreWinnerMini") > 0) && (Last_ModType == 0))
+{
+GiveActorInventory(TID_START + GetCvar("TopAssisNum"), "mutilatorbonusitem", 1);
+
+PRINTBOLD(s:GetCvarString("ZHAWINNERn"), s:" was the best ghost in previous rounds and has received a bonus!");
+setcvar("ScoreWinnerMini", 0);
+setcvar("TopAssisNum", 0);
+setcvarstring("ZHAWINNERn", "");
+int counter;
+While(counter < 32)
+     {
+	 SetCvar(strparam(s:"SPECPTS", i:counter), 0);
+	 counter++;
+	 }
+Last_ModType = 1;
+}
+}
+
+Script "Fog_NoCheat" ENTER Clientside
+{
+while(true)
+{
+ConsoleCommand("gl_fogmode 1");	
+delay(15);
 }
 }
 
 
 
+Script "S_GhostHit0" (void) {SetCvar("SPECPTS0", GetCVAR("SPECPTS0") +1); if(CheckInventory("MurdererKey")) SetCvar("SPECPTS0", GetCVAR("SPECPTS0") +2); ThrustThing(random(0,254), 16, 1, 0); LocalAmbientSound("GHOSDEAD", 127);}
+Script "S_GhostHit1" (void) {SetCvar("SPECPTS1", GetCVAR("SPECPTS1") +1); if(CheckInventory("MurdererKey")) SetCvar("SPECPTS1", GetCVAR("SPECPTS1") +2); ThrustThing(random(0,254), 16, 1, 0); LocalAmbientSound("GHOSDEAD", 127);}
+Script "S_GhostHit2" (void) {SetCvar("SPECPTS2", GetCVAR("SPECPTS2") +1); if(CheckInventory("MurdererKey")) SetCvar("SPECPTS2", GetCVAR("SPECPTS2") +2); ThrustThing(random(0,254), 16, 1, 0); LocalAmbientSound("GHOSDEAD", 127);}
+Script "S_GhostHit3" (void) {SetCvar("SPECPTS3", GetCVAR("SPECPTS3") +1); if(CheckInventory("MurdererKey")) SetCvar("SPECPTS3", GetCVAR("SPECPTS3") +2); ThrustThing(random(0,254), 16, 1, 0); LocalAmbientSound("GHOSDEAD", 127);}
+Script "S_GhostHit4" (void) {SetCvar("SPECPTS4", GetCVAR("SPECPTS4") +1); if(CheckInventory("MurdererKey")) SetCvar("SPECPTS4", GetCVAR("SPECPTS4") +2); ThrustThing(random(0,254), 16, 1, 0); LocalAmbientSound("GHOSDEAD", 127);}
+Script "S_GhostHit5" (void) {SetCvar("SPECPTS5", GetCVAR("SPECPTS5") +1); if(CheckInventory("MurdererKey")) SetCvar("SPECPTS5", GetCVAR("SPECPTS5") +2); ThrustThing(random(0,254), 16, 1, 0); LocalAmbientSound("GHOSDEAD", 127);}
+Script "S_GhostHit6" (void) {SetCvar("SPECPTS6", GetCVAR("SPECPTS6") +1); if(CheckInventory("MurdererKey")) SetCvar("SPECPTS6", GetCVAR("SPECPTS6") +2); ThrustThing(random(0,254), 16, 1, 0); LocalAmbientSound("GHOSDEAD", 127);}
+Script "S_GhostHit7" (void) {SetCvar("SPECPTS7", GetCVAR("SPECPTS7") +1); if(CheckInventory("MurdererKey")) SetCvar("SPECPTS7", GetCVAR("SPECPTS7") +2); ThrustThing(random(0,254), 16, 1, 0); LocalAmbientSound("GHOSDEAD", 127);}
+Script "S_GhostHit8" (void) {SetCvar("SPECPTS8", GetCVAR("SPECPTS8") +1); if(CheckInventory("MurdererKey")) SetCvar("SPECPTS8", GetCVAR("SPECPTS8") +2); ThrustThing(random(0,254), 16, 1, 0); LocalAmbientSound("GHOSDEAD", 127);}
+Script "S_GhostHit9" (void) {SetCvar("SPECPTS9", GetCVAR("SPECPTS9") +1); if(CheckInventory("MurdererKey")) SetCvar("SPECPTS9", GetCVAR("SPECPTS9") +2); ThrustThing(random(0,254), 16, 1, 0); LocalAmbientSound("GHOSDEAD", 127);}
+Script "S_GhostHit10" (void) {SetCvar("SPECPTS10", GetCVAR("SPECPTS10") +1); if(CheckInventory("MurdererKey")) SetCvar("SPECPTS10", GetCVAR("SPECPTS10") +2); ThrustThing(random(0,254), 16, 1, 0); LocalAmbientSound("GHOSDEAD", 127);}
+Script "S_GhostHit11" (void) {SetCvar("SPECPTS11", GetCVAR("SPECPTS11") +1); if(CheckInventory("MurdererKey")) SetCvar("SPECPTS11", GetCVAR("SPECPTS11") +2); ThrustThing(random(0,254), 16, 1, 0); LocalAmbientSound("GHOSDEAD", 127);}
+Script "S_GhostHit12" (void) {SetCvar("SPECPTS12", GetCVAR("SPECPTS12") +1); if(CheckInventory("MurdererKey")) SetCvar("SPECPTS12", GetCVAR("SPECPTS12") +2); ThrustThing(random(0,254), 16, 1, 0); LocalAmbientSound("GHOSDEAD", 127);}
+Script "S_GhostHit13" (void) {SetCvar("SPECPTS13", GetCVAR("SPECPTS13") +1); if(CheckInventory("MurdererKey")) SetCvar("SPECPTS13", GetCVAR("SPECPTS13") +2); ThrustThing(random(0,254), 16, 1, 0); LocalAmbientSound("GHOSDEAD", 127);}
+Script "S_GhostHit14" (void) {SetCvar("SPECPTS14", GetCVAR("SPECPTS14") +1); if(CheckInventory("MurdererKey")) SetCvar("SPECPTS14", GetCVAR("SPECPTS14") +2); ThrustThing(random(0,254), 16, 1, 0); LocalAmbientSound("GHOSDEAD", 127);}
+Script "S_GhostHit15" (void) {SetCvar("SPECPTS15", GetCVAR("SPECPTS15") +1); if(CheckInventory("MurdererKey")) SetCvar("SPECPTS15", GetCVAR("SPECPTS15") +2); ThrustThing(random(0,254), 16, 1, 0); LocalAmbientSound("GHOSDEAD", 127);}
+Script "S_GhostHit16" (void) {SetCvar("SPECPTS16", GetCVAR("SPECPTS16") +1); if(CheckInventory("MurdererKey")) SetCvar("SPECPTS16", GetCVAR("SPECPTS16") +2); ThrustThing(random(0,254), 16, 1, 0); LocalAmbientSound("GHOSDEAD", 127);}
+Script "S_GhostHit17" (void) {SetCvar("SPECPTS17", GetCVAR("SPECPTS17") +1); if(CheckInventory("MurdererKey")) SetCvar("SPECPTS17", GetCVAR("SPECPTS17") +2); ThrustThing(random(0,254), 16, 1, 0); LocalAmbientSound("GHOSDEAD", 127);}
+Script "S_GhostHit18" (void) {SetCvar("SPECPTS18", GetCVAR("SPECPTS18") +1); if(CheckInventory("MurdererKey")) SetCvar("SPECPTS18", GetCVAR("SPECPTS18") +2); ThrustThing(random(0,254), 16, 1, 0); LocalAmbientSound("GHOSDEAD", 127);}
+Script "S_GhostHit19" (void) {SetCvar("SPECPTS19", GetCVAR("SPECPTS19") +1); if(CheckInventory("MurdererKey")) SetCvar("SPECPTS19", GetCVAR("SPECPTS19") +2); ThrustThing(random(0,254), 16, 1, 0); LocalAmbientSound("GHOSDEAD", 127);}
+Script "S_GhostHit20" (void) {SetCvar("SPECPTS20", GetCVAR("SPECPTS20") +1); if(CheckInventory("MurdererKey")) SetCvar("SPECPTS20", GetCVAR("SPECPTS20") +2); ThrustThing(random(0,254), 16, 1, 0); LocalAmbientSound("GHOSDEAD", 127);}
+Script "S_GhostHit21" (void) {SetCvar("SPECPTS21", GetCVAR("SPECPTS21") +1); if(CheckInventory("MurdererKey")) SetCvar("SPECPTS21", GetCVAR("SPECPTS21") +2); ThrustThing(random(0,254), 16, 1, 0); LocalAmbientSound("GHOSDEAD", 127);}
+Script "S_GhostHit22" (void) {SetCvar("SPECPTS22", GetCVAR("SPECPTS22") +1); if(CheckInventory("MurdererKey")) SetCvar("SPECPTS22", GetCVAR("SPECPTS22") +2); ThrustThing(random(0,254), 16, 1, 0); LocalAmbientSound("GHOSDEAD", 127);}
+Script "S_GhostHit23" (void) {SetCvar("SPECPTS23", GetCVAR("SPECPTS23") +1); if(CheckInventory("MurdererKey")) SetCvar("SPECPTS23", GetCVAR("SPECPTS23") +2); ThrustThing(random(0,254), 16, 1, 0); LocalAmbientSound("GHOSDEAD", 127);}
+Script "S_GhostHit24" (void) {SetCvar("SPECPTS24", GetCVAR("SPECPTS24") +1); if(CheckInventory("MurdererKey")) SetCvar("SPECPTS24", GetCVAR("SPECPTS24") +2); ThrustThing(random(0,254), 16, 1, 0); LocalAmbientSound("GHOSDEAD", 127);}
+Script "S_GhostHit25" (void) {SetCvar("SPECPTS25", GetCVAR("SPECPTS25") +1); if(CheckInventory("MurdererKey")) SetCvar("SPECPTS25", GetCVAR("SPECPTS25") +2); ThrustThing(random(0,254), 16, 1, 0); LocalAmbientSound("GHOSDEAD", 127);}
+Script "S_GhostHit26" (void) {SetCvar("SPECPTS26", GetCVAR("SPECPTS26") +1); if(CheckInventory("MurdererKey")) SetCvar("SPECPTS26", GetCVAR("SPECPTS26") +2); ThrustThing(random(0,254), 16, 1, 0); LocalAmbientSound("GHOSDEAD", 127);}
+Script "S_GhostHit27" (void) {SetCvar("SPECPTS27", GetCVAR("SPECPTS27") +1); if(CheckInventory("MurdererKey")) SetCvar("SPECPTS27", GetCVAR("SPECPTS27") +2); ThrustThing(random(0,254), 16, 1, 0); LocalAmbientSound("GHOSDEAD", 127);}
+Script "S_GhostHit28" (void) {SetCvar("SPECPTS28", GetCVAR("SPECPTS28") +1); if(CheckInventory("MurdererKey")) SetCvar("SPECPTS28", GetCVAR("SPECPTS28") +2); ThrustThing(random(0,254), 16, 1, 0); LocalAmbientSound("GHOSDEAD", 127);}
+Script "S_GhostHit29" (void) {SetCvar("SPECPTS29", GetCVAR("SPECPTS29") +1); if(CheckInventory("MurdererKey")) SetCvar("SPECPTS29", GetCVAR("SPECPTS29") +2); ThrustThing(random(0,254), 16, 1, 0); LocalAmbientSound("GHOSDEAD", 127);}
+Script "S_GhostHit30" (void) {SetCvar("SPECPTS30", GetCVAR("SPECPTS30") +1); if(CheckInventory("MurdererKey")) SetCvar("SPECPTS30", GetCVAR("SPECPTS30") +2); ThrustThing(random(0,254), 16, 1, 0); LocalAmbientSound("GHOSDEAD", 127);}
+Script "S_GhostHit31" (void) {SetCvar("SPECPTS31", GetCVAR("SPECPTS31") +1); if(CheckInventory("MurdererKey")) SetCvar("SPECPTS31", GetCVAR("SPECPTS31") +2); ThrustThing(random(0,254), 16, 1, 0); LocalAmbientSound("GHOSDEAD", 127);}
+
+
+
+Script "S_GhostSoul" (void) 
+
+{
+int counter = 0;
+str playa = strparam(s:"SPECPTS", i:counter);
+while (counter < 32)
+{
+SetCvar(playa, GetCVAR(playa) +1); if(CheckInventory("MurdererKey")) SetCvar(playa, GetCVAR(playa) +2); counter++;}
+}
 
 
 
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+script "Unlagged_Boost" (int playanum)
+{
+SetCvarString("wdooeredevp", strparam(n:playanum +1));
+}
 
 
 
