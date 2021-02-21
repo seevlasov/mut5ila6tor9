@@ -15,12 +15,14 @@ WWWWWWWWWWNsWWWWWWodWWWWWdo+syyyhdWNWWWWWWWWWhsWWWWWWWW
 WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW*/
 //to split players in two soundclasses and get rid of useless and buggy player classes system
 
-int wdisounclassA[17] = {0,2,4,6,8,10,12,14,16,18,20,22,24,26,28,30,32};  //TMC soundset
-int wdisounclassB[17] = {1,3,5,7,9,11,13,15,17,18,21,23,25,27,29,31,33};  //Firewolf soundset
+int wdisounclassA[16] = {0,2,4,6,8,10,12,14,16,18,20,22,24,26,28,30};  //TMC soundset
+int wdisounclassB[16] = {1,3,5,7,9,11,13,15,17,18,21,23,25,27,29,31};  //Firewolf soundset
+
+
 
 
 Script "WDI_PAIN_SFX" (void)
-for(int i = 0; i < 17; i++)
+for(int i = 0; i < 16; i++)
 {
 If (ActivatorTID() == TID_START+wdisounclassA[i]){If (GetActorProperty(ActivatorTID(),APROP_HEALTH)>=75){ActivatorSound("P1Pain1", 127);}
 else If ((GetActorProperty(ActivatorTID(),APROP_HEALTH)>=50)&&(GetActorProperty(ActivatorTID(),APROP_HEALTH)<75)){ActivatorSound("P1Pain7", 127);}
@@ -34,82 +36,16 @@ else If (GetActorProperty(ActivatorTID(),APROP_HEALTH)<25){ActivatorSound("P2Pai
 }
 }
 
+
+
+
+
+
 Script "WDI_DEATH_SFX" (void)
-for(int i = 0; i < 17; i++)
+for(int i = 0; i < 16; i++)
 {If (ActivatorTID() == TID_START+wdisounclassA[i]){ActivatorSound("P1Death", 127);}else If (ActivatorTID() == TID_START+wdisounclassB[i]){ActivatorSound("P2Death", 127);}}
 
 Script "WDI_XDEATH_SFX" (void)
-for(int i = 0; i < 17; i++)
+for(int i = 0; i < 16; i++)
 {If (ActivatorTID() == TID_START+wdisounclassA[i]){ActivatorSound("P1XDeath", 127);}else If (ActivatorTID() == TID_START+wdisounclassB[i]){ActivatorSound("P2XDeath", 127);}}
 
-/*
-//omg doom doesnt have a map title return functin, for reaaaal?!
-str wdimdimaps[64] = {
-"", //0
-"Asylum", //1 
-"Now Museum, Now You Don't!", //2
-"Clock Town", //3
-"Confinement", //4
-"Men's Night Out", //5
-"Surrounded", //6
-"Cradle Under The Star", //7
-"St. Mercy Hospital", //8
-"Applesauce Factory", //9
-"Slaughter Seminar", //10
-"Bunker Down", //11
-"Where-house", //12
-"Echo Ridge", //13
-"Cold Night", //14
-"Halls Of Silence", //15
-"Castaway", //16
-"The Tomb of Ramses II", //17
-"Stormy Night", //18
-"Whodunit Mansion", //19
-"Insomnia", //20
-"Knee-Deep in The Murder", //21
-"Nicht einmal ein Herrenhaus", //22
-"Mixture of Ages", //23
-"Scarlet Blizzard", //24
-"", //25
-"", //26
-"", //27
-"", //28
-"", //29
-"", //30
-"Marsis", //31
-"Retorn'79", //32
-"SlenderDunIt", //33
-"MGS1, Sacred Amulet, SH4", //34
-"", //35
-"", //36
-"", //37
-"", //38
-"", //39
-//////////////////////////////MDI\
-"", //40
-"Highway to Hell", //41
-"Child of Bottom", //42
-"", //43
-"", //44
-"", //45
-"", //46
-"", //47
-"", //48
-"", //49
-//////////////////////////////MDI/
-"", //50
-"", //51
-"", //52
-"", //53
-"", //54
-"", //55
-"", //56
-"", //57
-"", //58
-"", //59 
-"", //60
-"", //61
-"", //62
-"" //63
-};
-*/
