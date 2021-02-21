@@ -5,19 +5,28 @@
 #import "classic.acs"
 #import "mdistuff.acs"
 
+/*
+/////////////////////////////////////////
+////////////////////////////////////////
+///////////////////// WDI VOTING by Zeberpal
+/////////////////////////////////////////
+////////////////////////////////////////
+*/
 
-
-
-str voteindex[8] =
+bool mdivoted;
+bool pollvoted;
+str voteindex[10] =
 {
 "NOTHING",
 "NIGHTMARE DIFFICULTY FOR MURDERER",
 "CRAZY MODE",
 "EX MAP: UNLOCK A SECRET (FOR HIDDEN ENDINGS)",
 "EVERYONE DUN IT",
-"ABORT THIS MAP, SKIP TO A SECRET SHITTY MAP",
+"ALLOW SPECTATORS MINI-GAMES",
 "ABLE TO CALL ANY VOTE NEXT ROUND",
-"ONE HIT KILL"
+"ONE HIT KILL",
+"ALLOW 'THE MUTILATOR' MAPS",
+"SERVER SPECIAL"
 };
 
 Script "wdi_votelistinfo" (void) NET CLIENTSIDE
@@ -29,21 +38,21 @@ s:"\ci1   ", s:voteindex[1], s:" \cf[MURD ONLY]\n   \ccEveryone receives a firea
 s:"\ci2   ", s:voteindex[2], s:" \cf[ALL / MURD+INNO]\n   \ccMap is slowly getting filled with random monsters, items and WTF effects.\n\n",
 s:"\ci3   ", s:voteindex[3], s:" \cf[MURD+INNO]\n   \ccThis will unlock a hidden area in any EX map.\n   \ccIt'll make possible to unlock secret endings in advance.\n\n",
 s:"\ci4   ", s:voteindex[4], s:" \cf[MURD+INNO]\n   \ccEveryone receives murderer items, but a true villain is still among players.\n\n",
-s:"\ci5   ", s:voteindex[5], s:" \cf[MURD+INNO]\n   \ccWill abort current map and skip to that unfinished shitty aztec map\n\n",
+s:"\ci5   ", s:voteindex[5], s:" \cf[ALL]\n   \ccAllow ghosts in WhoDunIt and hound/spirit in The Mutilator\n\n",
 s:"\ci6   ", s:voteindex[6], s:" \cf[MURD ONLY]\n   \ccWill let to call a non-murd votes next round,\n   \ccif players are told to wait more than 1 round for that.\n\n",
-s:"\ci7   ", s:voteindex[7], s:" \cf[MURD+INNO]\n   \ccEveryone can be killed with one hit.\n   \ccGuess carefully.\n\n");
-
+s:"\ci7   ", s:voteindex[7], s:" \cf[MURD+INNO]\n   \ccEveryone can be killed with one hit.\n   \ccGuess carefully.\n\n",
+s:"\ci8   ", s:voteindex[8], s:" \cf[ALL]\n   \ccAllows to play 'The Mutilator' mod.\n\n",
+s:"\ci9   ", s:voteindex[9], s:" \cf[SERVER]\n   \ccAn admin can use this option to poll.\n   \ccSet WdiServersVote <...> to set a question.\n   \ccCurrent vote option is '", s:GetCvarString("WdiServersVote"),s:"'\n\n");
 }
-
 
 
 Script "VOTE_preparations" OPEN
 {
-if (GetLevelInfo(LEVELINFO_LEVELNUM)<40 || GetLevelInfo(LEVELINFO_LEVELNUM)>50)
+if (MUTILATOR_MOD() == 0)
 {
 SetCVAR("specialMvoted", FALSE);
 SetCVAR("specialIvoted", FALSE);
-SetCVAR("IsVoting", FALSE); 
+SetCVAR("WdiIsVoting", 0); 
 endcam[6] = 10;
 if (GetCVAR("canvoteagain")> 0) {SetCVAR("canvoteagain", GetCVAR("canvoteagain") -1);}
 if (GetCVAR("canvoteagain")< 0) {SetCVAR("canvoteagain", 0);} // if it failcounts
@@ -62,7 +71,6 @@ delay(35);
 }
 
 
-Script "VoteNowSFX" (void)  {LocalAmbientSound("VOTENOW", 96);}
 
 
 
@@ -85,17 +93,35 @@ Script "VoteNowSFX" (void)  {LocalAmbientSound("VOTENOW", 96);}
 
 Script "Vote" (int voteid) NET  //Restrictions script
 {
+int numvoted = Playernumber();
 str amend = StrParam(s:"VOTECASE",i:voteid);
 int rere = 0;
+
+//personal restrictions
+if ((voteid == 6) && (!checkInventory("Murdererkey"))) {Print(s:"Only the Murderer can call this vote!"); terminate;}
+
 rere = ACS_NAMEDEXECUTEWITHRESULT(amend, 0);
 { 
 if (GetCVAR("VotingAllowed")==false) {Print(s:"Voting is disallowed."); terminate;}
-else if ((GetLevelInfo(LEVELINFO_LEVELNUM)>=40) && (GetLevelInfo(LEVELINFO_LEVELNUM)<=50)) {Print(s:"Voting is allowed in WhoDunIt maps only."); terminate;}
+else if (MUTILATOR_MOD() > 0) {Print(s:"Voting is allowed in WhoDunIt maps only."); terminate;}
 else if (PlayerIsSpectator(PlayerNumber()) > 0) {Print(s:"Spectators cannot vote."); terminate;}
 else if (gameinfo[1] != GAMESTATE_GAMEACTIVE) {Print(s:"The murderer has not been chosen yet."); terminate;}
 else if (gameinfo[1] == GAMESTATE_GAMEOVER) {Print(s:"Game is over now."); terminate;}
-else if (GetCVAR("IsVoting")== TRUE) {Print(s:"Someone's already called a vote."); terminate;}
+else if (GetCVAR("WdiIsVoting") > 0) {Print(s:"Someone's already called a vote."); terminate;}
 
+
+//MDISPECIAL
+
+else if ((voteid == 8))
+       {
+	   if (MDIGlobal[1] > 0) {Print(s:"Can vote to Allow/Disallow 'The Mutilator' in ", i: MDIGlobal[1], s:" rounds"); Terminate;}
+	   if (mdivoted == true) {Print(s:"The Mutilator vote has already been just now."); Terminate;}
+	   }
+	   
+else if ((voteid == 9))
+       {
+	   if (numvoted > -1) {Print(s:"Only the server can call this vote"); Terminate;}
+	   }	   
 //give a time for murd vote first
 else if ((endcam[6] > 0) && (!CheckInventory("MurdererKey"))) {Print(s:"Innocents have to wait ", i:endcam[6], s:" seconds to call a vote"); terminate;}
 else if ((rere == 100) && (GetCVAR("canvoteagain") < 1)) {}
@@ -107,12 +133,18 @@ else if ((rere == 97) && (GetCVAR("specialIvoted") == TRUE)) {Print(s:"You can v
 
 else if (rere == 96) {Print(s:"Murderer has already unpacked his backpack.\n\nCan't vote for this modifier now.."); terminate;}
 else if (rere == 95) {Print(s:"This map is not suitable for this modifier."); terminate;}
+else if (rere == 94) {Print(s:"Not enough players for this modifier."); terminate;}
+else if (rere == 93) {Print(s:"Get 220 MURDERER PTS first to unlock Nightmare Difficulty!"); terminate;}
+else if ((rere == 92) && (voteid != 8))
+       {
+	   if (MDIGlobal[8] > 0) {Print(s:"Can vote this particular option in ", i: MDIGlobal[8], s:" rounds"); Terminate;}
+	   if (pollvoted == true) {Print(s:"There already was a similiar vote"); Terminate;}
+	   }
 else if (rere == 1) {Print(s:"Conditions for this modifier are incorrect."); terminate;}
 else if (GetCVAR("canvoteagain")>0) {Print(s:"You can vote again for '", s:voteindex[voteid], s:"' in ", i:GetCVAR("canvoteagain"), s:" rounds."); terminate;}
 else if (voteid<=0) {Print(s:"\cktype \ciVOTE X\ck, where x is a number of modifier."); terminate;}
 
 }
-int numvoted = Playernumber();
 if (rere == 0) {print(s:"Modifier ", i:voteid, s:" doesn't exist."); TERMINATE;}
 int caseid = rere;
 ACS_NAMEDEXECUTE("VoteExe", 0, voteid, numvoted, caseid);
@@ -120,7 +152,7 @@ ACS_NAMEDEXECUTE("VoteExe", 0, voteid, numvoted, caseid);
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////
-
+bool VoteRepeat = false;
 
 
 Script "VoteExe" (int voteid, int numvoted, int caseid)
@@ -129,63 +161,91 @@ Script "VoteExe" (int voteid, int numvoted, int caseid)
 SetActivator(0, AAPTR_NULL);
 str voter = "";
 str initiated = "";
+str note = "";
 str modif = StrParam(s:"VOTECASE",i:voteid); 
 str votername = StrParam(n:numvoted+1);
 int minus = 0;
-SetCVAR("IsVoting", TRUE); 
+if (numvoted == 99) votername = "server";
+if (voteid == 9) voteindex[voteid] = getcvarstring("WdiServersVote");
+//SetCVAR("IsVoting", TRUE); 
+
 SetCVAR("VOTEYES", 0); SetCVAR("VOTENO", 0); 
 ACS_NAMEDEXECUTE(modif, 0, 44); //check if script has a while voting conditions
 switch(caseid)  //1st switch is to
  {
   case 100: //TwoRound   
-	if (endcam[7] > 0) 
-	{voter = "Murderer"; initiated = ", initiated by ";
-    GiveActorInventory(TID_START+gameinfo[2], "GetPlayerInputVote", 1); GiveActorInventory(TID_START+gameinfo[2], "VoteNowSFX", 1);//murder vote first
+	if (VoteRepeat == true) 
+	{
+	voter = "Murderer"; initiated = ", initiated by ";
+    //GiveActorInventory(TID_START+gameinfo[2], "GetPlayerInputVote", 1); GiveActorInventory(TID_START+gameinfo[2], "VoteNowSFX", 1);//murder vote first
+	SetCVAR("WdiIsVoting", 3); 
 	} 
-	if (endcam[7] <= 0) 
-	{voter = "Now innocents"; initiated = ", initiated by "; minus = 1;
-	for(int l = 0; l < 32; l++) {if(!CheckActorInventory(TID_START+l, "MurdererKey")) GiveActorInventory(TID_START+l, "GetPlayerInputVote", 1);} //innocents vote second
+	if (VoteRepeat == false) 
+	{
+	voter = "Now innocents"; initiated = ", initiated by "; minus = 1;
+	//for(int l = 0; l < 32; l++) {if(!CheckActorInventory(TID_START+l, "MurdererKey")) GiveActorInventory(TID_START+l, "GetPlayerInputVote", 1);} //innocents vote second
+	SetCVAR("WdiIsVoting", 2); 
 	}
 	break;
  case 99: //All Vote   
-	for(int m = 0; m < 32; m++) {GiveActorInventory(TID_START+m, "GetPlayerInputVote", 1);} 
-	voter = "Everyone"; initiated = ", initiated by ";
+	//for(int m = 0; m < 32; m++) {GiveActorInventory(TID_START+m, "GetPlayerInputVote", 1);} 
+	voter = "Everyone ingame"; initiated = ", initiated by ";
+	SetCVAR("WdiIsVoting", 1); 
 	break;
   case 98: //Murderer only  
-    GiveActorInventory(TID_START+gameinfo[2], "GetPlayerInputVote", 1);  GiveActorInventory(TID_START+gameinfo[2], "VoteNowSFX", 1); 
+    //GiveActorInventory(TID_START+gameinfo[2], "GetPlayerInputVote", 1);  GiveActorInventory(TID_START+gameinfo[2], "VoteNowSFX", 1); 
 	voter = "Murderer"; initiated = ""; votername = "";
+	SetCVAR("WdiIsVoting", 3); 
 	break;
   case 97: //Innocents only  
-	for(int n = 0; n < 32; n++) {if (!CheckActorInventory(TID_START+n, "MurdererKey")) {GiveActorInventory(TID_START+n, "GetPlayerInputVote", 1);}}  
+	//for(int n = 0; n < 32; n++) {if (!CheckActorInventory(TID_START+n, "MurdererKey")) {GiveActorInventory(TID_START+n, "GetPlayerInputVote", 1);}}  
 	voter = "Innocents";  initiated = ", initiated by ";
+	SetCVAR("WdiIsVoting", 2); 
+	break;
+  case 92:  //Everybody on the server on the server, with no early result(wait till end) 
+	//for(int q = 0; q < 32; q++) {GiveActorInventory(TID_START+q, "GetPlayerInputVote", 1);} 
+	voter = "Players and Spectators"; initiated = ", initiated by ";
+	SetCVAR("WdiIsVoting", 4); 
+	note = "Notice that ingame player count as 2 votes. Spectator count as 1 vote.";
 	break;
  }
 int counter = 20;
 while (counter > 0)
 {
-SetFont("smallfont");HudMessageBold (s:voter, s:"! \cg", i: counter, s:"\cr seconds left to vote for \cg", s:voteindex[voteid],  s:"\cr", s:initiated, s:votername ; HUDMSG_FADEOUT, 411, CR_DARKRED, 0.5, 0.02, 1.0, 1.0);
-SetFont("smallfont");HudMessageBold (k:"+left", s:"\cr to vote YES";  HUDMSG_FADEOUT, 412, CR_RED, 0.3, 0.02 + 0.03, 1.0, 1.0);
-SetFont("smallfont");HudMessageBold (k:"+right", s:"\cr to vote NO"; HUDMSG_FADEOUT, 413, CR_RED, 0.7, 0.02 + 0.03, 1.0, 1.0);
+SetFont("smallfont");
+HudMessageBold (s:voter, s:"! \cg", i: counter, s:"\cr seconds left to vote for \cg", s:voteindex[voteid],  s:"\cr", s:initiated, s:votername, s:"\n", s:note; HUDMSG_FADEOUT, 411, CR_DARKRED, 0.5, 0.02, 1.0, 1.0);
+//HudMessageBold (s:note; HUDMSG_FADEOUT, 410, CR_DARKRED, 0.5, 0.02 + 0.015, 1.0, 1.0);
+//for(int o = 0; o < 32; o++) {GiveActorInventory(TID_START+o, "ShowClientVoteKeys", 1);}  
+//SetFont("smallfont");HudMessageBold (k:"+left", s:"\cr to vote YES";  HUDMSG_FADEOUT, 412, CR_RED, 0.3, 0.02 + 0.03, 1.0, 1.0);
+//SetFont("smallfont");HudMessageBold (k:"+right", s:"\cr to vote NO"; HUDMSG_FADEOUT, 413, CR_RED, 0.7, 0.02 + 0.03, 1.0, 1.0);
 SetFont("BIGfont");HudMessageBold (i:GetCVAR("VOTEYES"); HUDMSG_FADEOUT, 414, CR_RED, 0.3, 0.02 + 0.06, 1.0, 1.0);
 SetFont("BIGfont");HudMessageBold (i:GetCVAR("VOTENO"); HUDMSG_FADEOUT, 415, CR_RED, 0.7, 0.02 + 0.06, 1.0, 1.0);
-if (endcam[7] > 0) { 
+if (VoteRepeat == true) { 
       if ((GetCVAR("VOTEYES") > GetCVAR("VOTENO"))||(GetCVAR("VOTEYES") < GetCVAR("VOTENO"))) {counter=0;}
 	               } //if only one man has to vote, and he did, end it early
-else if (endcam[7] <=0 ) 
-                    { if (caseid == 98) 
+else if (VoteRepeat == false) 
+                    { if (GetCVAR("WdiIsVoting") == 3)  
                       { 
-					  if ((GetCVAR("VOTEYES") > GetCVAR("VOTENO"))||(GetCVAR("VOTEYES") < GetCVAR("VOTENO"))) {counter=0;}
+					  if ((GetCVAR("VOTEYES") > GetCVAR("VOTENO"))||(GetCVAR("VOTEYES") < GetCVAR("VOTENO"))) counter=0;
 					  }
-                    else  if ((GetCVAR("VOTEYES") > (playercount()- minus)/2) || (GetCVAR("VOTENO") > (playercount()- minus)/2) ||  ((GetCVAR("VOTEYES") + GetCVAR("VOTENO")) >= playercount() - minus )) {counter=0;}
-	               }  //abort it early if large majority of players already called it over 
+			     else if (GetCVAR("WdiIsVoting") == 4) 
+                      { 
+					  //Wait till the time expires
+					  }
+                    else  
+					   {
+					   if ((GetCVAR("VOTEYES") > (playercount()- minus)/2) || (GetCVAR("VOTENO") > (playercount()- minus)/2) ||  ((GetCVAR("VOTEYES") + GetCVAR("VOTENO")) >= playercount() - minus )) counter=0;
+                       //abort it early if large majority of players already called for either
+					   }
+	               }  
 counter--;
-delay(35); 
+delay(35);
 }
-ACS_NAMEDTERMINATE("GetPlayerInputVote", 0); //Stop voting input for everybody
+//ACS_NAMEDTERMINATE("GetPlayerInputVote", 0); //Stop voting input for everybody
 {
   if (GetCVAR("VOTEYES") > GetCVAR("VOTENO"))     //VOTED YES
   {
-    if (endcam[7] <= 0) //no next round vote
+    if (VoteRepeat == false) //no next round vote
       {
 	  ACS_NAMEDEXECUTE(modif, 0, 45); //check if script has YES ending vote conditions
 	  delay(5);
@@ -197,7 +257,7 @@ ACS_NAMEDTERMINATE("GetPlayerInputVote", 0); //Stop voting input for everybody
     else  // yes next round vote
       {
       SetFont("smallfont");HudMessageBold (s:voter, s:" has voted for it."; HUDMSG_FADEOUT, 411, CR_DARKRED, 0.5, 0.02, 3.0, 1.0);
-      endcam[7] = 0; delay(35*4); restart;
+      VoteRepeat = false; delay(35*4); restart;
       }
   }
   else   //VOTED NO
@@ -208,9 +268,11 @@ ACS_NAMEDTERMINATE("GetPlayerInputVote", 0); //Stop voting input for everybody
   }
 }
 //FINISHING VOTE
-endcam[7] = 0;
+VoteRepeat = false;
+//for(int p = 0; p < 32; p++) TakeActorInventory(TID_START+p, "ClientCanVote", 99);
 SetCVAR("VOTEYES", 0); SetCVAR("VOTENO", 0);
-SetCVAR("IsVoting", FALSE); 
+SetCVAR("WdiIsVoting", 0);
+
 switch(caseid)
   {
   case 100: SetCVAR("canvoteagain", playercount()/2); break;
@@ -224,31 +286,92 @@ switch(caseid)
 
 
 
+Script "WDI_VoteYes"  (int password, int votepts) NET {if (MDI_PassMatch(password))       SetCVAR("VOTEYES", GetCVAR("VOTEYES")+votepts);} 
+Script "WDI_VoteNo"   (int password, int votepts) NET {if (MDI_PassMatch(password))       SetCVAR("VOTENO", GetCVAR("VOTENO")+votepts);}
 
-script "GetPlayerInputVote" (void) 
-{
-int buttonzz;
- while(TRUE)
- {
- buttonzz = GetPlayerInput(-1, INPUT_BUTTONS);
-     if (buttonzz & BT_LEFT)   {SetCVAR("VOTEYES", GetCVAR("VOTEYES")+1); TERMINATE;}   
-else if (buttonzz & BT_RIGHT)   {SetCVAR("VOTENO", GetCVAR("VOTENO")+1);  TERMINATE;}
-delay(1);
-}
-}
 
-script "WDISHOWSCORESINFO" ENTER CLIENTSIDE
+
+script "WDICLIENTSTUFF" OPEN CLIENTSIDE
 {
+SetActivatorToPlayer(ConsolePlayerNumber());
+int votepts = 1;
 int buttonzz;
- while(GetLevelInfo(LEVELINFO_LEVELNUM)<40 || GetLevelInfo(LEVELINFO_LEVELNUM)>50)
+int password;
+str pressyes;
+str pressno;
+bool voted;
+bool canvote;
+bool votenowsfx;
+ while(MUTILATOR_MOD() == 0)
  {
+ password = GetCvar("mdispecial1") * PlayerCount() - GetCvar("mdispecial6"); 
  buttonzz = GetPlayerInput(-1, INPUT_BUTTONS);
-   if ((buttonzz & BT_SHOWSCORES) && (PlayerIsSpectator(ConsolePlayerNumber())==0))
+   if (buttonzz & BT_SHOWSCORES)
    {
    SetHUDSize(1024, 768, 0);
    SetFont("smallfont");
    HudMessage(s:"Type in console: \cgghosted 1 \crto always see ghosts. \cgghosted 0 \crto never see ghosts again. \n\crTo vote special, type in console: \cgPUKENAME VOTE X\cr, where x is a number of gameplay modifier to vote for.\n\crType in console: \cgvotelist\cr, to see a list of gameplay modifiers."; HUDMSG_PLAIN, 2171, CR_DARKRED, 512.0, 640.0, 0.05);
- }   
+   }  
+   
+/////////////////////////////////// VOTING
+///////////////////////////////////
+///////////////////////////////////
+
+   if (GetCvar("WdiIsVoting") > 0) 
+   {
+     if(voted == false)
+	   {
+        if (PlayerIsSpectator(ConsolePlayerNumber()) == 0)
+		   {
+		     if (GetCvar("WdiIsVoting") == 1)  canvote = true; //all players in game
+        else if (GetCvar("WdiIsVoting") == 2)  {if(!CheckInventory("MurdererKey")) canvote = true; else canvote = false;}  //all innocents
+		else if (GetCvar("WdiIsVoting") == 3)  {if( CheckInventory("MurdererKey")) canvote = true; else canvote = false;}   //only murd              
+		else if (GetCvar("WdiIsVoting") == 4)  {canvote = true; votepts = 2;}   //whole server	
+		   }
+        if (PlayerIsSpectator(ConsolePlayerNumber()) > 0)
+		   {
+		     if (GetCvar("WdiIsVoting") == 1)  canvote = false; //all players in game
+        else if (GetCvar("WdiIsVoting") == 2)  canvote = false;   //all innocents
+		else if (GetCvar("WdiIsVoting") == 3)  canvote = false;   //only murd              
+		else if (GetCvar("WdiIsVoting") == 4)  {canvote = true; votepts = 1;}//whole server	
+		   }
+		   
+		if (canvote == true)
+		      {
+			  if(votenowsfx == false) {LocalAmbientSound("VOTENOW", 96); votenowsfx = true;}
+			  pressyes = strparam(k:"+speed", s:"  +  ", k:"+forward", s:"\cr to vote YES");
+			  pressno = strparam(k:"+speed", s:"  +  ", k:"+back", s:"\cr to vote NO");
+			       if (buttonzz & BT_SPEED && buttonzz & BT_FORWARD) { NamedRequestScriptPuke("WDI_VoteYes", password, votepts, 0); voted = true;} 
+              else if (buttonzz & BT_SPEED && buttonzz & BT_BACK   ) { NamedRequestScriptPuke("WDI_VoteNo",  password, votepts, 0); voted = true;}
+		      }   
+
+			  		
+	   }
+	   if((voted == true)|(canvote == false))
+	   {
+	   pressyes = strparam(s:"\crvoted YES");
+       pressno = strparam(s:"\crvoted NO");
+	   }
+
+			  
+		   	  SetHUDSize(0, 0, 0);
+              SetFont("smallfont");HudMessage (s:pressyes;  HUDMSG_FADEOUT, 412, CR_RED, 0.3, 0.02 + 0.03, 1.0, 1.0);
+              SetFont("smallfont");HudMessage (s:pressno;   HUDMSG_FADEOUT, 413, CR_RED, 0.7, 0.02 + 0.03, 1.0, 1.0);
+
+   }
+   
+else if (GetCvar("WdiIsVoting") == 0)    
+   {
+   votepts = 1;
+   canvote = false;
+   voted = false;
+   votenowsfx = false;
+   }
+
+///////////////////////////////////   
+   
+   
+   
 delay(1);
 }
 }
@@ -294,6 +417,8 @@ Script "VOTECASE0" (void)  {}
 
 Script "WHILEVOTING1" (void)
 {
+SetFont("smallfont");HudMessageBold (s:"ALL-TIME NIGHTMARE WINNERS ARE:"; HUDMSG_FADEOUT, 0, CR_DARKRED, 0.5, 0.15, 10.0, 1.0);
+HudMessageBold (s:GetCvarString("wdiNMwinners"); HUDMSG_FADEOUT, 0, CR_DARKRED, 0.5, 0.18, 10.0, 1.0);
 SetActivator(0, AAPTR_NULL);
 while(TRUE)
 {
@@ -326,9 +451,11 @@ if (add == 44) {ACS_NAMEDEXECUTE("WHILEVOTING1", 0); terminate;}
 if (add == 45) {ACS_NAMEDTERMINATE("WHILEVOTING1", 0); ACS_NAMEDEXECUTE("KEEPMURDOFFWALLS", 0);TERMINATE;}
 if (add == 46) {ACS_NAMEDTERMINATE("WHILEVOTING1", 0); delay(3); GiveActorInventory(TID_START+gameinfo[2],"MurderDoorUnblocker", 1); Wdi_Setinvulnerable(FALSE); terminate;}
 
+if (GetCvar("wdi_TopMurderer1score") < 220) { SetResultValue(93); terminate;}  //not enough playersSetResultValue(1)
+if (PlayerCount() < 6) { SetResultValue(94); terminate;}  //not enough players
 if (!CheckActorInventory(TID_START+gameinfo[2],"MurdBackpack")) { SetResultValue(96); terminate;}  //murderer has unpacked his backpack, aborting
 //Wdi_Setinvulnerable(TRUE); //while voting all players in godmode.
-endcam[7] = 0; SetResultValue(98); //98 only murderer decides (for heavy gameplay changes cases)
+VoteRepeat = false; SetResultValue(98); //98 only murderer decides (for heavy gameplay changes cases)
 if (add < 1 ) {TERMINATE;}
 //////////////////////////////////put your stuff after this line 
 delay(35*3);
@@ -336,6 +463,7 @@ GiveActorInventory(TID_START+gameinfo[2], "WDINMARER", 1);
 int counter = 0;
 int ammocnt = 0;
 int rand = 0;
+int idx = 0;
 
 delay(35);
 Wdi_Setinvulnerable(FALSE);
@@ -343,25 +471,50 @@ endcam[0] = 1; //will multiply the score
 GiveActorInventory(TID_START+gameinfo[2], "BlockEvenMurd", 1); //blocks murd from walls
 delay(5);
 
-while(counter < 31)
+
+	
+// fuck RNG, 
+	
+idx = 0; counter = 2; SpawnSpotForced("FakeBeretta", TID_START+idx, 0, 0); while(counter > 0) {SpawnSpotForced("PistolClip", TID_START+idx, 0, 0); counter--;} GiveActorInventory(TID_START+idx, "PistolAmmo", 10);  
+idx = 1; counter = 2; SpawnSpotForced("FakeBeretta", TID_START+idx, 0, 0); while(counter > 0) {SpawnSpotForced("PistolClip", TID_START+idx, 0, 0); counter--;} GiveActorInventory(TID_START+idx, "PistolAmmo", 10); 
+idx = 2; counter = 8; SpawnSpotForced("FakeShotgun", TID_START+idx, 0, 0); while(counter > 0) {SpawnSpotForced("NewShell", TID_START+idx, 0, 0); counter--;} GiveActorInventory(TID_START+idx, "SuperShells", 10); 
+idx = 3; counter = 2; SpawnSpotForced("FakeM1", TID_START+idx, 0, 0); while(counter > 0) {SpawnSpotForced("M1Ammo", TID_START+idx, 0, 0); counter--;} GiveActorInventory(TID_START+idx, "M1CarbineClipIn", 10); 
+idx = 4; SpawnSpotForced("FakeChainsawfix", TID_START+idx, 0, 0); GiveActorInventory(TID_START+idx, "Gasoline", 999); counter--;
+idx = 5; SpawnSpotForced("FakeShovel", TID_START+idx, 0, 0); GiveActorInventory(TID_START+idx, "Gasoline", 999); counter--;
+
+
+// at this point the rest players doesnt matter, just give them any
+while(idx < 31)
 {
-rand = random(17,18);
-SpawnSpotForced(buywep[rand], TID_START+counter, 0, 0);
-if (rand == 17) {SpawnSpotForced("NewShell", TID_START+counter, 0, 0);
-               SpawnSpotForced("NewShell", TID_START+counter, 0, 0); 
-			   SpawnSpotForced("NewShell", TID_START+counter, 0, 0); 
-			   SpawnSpotForced("NewShell", TID_START+counter, 0, 0); 
-			   SpawnSpotForced("NewShell", TID_START+counter, 0, 0); 
-			   SpawnSpotForced("NewShell", TID_START+counter, 0, 0); 
-			   SpawnSpotForced("NewShell", TID_START+counter, 0, 0); 
-			   SpawnSpotForced("NewShell", TID_START+counter, 0, 0); }
-if (rand == 18) {SpawnSpotForced("PistolClip", TID_START+counter, 0, 0);
-               SpawnSpotForced("PistolClip", TID_START+counter, 0, 0);}
-GiveActorInventory(TID_START+counter, buyAmmotype[rand], 10);              
-GiveActorInventory(TID_START+counter, "Stimpack", 2);
-counter++;
+rand = random(13,18);
+if (rand == 14) {rand = 16;}
+SpawnSpotForced(buywep[rand], TID_START+idx, 0, 0);
+if (rand == 13) {SpawnSpotForced("M1CarbineClipIn", TID_START+idx, 0, 0);}
+if (rand == 17) {SpawnSpotForced("NewShell", TID_START+idx, 0, 0);
+               SpawnSpotForced("NewShell", TID_START+idx, 0, 0); 
+			   SpawnSpotForced("NewShell", TID_START+idx, 0, 0); 
+			   SpawnSpotForced("NewShell", TID_START+idx, 0, 0); 
+			   SpawnSpotForced("NewShell", TID_START+idx, 0, 0); 
+			   SpawnSpotForced("NewShell", TID_START+idx, 0, 0); 
+			   SpawnSpotForced("NewShell", TID_START+idx, 0, 0); 
+			   SpawnSpotForced("NewShell", TID_START+idx, 0, 0); }
+if (rand == 18) {SpawnSpotForced("PistolClip", TID_START+idx, 0, 0);
+               SpawnSpotForced("PistolClip", TID_START+idx, 0, 0);}
+GiveActorInventory(TID_START+idx, buyAmmotype[rand], 10);              
+GiveActorInventory(TID_START+idx, "Stimpack", 2);
+GiveActorInventory(TID_START+idx, "Gasoline", 999);
+idx++;
 delay(1); 
 }
+
+for(int l = 0; l < 32; l++)
+{
+GiveActorInventory(TID_START+l, buyAmmotype[rand], 10);              
+GiveActorInventory(TID_START+l, "Stimpack", 2);
+GiveActorInventory(TID_START+l, "Gasoline", 999);
+}
+
+
 delay(35);
 while(gameinfo[1] == GAMESTATE_GAMEACTIVE)
 {
@@ -374,7 +527,12 @@ if (playinfo[4] == END_INOLOSE)
 delay(35*3);
 SetHUDSize(1024, 768, 0);
 setfont("BIGFONT");
-HudMessageBold (n:gameinfo[2]+1, s:" MANAGED TO WIN THE GAME ON NIGHTMARE DIFFICULTY!"; HUDMSG_FADEOUT, 411, CR_GREY, 512.0, 384.0, 4.0, 1.0);
+HudMessageBold (n:gameinfo[2]+1, s:" MANAGED TO WIN THE GAME ON NIGHTMARE DIFFICULTY!"; HUDMSG_FADEOUT, 0, CR_GREY, 512.0, 384.0, 4.0, 1.0);
+str addwinner = StrParam(s:GetCvarString("wdiNMwinners"), s:"\cc,\n\n\cc", s:Strftime(SystemTime(), "%Y", true), s:"/", s:Strftime(SystemTime(), "%m", true), s:"/", s:Strftime(SystemTime(), "%d", true), s:"   ", n:gameinfo[2]+1);
+SetCvarString("wdiNMwinners", addwinner);
+Log(n:gameinfo[2]+1, s:" has won wdinightmare.");
+
+
 
 //if ((GetCvar("SeasonOnHold") == false) && (getcvar("RoundsLeft")>1) && (PlayerCount() >= 4)) 
   //{
@@ -386,6 +544,11 @@ HudMessageBold (n:gameinfo[2]+1, s:" MANAGED TO WIN THE GAME ON NIGHTMARE DIFFIC
 }
 
 
+Script "GiveWarn" (void)
+{
+if((CheckInventory("MurdererKey")) && (endcam[0] == 1)) {Print(s:" Don't come too close to HAND markers!"); DamageThing(25, MOD_EXIT);}
+}
+
 
 
 Script "WDINMARER" (void) CLIENTSIDE// NIGHTMARE MODE FOR MURDERER
@@ -394,6 +557,8 @@ Script "WDINMARER" (void) CLIENTSIDE// NIGHTMARE MODE FOR MURDERER
    SetHUDSize(640, 480, 0);
    SetFont("M_NMARE");
    HudMessage(s:"A"; HUDMSG_FADEOUT, 0,CR_DARKRED, 320.0, 240.0, 5.0, 2.0 );
+   SetFont("smallfont");
+   HudMessage(s:"Avoid murderer's handwall markers to get away from the sudden death!"; HUDMSG_FADEOUT, 0,CR_DARKRED, 320.0, 320.0, 5.0, 2.0 );
 }
 
 
@@ -407,7 +572,7 @@ str bullshitems[20] = {
 "ShotgunTrap",
 "WDI18bombdropped",
 "DeployingStimGas",
-"PoliceLight",
+"WDI18bombdropped",
 "Trite",
 "StealthCamouflage",
 "Doom3Imp",
@@ -419,7 +584,7 @@ str bullshitems[20] = {
 "BearTrapy",
 "SmokeCanister",
 "ChainsawZombie",
-"Fish1",
+"WDI18bombdropped", //0
 "Trite",
 "ZHAPlatformSpawner"
 };
@@ -431,8 +596,8 @@ if (add == 44) {terminate;}
 if (add == 45) {terminate;}
 if (add == 46) {terminate;}
 {
-if ((GetCvar("SeasonOnHold") == false) && (getcvar("RoundsLeft")>1) && (PlayerCount() >= 4)) {endcam[7] = 1; SetResultValue(100); }
-else {endcam[7] = 0; SetResultValue(99);}
+if ((GetCvar("SeasonOnHold") == false) && (getcvar("RoundsLeft")>1) && (PlayerCount() >= 4)) {VoteRepeat = true; SetResultValue(100); }
+else {VoteRepeat = false; SetResultValue(99);}
 }
 if (add < 1 ) {TERMINATE;}
 //////////////////////////////////put your stuff after this line 
@@ -456,7 +621,7 @@ if (add == 45) {terminate;}
 if (add == 46) {terminate;}
 if (GetLevelInfo(LEVELINFO_LEVELNUM)<31 || GetLevelInfo(LEVELINFO_LEVELNUM)>33) { SetResultValue(95); terminate;} //map is wrong
  
-endcam[7] = 1; SetResultValue(100); //100 murderer decides first, then innocents do (for certain changes cases)
+VoteRepeat = true; SetResultValue(100); //100 murderer decides first, then innocents do (for certain changes cases)
 if (add < 1 ) {TERMINATE;}
 //////////////////////////////////put your stuff after this line 
 delay(35*3);
@@ -506,7 +671,7 @@ if (add == 44) {terminate;}
 if (add == 45) {terminate;}
 if (add == 46) {terminate;}
 
-endcam[7] = 1; SetResultValue(100); //100 murderer decides first, then innocents do (for certain changes cases)
+VoteRepeat = true; SetResultValue(100); //100 murderer decides first, then innocents do (for certain changes cases)
 if (add < 1 ) {TERMINATE;}
 //////////////////////////////////put your stuff after this line 
 delay(35*3);
@@ -525,22 +690,48 @@ GiveActorInventory(TID_START+l,"SoundEmitter", 4); // Sound Emitters x4
 //////////////////////////////////your stuff ends here
 }
 
-Script "VOTECASE5" (int add) // will skip to a secret map
+Script "VOTECASE5" (int add) // allows specgames
 {
 SetActivator(0, AAPTR_NULL);
-if (add == 44) {terminate;}
-if (add == 45) {terminate;}
-if (add == 46) {terminate;}
+if (add == 44) terminate;
+if (add == 45) {ACS_NAMEDEXECUTE("afterspecvote", 0, 0);}
+if (add == 46) {ACS_NAMEDEXECUTE("afterspecvote", 0, 1);}
 
-endcam[7] = 1; SetResultValue(100); //100 murderer decides first, then innocents do (for certain changes cases)
+
+if (mdivoted == true) {SetResultValue(1); terminate;}
+
+VoteRepeat = false; SetResultValue(92);
+
 if (add < 1 ) {TERMINATE;}
 //////////////////////////////////put your stuff after this line 
-delay(35*3);
-consolecommand("changemap wdiexsec");
+SetCvar("GhostedStart", 0);
+SetCvar("DwangoStart", 0);
 //////////////////////////////////your stuff ends here
 }
 
-Script "VOTECASE6" (int add) // vote in advance
+
+script "afterspecvote" (int result)
+{
+switch(result)
+{
+case 0: SetCvar("GhostedStart", 0); SetCvar("DwangoStart", 0); break;
+case 1: SetCvar("GhostedStart", 666); SetCvar("DwangoStart", 666); break;
+}
+MDIGlobal[8] = 3;
+pollvoted = true;
+}
+
+
+
+
+
+
+
+
+
+
+
+Script "VOTECASE6" (int add, int voternum) // vote in advance
 {
 SetActivator(0, AAPTR_NULL);
 if (add == 44) {terminate;}
@@ -549,90 +740,126 @@ if (add == 46) {terminate;}
 
 if (GetCVAR("canvoteagain") < 2) {SetResultValue(1); TERMINATE;}
 
-endcam[7] = 0; SetResultValue(98); //98 only murderer decides 
+VoteRepeat = false; SetResultValue(98); //98 only murderer decides 
 if (add < 1 ) {TERMINATE;}
 //////////////////////////////////put your stuff after this line 
 delay(35);
 SetCvar("canvoteagain", 1);
 //////////////////////////////////your stuff ends here
 }
-/*
-function void hudmessageonactorB(int tid, int range, str sprite, str text, int id)
-{
-	int dist, ang, vang, pitch, xx, yy;
-	int HUDX = 1280;
-	int HUDY = 960;
-	int offset = 0;
 
-	if(sprite != -1)
-	{
-		SetFont(sprite);
-		text = "A";
-		offset = 0.1;
-	}
-
-	SetHUDSize(HUDX, HUDY, 1);
-	xx = GetActorX(tid) - GetActorX(0);
-	yy = GetActorY(tid) - GetActorY(0);
-
-	vang = VectorAngle(xx,yy);
-	ang = (vang - GetActorAngle(0) + 1.0) % 1.0;
-
-	if(((vang+0.125)%0.5) > 0.25) dist = FixedDiv(yy, Sin(vang));
-	else dist = FixedDiv(xx, Cos(vang));
-
-	if ((ang < 0.2 || ang > 0.8) && dist < range)
-	{
-		pitch = VectorAngle(dist, GetActorZ(tid) - (GetActorZ(0) + 41.0));
-		pitch = (pitch + GetActorPitch(0) + 1.0) % 1.0;
-
-		xx = HUDX/2 - ((HUDX/2) * Sin(ang) / Cos(ang));
-		yy = HUDY/2 - ((HUDX/2) * Sin(pitch) / Cos(pitch));
-
-		if(sprite != -1)
-		SetFont(sprite);
-		HudMessage(s:text; HUDMSG_PLAIN, id, CR_UNTRANSLATED, (xx<<16)+offset, ((yy<<16)+offset)-32.0, 0.1);
-	}
-	else
-	HudMessage(s:" "; HUDMSG_PLAIN, id, CR_UNTRANSLATED, 0, 0, 0.1);
-}
-
-
-function void seek_names (void)
-{
-    for(int m = 0; m < 32; m++)
-    {
-        HudMessageOnActorB(TID_START+m, 16000.0,-1,StrParam(n:m + 1),4200+m); 
-    }
-}
-
-script "seek_nnames" (void) clientside 
-{
-if (!Client_action()) { terminate;}
-	while(WDI_GameState() == GAMESTATE_GAMEACTIVE)
-	{
-		seek_names();
-		Delay(1);		
-	}
-}
-*/
-
-Script "VOTECASE7" (int add) // blind mode
+Script "VOTECASE7" (int add) // one hit mode
 {
 SetActivator(0, AAPTR_NULL);
 if (add == 44) {terminate;}
 if (add == 45) {terminate;}
 if (add == 46) {terminate;}
 
-endcam[7] = 1; SetResultValue(100); //98 only murderer decides 
+VoteRepeat = true; SetResultValue(100); //100 murd, first, then innocents
 if (add < 1 ) {TERMINATE;}
 //////////////////////////////////put your stuff after this line 
 delay(35*3);
+endcam[0] = 2; //don't count it as a normal score
 
 while(gameinfo[1] == GAMESTATE_GAMEACTIVE)
 {
-for(int k = 0; k < 32; k++) {SetActorProperty(TID_START+k, APROP_DamageFactor, 50.0);}
+for(int k = 0; k < 32; k++) 
+{
+SetActorProperty(TID_START+k, APROP_DamageFactor, 50.0); 
+GiveActorInventory(TID_START+k, "TakeFireWeapons", 1);
+}
 delay(35);
 }
+//////////////////////////////////your stuff ends here
+}
+
+Script "TakeFireWeapons" (void)
+{
+If ((CheckInventory("Beretta")) || (CheckInventory("WDIBeretta")) || (CheckInventory("Beretta")) || (CheckInventory("Shotgun2")) || (CheckInventory("M1Carbine")) || (CheckInventory("LCrossbow")) || (CheckInventory("LCrossbow")) || (CheckInventory("ChlorineGas")) || (CheckInventory("Brick")))
+{TakeInventory("Beretta", 99);TakeInventory("WDIBeretta", 99);TakeInventory("Shotgun2", 99);TakeInventory("M1Carbine", 99);TakeInventory("LCrossbow", 99); TakeInventory("Brick", 99); TakeInventory("ChlorineGas", 99); TakeInventory("Slot1Filled", 99);}
+
+}
+
+
+
+
+
+
+
+Script "WHILEVOTING8" (void)
+{
+//int ALLVOTES;
+while(true)
+{
+/*if (MDIglobal[3] < GetCvar("VOTEYES"))*/ MDIglobal[3] = GetCvar("VOTEYES");
+/*if (MDIglobal[4] < GetCvar("VOTENO"))*/ MDIglobal[4] = GetCvar("VOTENO");
+//ALLVOTES = GetCvar("VOTEYES") + GetCvar("VOTENO");
+//MDIglobal[5] = Playercount() - ALLVOTES;
+
+//     if (MDIglobal[3] >  MDIglobal[4]) MDIglobal[2] = (FixedDiv(Int2Fix(GetCvar("VOTEYES")),Int2Fix(ALLVOTES)) * 100) >> 16;
+//else if (MDIglobal[3] <= MDIglobal[4]) MDIglobal[2] = (FixedDiv(Int2Fix(GetCvar("VOTENO")), Int2Fix(ALLVOTES)) * 100) >> 16;
+
+
+delay(1);
+}
+}
+
+
+Script "VOTECASE8" (int add) // allows mdi
+{
+SetActivator(0, AAPTR_NULL);
+if (add == 44) {ACS_NAMEDEXECUTE("WHILEVOTING8", 0); terminate;}
+if (add == 45) {ACS_NAMEDEXECUTE("aftermdivote", 0, 0);}
+if (add == 46) {ACS_NAMEDEXECUTE("aftermdivote", 0, 1);}
+
+
+if (mdivoted == true) {SetResultValue(1); terminate;}
+
+VoteRepeat = false; SetResultValue(92);
+
+if (add < 1 ) {TERMINATE;}
+//////////////////////////////////put your stuff after this line 
+MDIGlobal[0] = 1; //alowmdi
+MDIGlobal[1] = 10; // reset possible vote to mdi count
+MDIVoteDate = strparam(s:Strftime(SystemTime(), "%Y", true), s:"/", s:Strftime(SystemTime(), "%m", true), s:"/", s:Strftime(SystemTime(), "%d", true), s:"  ", s:Strftime(SystemTime(), "%H", true), s:":", s:Strftime(SystemTime(), "%M", true), s:" UTC");
+
+ACS_NAMEDTERMINATE("WHILEVOTING8", 0);
+//////////////////////////////////your stuff ends here
+}
+
+
+script "aftermdivote" (int result)
+{
+ACS_NAMEDTERMINATE("WHILEVOTING8", 0);
+mdivoted = true;
+switch(result)
+{
+case 0: MDIGlobal[0] = 1; break;
+case 1: MDIGlobal[0] = 0; break;
+}
+MDIGlobal[1] = 10; 
+//Set the time vote was on
+MDIVoteDate = strparam(s:Strftime(SystemTime(), "%Y", true), s:"/", s:Strftime(SystemTime(), "%m", true), s:"/", s:Strftime(SystemTime(), "%d", true), s:"  ", s:Strftime(SystemTime(), "%H", true), s:":", s:Strftime(SystemTime(), "%M", true), s:" UTC");
+}
+
+
+
+
+
+
+
+Script "VOTECASE9" (int add) // Poll
+{
+SetActivator(0, AAPTR_NULL);
+if (add == 44) {terminate;}
+if (add == 45) {terminate;}
+if (add == 46) {terminate;}
+
+VoteRepeat = false; SetResultValue(92);
+if (add < 1 ) {TERMINATE;}
+
+//////////////////////////////////put your stuff after this line 
+delay(35*3);
+SetCvar("canvoteagain", 0);
 //////////////////////////////////your stuff ends here
 }
