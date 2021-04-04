@@ -100,7 +100,7 @@ str getnumber = strparam(s:"ZHAPTS", i:tid - 13300);
 SetCvar(getnumber, 0); 
 }
 
- Script "MG_MoveLeft" (void) NET  
+ Script "MG_MoveLeft" (int password) NET {if (MDI_PassMatch(password)) 
 {
 str getnumber = strparam(s:"ZHAPTS", i:PlayerNumber());
 str getnumber2 = strparam(s:"SPECPTS", i:PlayerNumber());
@@ -117,10 +117,10 @@ SetCvar(getspeed, GetCvar(getspeed)+1.0);
 if (GetCvar(getspeed)<250.0) { Thing_SetTranslation(13300+PlayerNumber(), GetCvar(getspeed)/10>>16);} 
 if ((GetActorX(13300+PlayerNumber())>(endcam[9]-32.0)) && (GetActorX(13300+PlayerNumber())<(endcam[9]+32.0)))
 {SetCvarString(getstate, MutilatorType[7]);}
-
+}
 }  
    
-Script "MG_MoveRight" (void) NET  
+Script "MG_MoveRight" (int password) NET {if (MDI_PassMatch(password)) 
 {
 str getnumber = strparam(s:"ZHAPTS", i:PlayerNumber());
 str getnumber2 = strparam(s:"SPECPTS", i:PlayerNumber());
@@ -137,18 +137,19 @@ SetCvar(getspeed, GetCvar(getspeed)+1.0);
 if (GetCvar(getspeed)<250.0) { Thing_SetTranslation(13300+PlayerNumber(), GetCvar(getspeed)/10>>16);} 
 if ((GetActorX(13300+PlayerNumber())>(endcam[9]-32.0)) && (GetActorX(13300+PlayerNumber())<(endcam[9]+32.0)))
 {SetCvarString(getstate, MutilatorType[7]);}
-
+}
 }
 
 
 
-Script "MG_MoveJump" (void) NET  
+Script "MG_MoveJump" (int password) NET {if (MDI_PassMatch(password)) 
 {
 ThrustThingZ(13300+PlayerNumber(), 28, 0,0);  //16
 ThingSound(13300+PlayerNumber(), "DWAJUMP", 127);
 }
+}
 
-Script "MG_SendPTS" (void) NET  
+Script "MG_SendPTS" (int password) NET {if (MDI_PassMatch(password)) 
 {
 //str activatorname
 str getnumber = strparam(s:"ZHAPTS", i:PlayerNumber());
@@ -156,31 +157,31 @@ str getnumber2 = strparam(s:"SPECPTS", i:PlayerNumber());
 SetCvar(getnumber, GetCvar(getnumber)+3); 
 SetCvar(getnumber2, GetCvar(getnumber2)+1); 
 }
+}
 
-Script "MG_Attack" (void) NET  
-{str getstate = strparam(s:"MGSTATE", i:PlayerNumber());
+Script "MG_Attack" (int password) NET {if (MDI_PassMatch(password)) 
+{
+str getstate = strparam(s:"MGSTATE", i:PlayerNumber());
 str getnumber = strparam(s:"ZHAPTS", i:PlayerNumber());
 str getnumber2 = strparam(s:"SPECPTS", i:PlayerNumber());
 SetActorPitch(13300+PlayerNumber(), 0.0);
 SetActorState(13300+PlayerNumber(), GetCvarString(getstate));
 if (GetCvarString(getstate)=="MULTIJUMP") 
 {ThrustThingZ(13300+PlayerNumber(), 28, 0,0);ThingSound(13300+PlayerNumber(), "DWAJUMP", 127);}
-/*{if (GetActorAngle(13300+PlayerNumber())== 1.0){SetActorPosition(13300+PlayerNumber(), GetActorX(13300+PlayerNumber()) + 64.0, GetActorY(13300+PlayerNumber()), GetActorZ(13300+PlayerNumber())+3.0, 0);}}
-else if (GetActorAngle(13300+PlayerNumber())== 0.5){SetActorPosition(13300+PlayerNumber(), GetActorX(13300+PlayerNumber()) - 64.0, GetActorY(13300+PlayerNumber()), GetActorZ(13300+PlayerNumber())+3.0, 0);}*/
 else if (GetCvarString(getstate)=="FARM") {SetCvar(getnumber, GetCvar(getnumber)+8); SetCvar(getnumber2, GetCvar(getnumber2)+8);}
 } 
+}
 ////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////SPAWN/RESPAWN
 
-Script "MGamerRespawn" (void) NET  
+Script "MGamerRespawn" (int password) NET {if (MDI_PassMatch(password))
 {
 int counter = 3;
 str getname = strparam(s:"ZHAPLAYER", i:PlayerNumber());
 str getnumber = strparam(s:"ZHAPTS", i:PlayerNumber());
 str getstate = strparam(s:"MGSTATE", i:PlayerNumber());
 str getspeed = strparam(s:"GHSPEED", i:PlayerNumber());
-//ACS_NAMEDEXECUTE("MINIGAME_WINNER", 0);
 if (GetCVAR("SPECTIME")<=0) 
        {
 SetCVAR("SPECTIME", GetCVAR("defaultSPECTIME")); // reloading spectator timer
@@ -220,7 +221,7 @@ HudMessage (s:"RESPAWN IN ...", i:counter; HUDMSG_FADEOUT, 0, CR_ORANGE, 540.0, 
 	SetActorProperty(13300+PlayerNumber(), APROP_Invulnerable, false);
 	//}
 }
-
+}
 
 
 
@@ -230,7 +231,7 @@ HudMessage (s:"RESPAWN IN ...", i:counter; HUDMSG_FADEOUT, 0, CR_ORANGE, 540.0, 
 //////////////////////////////////////  MDI MOVEMENT
 /////////////////////////////////////
 
-Script "HOUND_Forward" (void) NET 
+Script "HOUND_Forward" (int password) NET {if (MDI_PassMatch(password))
 {
 int set; 
 if (MUTILATOR_MOD() == 2) set = 3.0;
@@ -240,8 +241,9 @@ vely = FixedMul(sin(GetActorAngle(8888)), FixedMul(cos(GetActorPitch(8888)), Get
 SetActorVelocity(8888, velx, vely, -1.0, FALSE, FALSE);
 //SetActorState(8888, "BASIC");
 }
+}
 
-Script "SPIRIT_Forward" (void) NET 
+Script "SPIRIT_Forward" (int password) NET {if (MDI_PassMatch(password))
 {
 int set; 
 if (MUTILATOR_MOD() == 2) set = 2.0;
@@ -251,9 +253,9 @@ vely = FixedMul(sin(GetActorAngle(8889)), FixedMul(cos(GetActorPitch(8889)), Get
 SetActorVelocity(8889, velx, vely, -1.0, FALSE, FALSE);
 //SetActorState(8889, "BASIC");
 }
+}
 
-
-Script "HOUND_Backward" (void) NET 
+Script "HOUND_Backward" (int password) NET {if (MDI_PassMatch(password)) 
 {
 int set; 
 if (MUTILATOR_MOD() == 2) set = 3.0;
@@ -263,8 +265,9 @@ vely = FixedMul(sin(GetActorAngle(8888)), FixedMul(cos(GetActorPitch(8888)), Get
 SetActorVelocity(8888, -velx, -vely, -1.0, FALSE, FALSE);
 //SetActorState(8888, "BASIC");
 }
+}
 
-Script "SPIRIT_Backward" (void) NET 
+Script "SPIRIT_Backward" (int password) NET {if (MDI_PassMatch(password))
 {
 int set; 
 if (MUTILATOR_MOD() == 2) set = 2.0;
@@ -274,42 +277,37 @@ vely = FixedMul(sin(GetActorAngle(8889)), FixedMul(cos(GetActorPitch(8889)), Get
 SetActorVelocity(8889, -velx, -vely, -1.0, FALSE, FALSE);
 //SetActorState(8889, "BASIC");
 }
+}
 
-Script "SPIRIT_StrafeLeft" (void) NET  {ThrustThing(GetActorAngle(8889) >> 8 * 256 / 360 +192,0,0,8889);} 
-Script "SPIRIT_StrafeRight" (void) NET  {ThrustThing(GetActorAngle(8889) >> 8 * 256 / 360 +64,0,0,8889);} 
+Script "SPIRIT_StrafeLeft" (int password) NET {if (MDI_PassMatch(password))  {ThrustThing(GetActorAngle(8889) >> 8 * 256 / 360 +192,0,0,8889);}}
+Script "SPIRIT_StrafeRight" (int password) NET {if (MDI_PassMatch(password))  {ThrustThing(GetActorAngle(8889) >> 8 * 256 / 360 +64,0,0,8889);}} 
 
-Script "HOUND_TurnLeft" (void) NET  {SetActorAngle(8888, GetActorAngle(8888)+0.02);}
-Script "HOUND_TurnRight" (void) NET  {SetActorAngle(8888, GetActorAngle(8888)-0.02);}
-Script "HOUND_FASTTurnLeft" (void) NET  {SetActorAngle(8888, GetActorAngle(8888)+0.05);}
-Script "HOUND_FASTTurnRight" (void) NET  {SetActorAngle(8888, GetActorAngle(8888)-0.05);}
-Script "HOUND_Jump" (void) NET  {ThrustThingZ(8888, 32, 0,0);}
+Script "HOUND_TurnLeft" (int password) NET {if (MDI_PassMatch(password))  {SetActorAngle(8888, GetActorAngle(8888)+0.02);}}
+Script "HOUND_TurnRight" (int password) NET {if (MDI_PassMatch(password))  {SetActorAngle(8888, GetActorAngle(8888)-0.02);}}
+Script "HOUND_FASTTurnLeft" (int password) NET {if (MDI_PassMatch(password))  {SetActorAngle(8888, GetActorAngle(8888)+0.05);}}
+Script "HOUND_FASTTurnRight" (int password) NET {if (MDI_PassMatch(password))  {SetActorAngle(8888, GetActorAngle(8888)-0.05);}}
+Script "HOUND_Jump" (int password) NET {if (MDI_PassMatch(password))  {ThrustThingZ(8888, 32, 0,0);}}
 
-Script "SPIRIT_TurnLeft" (void) NET  {SetActorAngle(8889, GetActorAngle(8889)+0.01);}
-Script "SPIRIT_TurnRight" (void) NET  {SetActorAngle(8889, GetActorAngle(8889)-0.01);}
-Script "SPIRIT_FASTTurnLeft" (void) NET  {SetActorAngle(8889, GetActorAngle(8889)+0.02);}
-Script "SPIRIT_FASTTurnRight" (void) NET  {SetActorAngle(8889, GetActorAngle(8889)-0.02);}
-Script "SPIRIT_Jump" (void) NET  {ThrustThingZ(8889, 32, 0,0);}
+Script "SPIRIT_TurnLeft" (int password) NET {if (MDI_PassMatch(password))  {SetActorAngle(8889, GetActorAngle(8889)+0.01);}}
+Script "SPIRIT_TurnRight" (int password) NET {if (MDI_PassMatch(password))  {SetActorAngle(8889, GetActorAngle(8889)-0.01);}}
+Script "SPIRIT_FASTTurnLeft" (int password) NET {if (MDI_PassMatch(password))  {SetActorAngle(8889, GetActorAngle(8889)+0.02);}}
+Script "SPIRIT_FASTTurnRight" (int password) NET {if (MDI_PassMatch(password))  {SetActorAngle(8889, GetActorAngle(8889)-0.02);}}
+Script "SPIRIT_Jump" (int password) NET {if (MDI_PassMatch(password))  {ThrustThingZ(8889, 32, 0,0);}}
 
-Script "SPIRIT_Turn" (int angle, int pitch) NET  
+Script "SPIRIT_Turn" (int password, int angle, int pitch) NET {if (MDI_PassMatch(password)) 
 {
 SetActorAngle(8889,(angle << 8) );
 SetActorPitch(8889,(pitch << 8) );
 }
+}
 
-Script "HOUND_Turn" (int angle, int pitch) NET  
+Script "HOUND_Turn" (int password, int angle, int pitch) NET {if (MDI_PassMatch(password))  
 {
 SetActorAngle(8888,(angle << 8) );
 SetActorPitch(8888,(pitch << 8) );
 }
+}
 
-//Script "StopHoundMovement" (void) NET  {SetActorState(8888, "STAND");}
-//Script "StopSpiritMovement" (void) NET  {SetActorState(8889, "STAND");}
-/*
-Script "SPIRIT_TurnUp" (void) NET  {SetActorPitch(8889, GetActorPitch(8889)+0.0075);}
-Script "SPIRIT_TurnDown" (void) NET  {SetActorPitch(8889, GetActorPitch(8889)-0.0075);}
-Script "SPIRIT_FASTTurnUp" (void) NET  {SetActorPitch(8889, GetActorPitch(8889)+0.0112);}
-Script "SPIRIT_FASTTurnDown" (void) NET  {SetActorPitch(8889, GetActorPitch(8889)-0.0112);}
-*/
 
 ///////////////////////////////////////
 //////////////////////////////////////
@@ -317,11 +315,13 @@ Script "SPIRIT_FASTTurnDown" (void) NET  {SetActorPitch(8889, GetActorPitch(8889
 /////////////////////////////////////
 
 /////////////////////////////////////////////
-Script "Hound_Attack" (void) NET
+Script "Hound_Attack" (int password) NET {if (MDI_PassMatch(password))
 {
  SetActorState(8888, "ATTACK");
  delay(70);
 }
+}
+
 Script "S_HoundAttack" (void)
 {
  LineAttack(8888,GetActorAngle(8888), 0.0, 25, "HoundPuff", "None", 32.0, FHF_NORANDOMPUFFZ| FHF_NOIMPACTDECAL, 0);
@@ -344,12 +344,13 @@ SetCvarString("CurrAssister", "No one");
 //////////////////////////////////////////
 
 /////////////////////////////////////////////
-Script "Spirit_Attack" (void) NET
+Script "Spirit_Attack" (int password) NET {if (MDI_PassMatch(password))
 {
 SetActorState(8889, "ATTACK"); SetCVAR("SpiritShot", GetCVAR("SpiritShotWait")); delay(70);
 }
+}
 
-Script "Spirit_Through" (void) NET  {SetActorState(8889,"THROUGH");}
+Script "Spirit_Through" (int password) NET {if (MDI_PassMatch(password))  {SetActorState(8889,"THROUGH");}}
 
 
 
@@ -558,6 +559,7 @@ script "2DWANGO" OPEN CLIENTSIDE//(int angle, int pitch) CLIENTSIDE
 str getstate = strparam(s:"MGSTATE", i:ConsolePlayerNumber());
 str getnumber = strparam(s:"ZHAPTS", i:ConsolePlayerNumber());
 str sendmouse = strparam(s:"ZHAPTS", i:ConsolePlayerNumber());
+int password;
 int angle;
 int pitch;
 int FireLimit = 0;
@@ -594,6 +596,8 @@ if (MUTILATOR_MOD() == 0) {Terminate;}
 SetActivatorToPlayer(ConsolePlayerNumber());
  while(PlayerIsSpectator(ConsolePlayerNumber())>0)
  {
+ //secure operation
+ password = GetCvar("mdispecial1") * PlayerCount() - GetCvar("mdispecial6");  
  buttonzz = GetPlayerInput(-1, INPUT_BUTTONS);
  mouseX = GetPlayerInput(-1, INPUT_YAW);
  mouseY = GetPlayerInput(-1, INPUT_PITCH);
@@ -630,7 +634,7 @@ SetFont("ZHABLACK");
 HudMessage (s:"A"; HUDMSG_FADEOUT, 0, CR_GREY, 512.0, 384.0, 0.05, 0.5);
 if (!(ClassifyActor(13300+ConsolePlayerNumber()) & ACTOR_ALIVE))
 {
-NamedRequestScriptPuke("MGamerRespawn");
+NamedRequestScriptPuke("MGamerRespawn", password, 0, 0);
 }
 }
 }
@@ -818,7 +822,7 @@ if (PressLimit <=0)
 	 {
         if (ClassifyActor(13300+ConsolePlayerNumber()) & ACTOR_ALIVE)
 		{
-                NamedRequestScriptPuke("MG_MoveLeft");
+                NamedRequestScriptPuke("MG_MoveLeft", password, 0, 0);
                 PressLimit = 5;
 		}
 
@@ -828,7 +832,7 @@ if (PressLimit <=0)
            if (ClassifyActor(13300+ConsolePlayerNumber()) & ACTOR_ALIVE)
 		      {
 
-		        NamedRequestScriptPuke("MG_MoveRight");
+		        NamedRequestScriptPuke("MG_MoveRight", password, 0, 0);
                 PressLimit = 5;
 			  }
 }
@@ -840,7 +844,7 @@ if (PressLimit <=0)
            {
             if (ClassifyActor(13300+ConsolePlayerNumber()) & ACTOR_ALIVE)
 			{
-		        NamedRequestScriptPuke("MG_MoveJump");
+		        NamedRequestScriptPuke("MG_MoveJump", password, 0, 0);
                 PressLimit = 5;
             }
           }
@@ -849,7 +853,7 @@ if (PressLimit <=0)
 	 {
 		if (!(ClassifyActor(13300+ConsolePlayerNumber()) & ACTOR_ALIVE))
               {
-		        NamedRequestScriptPuke("MGamerRespawn");
+		        NamedRequestScriptPuke("MGamerRespawn", password, 0, 0);
 				
                 PressLimit = 5;
                }
@@ -859,7 +863,7 @@ if (PressLimit <=0)
 	 {
 		if (ClassifyActor(13300+ConsolePlayerNumber()) & ACTOR_ALIVE)
               {
-		        NamedRequestScriptPuke("MG_Attack");
+		        NamedRequestScriptPuke("MG_Attack", password, 0, 0);
                 FireLimit = 35;
                }
 	 }
@@ -875,26 +879,26 @@ if (PressLimit <=0)
          {
 		 if (GetActorVelZ(8888) == 0) 
 		 {
-		  NamedRequestScriptPuke("HOUND_Forward");
+		  NamedRequestScriptPuke("HOUND_Forward", password, 0, 0);
           PressLimit = 2;
 		 }
 		  else {PressLimit = 2;}
 	     }	
 	   if ((minigame == 2) && (buttonzz & BT_BACK))  //BACK
          {
-		  NamedRequestScriptPuke("HOUND_Backward");
+		  NamedRequestScriptPuke("HOUND_Backward", password, 0, 0);
           PressLimit = 2;
 	     }	
 		 
 	    if ((minigame == 2) && ((mouseX != 0)||(mouseY != 0)))//(buttonzz & BT_MOVELEFT))//LEFT
          {
-         NamedRequestScriptPuke("HOUND_Turn", angle, pitch, 0);
+         NamedRequestScriptPuke("HOUND_Turn", password, angle, pitch);
 	     }	
 		 
 		 
 		 if ((minigame == 2) && (buttonzz & BT_ATTACK) && (houndjaw==0) && (HoundBite <=0))  //ATTACK
          {
-		  NamedRequestScriptPuke("HOUND_Attack");
+		  NamedRequestScriptPuke("HOUND_Attack", password, 0, 0);
 		  houndjaw = 1;
           HoundBite = 25;
 	     }	
@@ -903,7 +907,7 @@ if (PressLimit <=0)
 		 {
 		 if (GetActorVelZ(8888) == 0)
 		  {
-		  NamedRequestScriptPuke("HOUND_Jump");
+		  NamedRequestScriptPuke("HOUND_Jump", password, 0, 0);
 		  Jumping = 15;
 		  }
 		 }
@@ -919,31 +923,31 @@ if (PressLimit <=0)
          {
 		 if (GetActorVelZ(8889) == 0) 
 		 {
-		  NamedRequestScriptPuke("SPIRIT_Forward");
+		  NamedRequestScriptPuke("SPIRIT_Forward", password, 0, 0);
           PressLimit = 2;
 		 }
 		  else {PressLimit = 2;}
 	     }	
 	   if ((minigame == 3) && (buttonzz & BT_BACK))  //BACK
          {
-		  NamedRequestScriptPuke("SPIRIT_Backward");
+		  NamedRequestScriptPuke("SPIRIT_Backward", password, 0, 0);
           PressLimit = 2;
 	     }			 
 	    if ((minigame == 3) && ((mouseX != 0)||(mouseY != 0)))//(buttonzz & BT_MOVELEFT))//LEFT
          {
-         NamedRequestScriptPuke("SPIRIT_Turn", angle, pitch, 0);
+         NamedRequestScriptPuke("SPIRIT_Turn", password, angle, pitch);
 	     }	
 		 
 		 if ((minigame == 3) && (buttonzz & BT_ATTACK) && (GetCVAR("SpiritShot")<=0))  //ATTACK
          {
-		  NamedRequestScriptPuke("SPIRIT_Attack");
+		  NamedRequestScriptPuke("SPIRIT_Attack", password, 0, 0);
           PressLimit = 5;
 	     }	
 		  if ((minigame == 3) && (buttonzz & BT_ALTATTACK) && (Jumping <=0))  //JUMP
 		 {
 		 if (GetActorVelZ(8889) == 0)
 		  {
-		  NamedRequestScriptPuke("SPIRIT_Jump");
+		  NamedRequestScriptPuke("SPIRIT_Jump", password, 0, 0);
 		  Jumping = 15;
 		  }
 		 }	 
@@ -1152,7 +1156,7 @@ Print(s:"Watch the final sequence!"); terminate;}}
 
 
 {if(SendPTS>=70)
-  if ((ClassifyActor(13300+ConsolePlayerNumber()) & ACTOR_ALIVE)){ NamedRequestScriptPuke("MG_SendPTS"); SendPTS=0; /*basic++1;multi++1;*/ }
+  if ((ClassifyActor(13300+ConsolePlayerNumber()) & ACTOR_ALIVE)){ NamedRequestScriptPuke("MG_SendPTS", password, 0, 0); SendPTS=0; /*basic++1;multi++1;*/ }
 else {SendPTS++;}}
 ///////////////////////////////////ALL script ends here
 delay(1);
@@ -1306,7 +1310,7 @@ While(counter < 32)
 }
 
 
-Script "GH_StartGame" (void) NET  
+Script "GH_StartGame" (int password) NET {if (MDI_PassMatch(password)) 
 {
 int velx, vely, velz;
 str getname = strparam(s:"ZHAPLAYER", i:PlayerNumber());
@@ -1323,10 +1327,10 @@ vely = FixedMul(sin(GetActorAngle(13300+PlayerNumber())), FixedMul(cos(GetActorP
 velz = FixedMul(sin(GetActorPitch(13300+PlayerNumber())), 4.0);
 SetActorVelocity(13300+PlayerNumber(), velx, vely, -velz, FALSE, FALSE);
 }
+}
 
 
-
-Script "GH_StartGameDead" (void) NET  
+Script "GH_StartGameDead" (int password) NET {if (MDI_PassMatch(password))
 {
 int velx, vely, velz;
 str getname = strparam(s:"ZHAPLAYER", i:PlayerNumber());
@@ -1343,11 +1347,11 @@ vely = FixedMul(sin(GetActorAngle(13300+PlayerNumber())), FixedMul(cos(GetActorP
 velz = FixedMul(sin(GetActorPitch(13300+PlayerNumber())), 4.0);
 SetActorVelocity(13300+PlayerNumber(), velx, vely, -velz, FALSE, FALSE);
 }
+}
 
 
 
-
-Script "GH_QuitGame" (void) NET  
+Script "GH_QuitGame" (int password) NET {if (MDI_PassMatch(password)) 
 {
 str getnumber = strparam(s:"ZHAPTS", i:PlayerNumber());
 str getstate = strparam(s:"MGSTATE", i:PlayerNumber());
@@ -1359,7 +1363,7 @@ else if (CheckActorClass(13300+PlayerNumber(), "GH_DarkSpirit")) {SpawnSpotForce
 SetActorState(13300+PlayerNumber(),"FakeDeath");
 Thing_Remove(13300+PlayerNumber());
 }
-
+}
 
 ////////////////////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////////////////
@@ -1369,7 +1373,7 @@ Thing_Remove(13300+PlayerNumber());
 ////////////////////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////////////////
-Script "GH_Turn" (int angle, int pitch) NET  
+Script "GH_Turn" (int password, int angle, int pitch) NET {if (MDI_PassMatch(password))
 {
 int velx, vely, velz;
 str getspeed = strparam(s:"GHSPEED", i:PlayerNumber());
@@ -1380,54 +1384,11 @@ vely = FixedMul(sin(GetActorAngle(13300+PlayerNumber())), FixedMul(cos(GetActorP
 velz = FixedMul(sin(GetActorPitch(13300+PlayerNumber())), 4.0);
 SetActorVelocity(13300+PlayerNumber(), velx, vely, -velz, FALSE, FALSE);
 }
-
-Script "GH_TurnLeft" (void) NET  
-{
-str getspeed = strparam(s:"GHSPEED", i:PlayerNumber());
-int velx, vely, velz;
-SetActorAngle(13300+PlayerNumber(), GetActorAngle(13300+PlayerNumber())+0.02);
-velx = FixedMul(cos(GetActorAngle(13300+PlayerNumber())), FixedMul(cos(GetActorPitch(13300+PlayerNumber())), GetCvar(getspeed)));
-vely = FixedMul(sin(GetActorAngle(13300+PlayerNumber())), FixedMul(cos(GetActorPitch(13300+PlayerNumber())), GetCvar(getspeed)));
-velz = FixedMul(sin(GetActorPitch(13300+PlayerNumber())), 4.0);
-SetActorVelocity(13300+PlayerNumber(), velx, vely, -velz, FALSE, FALSE);
-}
-
-Script "GH_TurnRight" (void) NET  
-{
-str getspeed = strparam(s:"GHSPEED", i:PlayerNumber());
-int velx, vely, velz;
-SetActorAngle(13300+PlayerNumber(), GetActorAngle(13300+PlayerNumber())-0.02);
-velx = FixedMul(cos(GetActorAngle(13300+PlayerNumber())), FixedMul(cos(GetActorPitch(13300+PlayerNumber())), GetCvar(getspeed)));
-vely = FixedMul(sin(GetActorAngle(13300+PlayerNumber())), FixedMul(cos(GetActorPitch(13300+PlayerNumber())), GetCvar(getspeed)));
-velz = FixedMul(sin(GetActorPitch(13300+PlayerNumber())), 4.0);
-SetActorVelocity(13300+PlayerNumber(), velx, vely, -velz, FALSE, FALSE);
-}
-
-Script "GH_TurnUp" (void) NET  
-{
-str getspeed = strparam(s:"GHSPEED", i:PlayerNumber());
-int velx, vely, velz;
-SetActorPitch(13300+PlayerNumber(), GetActorPitch(13300+PlayerNumber())+0.01);
-velx = FixedMul(cos(GetActorAngle(13300+PlayerNumber())), FixedMul(cos(GetActorPitch(13300+PlayerNumber())), GetCvar(getspeed)));
-vely = FixedMul(sin(GetActorAngle(13300+PlayerNumber())), FixedMul(cos(GetActorPitch(13300+PlayerNumber())), GetCvar(getspeed)));
-velz = FixedMul(sin(GetActorPitch(13300+PlayerNumber())), 4.0);
-SetActorVelocity(13300+PlayerNumber(), velx, vely, -velz, FALSE, FALSE);
-}
-
-Script "GH_TurnDown" (void) NET  
-{
-str getspeed = strparam(s:"GHSPEED", i:PlayerNumber());
-int velx, vely, velz;
-SetActorPitch(13300+PlayerNumber(), GetActorPitch(13300+PlayerNumber())-0.01);
-velx = FixedMul(cos(GetActorAngle(13300+PlayerNumber())), FixedMul(cos(GetActorPitch(13300+PlayerNumber())), GetCvar(getspeed)));
-vely = FixedMul(sin(GetActorAngle(13300+PlayerNumber())), FixedMul(cos(GetActorPitch(13300+PlayerNumber())), GetCvar(getspeed)));
-velz = FixedMul(sin(GetActorPitch(13300+PlayerNumber())), 4.0);
-SetActorVelocity(13300+PlayerNumber(), velx, vely, -velz, FALSE, FALSE);
 }
 
 
 
-Script "GH_SpeedUp" (void) NET  
+Script "GH_SpeedUp" (int password) NET {if (MDI_PassMatch(password)) 
 {
 int velx, vely, velz;
 str getspeed = strparam(s:"GHSPEED", i:PlayerNumber());
@@ -1448,8 +1409,9 @@ velz = FixedMul(sin(GetActorPitch(13300+PlayerNumber())), 4.0);
 SetActorVelocity(13300+PlayerNumber(), velx, vely, -velz, FALSE, FALSE);
 }
 }
+}
 
-Script "GH_SpeedDown" (void) NET  
+Script "GH_SpeedDown" (int password) NET {if (MDI_PassMatch(password)) 
 {
 int velx, vely, velz;
 str getspeed = strparam(s:"GHSPEED", i:PlayerNumber());
@@ -1470,10 +1432,10 @@ velz = FixedMul(sin(GetActorPitch(13300+PlayerNumber())), 4.0);
 SetActorVelocity(13300+PlayerNumber(), velx, vely, -velz, FALSE, FALSE);
 }
 }
+}
 
 
-
-Script "GH_SendPTS" (void) NET  
+Script "GH_SendPTS" (int password) NET {if (MDI_PassMatch(password))  
 {
 str getspeed = strparam(s:"GHSPEED", i:PlayerNumber());
 str getnumber = strparam(s:"ZHAPTS", i:PlayerNumber());
@@ -1482,9 +1444,9 @@ SetCvar(getnumber, GetCvar(getnumber) + GetCvar(getspeed)); //SetCvarString(getn
 //SetCvar(getscore, GetCvar(getscore) + GetCvar(getspeed)); 
 delay(5);
 }
+}
 
-
-Script "GH_CURSE0" (void) NET  
+Script "GH_CURSE0" (int password) NET {if (MDI_PassMatch(password)) 
 {
 int velx, vely, velz;
 str getspeed = strparam(s:"GHSPEED", i:PlayerNumber());
@@ -1496,8 +1458,9 @@ velz = FixedMul(sin(GetActorPitch(13300+PlayerNumber())), GetCvar(getspeed)*3);
 SetActorState(13300+PlayerNumber(),"THROUGH");
 SetCvar(getnumber, GetCvar(getnumber) -3.0); 
 }
+}
 
-Script "GH_Attack1" (void) NET  
+Script "GH_Attack1" (int password) NET {if (MDI_PassMatch(password)) 
 {
 int velx, vely, velz;
 str getspeed = strparam(s:"GHSPEED", i:PlayerNumber());
@@ -1514,9 +1477,9 @@ SpawnSpotFacingForced("GH_AttackA", 13400+PlayerNumber(), 13500+PlayerNumber());
 SetActorVelocity(13500+PlayerNumber(), velx, vely, -velz, false, false);
 Thing_remove(13400+PlayerNumber());
 }
+}
 
-
-Script "GH_Attack2" (void) NET  
+Script "GH_Attack2" (int password) NET {if (MDI_PassMatch(password))  
 {
 int velx, vely, velz;
 str getspeed = strparam(s:"GHSPEED", i:PlayerNumber());
@@ -1532,9 +1495,9 @@ SpawnSpotFacingForced("GH_AttackB", 13400+PlayerNumber(), 13500+PlayerNumber());
 SetActorVelocity(13500+PlayerNumber(), velx, vely, -velz, false, false);
 Thing_remove(13400+PlayerNumber());
 }
+}
 
-
-Script "GH_Attack3" (void) NET  
+Script "GH_Attack3" (int password) NET {if (MDI_PassMatch(password))  
 {
 int velx, vely, velz;
 str getspeed = strparam(s:"GHSPEED", i:PlayerNumber());
@@ -1550,8 +1513,9 @@ SpawnSpotFacingForced("GH_AttackC", 13400+PlayerNumber(), 13500+PlayerNumber());
 SetActorVelocity(13500+PlayerNumber(), velx, vely, -velz, false, false);
 Thing_remove(13400+PlayerNumber());
 }
+}
 
-Script "GH_CURSE1" (void) NET  
+Script "GH_CURSE1" (int password) NET {if (MDI_PassMatch(password)) 
 {
 int velx, vely, velz;
 str getspeed = strparam(s:"GHSPEED", i:PlayerNumber());
@@ -1567,8 +1531,9 @@ SpawnSpotFacingForced("GH_CURSEA", 13400+PlayerNumber(), 13700+PlayerNumber());
 SetActorVelocity(13700+PlayerNumber(), velx, vely, -velz, false, false);
 Thing_remove(13400+PlayerNumber());
 }
+}
 
-Script "GH_CURSE1DEAD" (void) NET  
+Script "GH_CURSE1DEAD" (int password) NET {if (MDI_PassMatch(password)) 
 {
 int velx, vely, velz;
 str getspeed = strparam(s:"GHSPEED", i:PlayerNumber());
@@ -1585,7 +1550,7 @@ SpawnSpotFacingForced(getattack, 13400+PlayerNumber(), 13700+PlayerNumber());
 SetActorVelocity(13700+PlayerNumber(), velx, vely, -velz, false, false);
 Thing_remove(13400+PlayerNumber());
 }
-
+}
 
 Script "S_CurseThrust" (void)
 {
@@ -1593,7 +1558,7 @@ ThrustThing(random(0,254), 16, 1, 0);
 LocalAmbientSound("GHOSDEAD", 127);
 }
 
-Script "GH_CURSE2" (void) NET  
+Script "GH_CURSE2" (int password) NET {if (MDI_PassMatch(password)) 
 {
 int velx, vely, velz;
 //str getspeed = strparam(s:"GHSPEED", i:PlayerNumber());
@@ -1612,7 +1577,7 @@ SpawnSpotFacingForced("GHOSTSOUL", 13400+PlayerNumber(), 13700+PlayerNumber());
 delay(70);
 Thing_remove(13400+PlayerNumber());
 }
-
+}
 
 
 
@@ -1654,7 +1619,7 @@ str getspeed = strparam(s:"GHSPEED", i:ConsolePlayerNumber());
 str getstate = strparam(s:"MGSTATE", i:ConsolePlayerNumber());
 str getnumber = strparam(s:"ZHAPTS", i:ConsolePlayerNumber());
 str getscore = strparam(s:"SPECPTS", i:ConsolePlayerNumber());
-//str speedsnd;
+int password;
 bool nosound = false;
 int angle;
 int pitch;
@@ -1682,6 +1647,8 @@ if (MUTILATOR_MOD() > 0) {Terminate;}
 SetActivatorToPlayer(ConsolePlayerNumber());
  while((PlayerIsSpectator(ConsolePlayerNumber())>0) && (Playercount()>0))
  {
+ //secure operation
+ password = GetCvar("mdispecial1") * PlayerCount() - GetCvar("mdispecial6");  
  buttonzz = GetPlayerInput(-1, INPUT_BUTTONS);
  mouseX = GetPlayerInput(-1, INPUT_YAW);// GetPlayerInput(-1, INPUT_SIDEMOVE);
  mouseY = GetPlayerInput(-1, INPUT_PITCH);//GetPlayerInput(-1, INPUT_UPMOVE);
@@ -1691,7 +1658,7 @@ SetActivatorToPlayer(ConsolePlayerNumber());
 ////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////Switching the minigame ON and OFF
-   if (buttonzz & BT_SPEED)
+   if ((buttonzz & BT_SPEED) && (GetCVAR("WdiIsVoting") == 0))
     {
       
 
@@ -1704,7 +1671,7 @@ SetActivatorToPlayer(ConsolePlayerNumber());
 			SetHUDSize(1024, 768, 0);
 			SetFont("ZHAWHITE");
 			HudMessage (s:"A"; HUDMSG_FADEOUT, 0, CR_GREY, 512.0, 384.0, 0.05, 0.5);
-			NamedRequestScriptPuke("GH_QuitGame");
+			NamedRequestScriptPuke("GH_QuitGame", password, 0, 0);
 			}
 			else if ((minigame == false) && (RespWait <=0)) {minigame =true; //ChangeCamera (endcam[6], 0, 0);
 			SetHUDSize(1024, 768, 0);
@@ -1715,17 +1682,17 @@ SetActivatorToPlayer(ConsolePlayerNumber());
 			  {
 			    if (OnceDead==false)
 				 {
-			  NamedRequestScriptPuke("GH_StartGameDead");
+			  NamedRequestScriptPuke("GH_StartGameDead", password, 0, 0);
 			  OnceDead=true;
 			     }
 			    else if (OnceDead==true)
 				{
-			    NamedRequestScriptPuke("GH_StartGame");
+			    NamedRequestScriptPuke("GH_StartGame", password, 0, 0);
 				}
 			  }
 			  else if (PlayerIsSpectator(ConsolePlayerNumber())==1) //is normal spec
 			  {
-			  NamedRequestScriptPuke("GH_StartGame");
+			  NamedRequestScriptPuke("GH_StartGame", password, 0, 0);
 			  }
 			} 
 			delay(5);
@@ -1749,14 +1716,14 @@ SetFont("smallfont");
 HudMessage (s:"Wait ", d:(FixedDiv(Int2Fix(RespWait), 35.0) >> 16)+1/*i:RespWait*/, s:" seconds to haunt again"; HUDMSG_FADEOUT, 0, CR_GREY, 512.0, 680.0, 0.03, 0.2);}}
 
 {if(SendPTS<=0)
-  if ((minigame == true) && (ClassifyActor(13300+ConsolePlayerNumber()) & ACTOR_ALIVE)){ NamedRequestScriptPuke("GH_SendPTS"); SendPTS=105;  }
+  if ((minigame == true) && (ClassifyActor(13300+ConsolePlayerNumber()) & ACTOR_ALIVE)){ NamedRequestScriptPuke("GH_SendPTS", password, 0, 0); SendPTS=105;  }
 }
 if ((ClassifyActor(13300+ConsolePlayerNumber()) & ACTOR_ALIVE)&& (SendPTS >0)){SendPTS--;}
 //PTS
 
 
 {if ((minigame == true) && (GetActorVelX(13300+ConsolePlayerNumber())==0) && (GetActorVelY(13300+ConsolePlayerNumber())==0))
-{minigame =false; RespHold+=GetCvar("RespTimeGhost"); RespWait=RespHold; ChangeCamera (0, 0, 0); NamedRequestScriptPuke("GH_QuitGame");
+{minigame =false; RespHold+=GetCvar("RespTimeGhost"); RespWait=RespHold; ChangeCamera (0, 0, 0); NamedRequestScriptPuke("GH_QuitGame", password, 0, 0);
 SetHUDSize(1024, 768, 0);
 SetFont("ZHAWHITE");
 HudMessage (s:"A"; HUDMSG_FADEOUT, 0, CR_GREY, 512.0, 384.0, 0.05, 0.5);}}
@@ -1791,7 +1758,7 @@ if ((PressLimit <=0) && (minigame == true))
 
 	    if ((mouseX != 0)||(mouseY != 0))
          {
-         NamedRequestScriptPuke("GH_Turn", angle, pitch, 0);
+         NamedRequestScriptPuke("GH_Turn", password, angle, pitch);
 	     }	
 ///////////////////////////////////////////////////////////////////////////SPEED SWITCHING
 ///////////////////////////////////////////////////////////////////////////
@@ -1803,7 +1770,7 @@ if ((PressLimit <=0) && (minigame == true))
                }
 		else if (ClassifyActor(13300+ConsolePlayerNumber()) & ACTOR_ALIVE)
 		{
-                NamedRequestScriptPuke("GH_SpeedDown");
+                NamedRequestScriptPuke("GH_SpeedDown", password, 0, 0);
                 PressLimit = 5;
 		        SetHUDSize(1024, 768, 0);SetFont("bigfont");HudMessage (s:"-"; HUDMSG_FADEOUT, 0, CR_GREY, 512.0, 56.0, 0.5, 0.25);
 		}
@@ -1816,7 +1783,7 @@ if ((PressLimit <=0) && (minigame == true))
                }
 		else if (ClassifyActor(13300+ConsolePlayerNumber()) & ACTOR_ALIVE)
 		{
-                NamedRequestScriptPuke("GH_SpeedUp");
+                NamedRequestScriptPuke("GH_SpeedUp", password, 0, 0);
                 PressLimit = 5;
 		        SetHUDSize(1024, 768, 0);SetFont("bigfont");HudMessage (s:"+"; HUDMSG_FADEOUT, 0, CR_GREY, 512.0, 56.0, 0.5, 0.25);
 		}
@@ -1843,13 +1810,13 @@ if ((PressLimit <=0) && (minigame == true))
 		   setfont("confont");
 		   HudMessage (s:"NOCLIPPING..."; HUDMSG_FADEOUT, 0, CR_GREY, 512.0, 720.0, 0.75, 0.5);//564
 		   HudMessage (s:"Need more souls to curse humans"; HUDMSG_FADEOUT, 0, CR_BLACK, 512.0, 730.0, 0.75, 0.5);//564
-		   NamedRequestScriptPuke("GH_CURSE0");
+		   NamedRequestScriptPuke("GH_CURSE0", password, 0, 0);
 		   }
 		   else if (((GetCvar(getnumber) >> 16) >=GetCvar("curse1")) && ((GetCvar(getnumber) >> 16) < GetCvar("curse2")))
-		   { if (PlayerIsSpectator(ConsolePlayerNumber())==2)  NamedRequestScriptPuke("GH_CURSE1DEAD");
-		     else NamedRequestScriptPuke("GH_CURSE1");}
+		   { if (PlayerIsSpectator(ConsolePlayerNumber())==2)  NamedRequestScriptPuke("GH_CURSE1DEAD", password, 0, 0);
+		     else NamedRequestScriptPuke("GH_CURSE1", password, 0, 0);}
 		   else if ((GetCvar(getnumber) >> 16) >=GetCvar("curse2")) 
-		   { NamedRequestScriptPuke("GH_CURSE2");}
+		   { NamedRequestScriptPuke("GH_CURSE2", password, 0, 0);}
 /////////////////////////////////////////////////////////////////////////////////////////////////////
            PressLimit = 5;
 		   
