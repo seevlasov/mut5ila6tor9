@@ -314,7 +314,7 @@ if (MDIglobal[0] == 1) voteresult = "for";
 SetHUDSize(1024, 768, 0);
 SetFont("confont");
 /*HudMessage(i:MDIglobal[2], s:"%*/HudMessage(s:"A majority voted ", s:voteresult, s:" 'The Mutilator' mode  (", s:MDIVoteDate, s:")"; HUDMSG_FADEOUT, 0, CR_GREY, 512.0, 630.0, 12.0, 2.0);
-HudMessage(i:MDIglobal[3], s:" voted YES    ", i:MDIglobal[4], s:" voted NO"/*, s:abst*/; HUDMSG_FADEOUT, 0, CR_GREY, 512.0, 645.0, 12.0, 2.0);
+HudMessage(f:MDIglobal[3], s:" voted YES    ", f:MDIglobal[4], s:" voted NO"/*, s:abst*/; HUDMSG_FADEOUT, 0, CR_GREY, 512.0, 645.0, 12.0, 2.0);
 }
 
 
@@ -1174,7 +1174,6 @@ SetCVAR("MDISTATE", 2);
 /////////////////////////////////////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
 
 
 
@@ -2753,7 +2752,7 @@ script "LookAtVictims" (int password) NET
 {
 if (MDI_PassMatch(password)) 
 {
-LineAttack(0,GetActorAngle(ActivatorTID()), GetActorPitch( ActivatorTID()), 0, "ChasePuff", "None", (chasedist* 1.0), FHF_NORANDOMPUFFZ| FHF_NOIMPACTDECAL, 0);
+LineAttack(0,GetActorAngle(ActivatorTID()), GetActorPitch( ActivatorTID()), 0, "ChasePuff", "None", (Int2Fix(chasedist)), FHF_NORANDOMPUFFZ| FHF_NOIMPACTDECAL, 0);
 }
 }
 
@@ -3284,14 +3283,14 @@ MyAngle = GetActorAngle(0) >> 8;
 AngleIMG = strparam(s:"MDIPAA", i:MyAngle/10);
 SetHUDSize(1920, 1440, 0);
 SetFont("MDIRADAR");
-HudMessage (s:"A"; HUDMSG_PLAIN, 1751, CR_GREY, (RadarBaseX*1.0),       (RadarBaseY*1.0),       1.5);
+HudMessage (s:"A"; HUDMSG_PLAIN, 1751, CR_GREY, Int2Fix(RadarBaseX),       Int2Fix(RadarBaseY),       1.5);
 SetFont(AngleIMG);
-HudMessage (s:"A"; HUDMSG_PLAIN, 1749, CR_GREY, (RadarBaseX*1.0) + MyX, (RadarBaseY*1.0) + MyY, 1.5);
+HudMessage (s:"A"; HUDMSG_PLAIN, 1749, CR_GREY, Int2Fix(RadarBaseX) + MyX, Int2Fix(RadarBaseY) + MyY, 1.5);
 
 if (MovStage < 10)
 {
 SetFont("MDIQUEST");
-HudMessage (s:"A"; HUDMSG_PLAIN, 1750, CR_GREY, QuestX*1.0, QuestY*1.0, 1.5);
+HudMessage (s:"A"; HUDMSG_PLAIN, 1750, CR_GREY, Int2Fix(QuestX), Int2Fix(QuestY), 1.5);
 }
 
 //debug
@@ -3374,7 +3373,7 @@ HudMessage(s:"\c", s:flashcolor, k:"+use", s:FlashAdvice; HUDMSG_FADEOUT, 3474, 
 ////////////////////////////////////////////STAMINA
 SetHUDSize(1920, 1440, 0);
 SetFont(strparam(s:"MDI", s:staminatype, i:SSTAMINA/100));
-HudMessage (s:"A"; HUDMSG_FADEOUT, 1747, CR_GREY, (RadarBaseX*1.0), (RadarBaseY*1.0), 0.1, 1.0);
+HudMessage (s:"A"; HUDMSG_FADEOUT, 1747, CR_GREY, Int2Fix(RadarBaseX), Int2Fix(RadarBaseY), 0.1, 1.0);
 
 
 
@@ -3603,7 +3602,7 @@ if (CheckWeapon("Mutilator1")==true)
 ////////////////////////////////////////////CHAINSAW
 SetHUDSize(1920, 1440, 0);
 SetFont(strparam(s:"MDIST", i:MutiAmmo/10));
-HudMessage (s:"A"; HUDMSG_FADEOUT, 1747, CR_GREY, (RadarBaseX*1.0), (RadarBaseY*1.0) + 180.0, 0.1, 1.0);
+HudMessage (s:"A"; HUDMSG_FADEOUT, 1747, CR_GREY, Int2Fix(RadarBaseX), Int2Fix(RadarBaseY) + 180.0, 0.1, 1.0);
 
 	
 	  ////////////////////////////////////////////    Chainsaw Attack
@@ -3618,7 +3617,7 @@ HudMessage (s:"A"; HUDMSG_FADEOUT, 1747, CR_GREY, (RadarBaseX*1.0), (RadarBaseY*
 		if (MutiAmmo < 8*35)
 		{
 		SetFont("MDICHARG");
-        HudMessage (s:"A"; HUDMSG_PLAIN, 0, CR_UNTRANSLATED, (RadarBaseX*1.0), (RadarBaseY*1.0) + 180.0, 0.75);
+        HudMessage (s:"A"; HUDMSG_PLAIN, 0, CR_UNTRANSLATED, Int2Fix(RadarBaseX), Int2Fix(RadarBaseY) + 180.0, 0.75);
 		}
 	    } /////// end FIRE input	of chainsaw
 if (MutiAmmo < MutiMaxAmmo) MutiAmmo+=2;				
@@ -3794,8 +3793,8 @@ return rett;
 
 function bool CheckGoalDistance(int Radius, int AreaBlock, int QuestMeter)
 {
-if ((GetActorX(0)  >  GetActorX(AreaBlock*100 + QuestMeter) - (Radius * 1.0)) &&  (GetActorX(0)  <  GetActorX(AreaBlock*100 + QuestMeter) + (Radius * 1.0))
- && (GetActorY(0)  >  GetActorY(AreaBlock*100 + QuestMeter) - (Radius * 1.0)) &&  (GetActorY(0)  <  GetActorY(AreaBlock*100 + QuestMeter) + (Radius * 1.0)))
+if ((GetActorX(0)  >  GetActorX(AreaBlock*100 + QuestMeter) - Int2Fix(Radius)) &&  (GetActorX(0)  <  GetActorX(AreaBlock*100 + QuestMeter) + Int2Fix(Radius))
+ && (GetActorY(0)  >  GetActorY(AreaBlock*100 + QuestMeter) - Int2Fix(Radius)) &&  (GetActorY(0)  <  GetActorY(AreaBlock*100 + QuestMeter) + Int2Fix(Radius)))
 
 return true;
 return false;
@@ -3902,16 +3901,16 @@ function str StripColors(str input) //DrinkyBird + Mr.Satan
 script "BanIfSpecGO" (int Ahead) //Ban if game winner has gone spec
 {
 if (MDIGlobal[7] == 1) terminate;
-int lastplayer;
-str bantime = 20 + (MDIGlobal[6]*5);
+
+str bantime = 10;// + (MDIGlobal[6]*5);
 int mapnum =  GetLevelInfo(LEVELINFO_LEVELNUM);
-//lastplayer = StripColours(strparam(n:gameinfo[2] + 1));
+str lastplayer = StripColors(strparam(n:gameinfo[2] + 1));
 
 if (Ahead > 0) //if murderer spectates midgame
 {
-Printbold(s:strparam(n:lastplayer+1, s:" has been kicked for ragequit as a murderer (", i:bantime, s:" minutes). Please respect the other players."));
-consolecommand(strparam(s:"Ban_IDx ", i:lastplayer, s:" ", i:bantime, s:"minute \"Ragequit as a Murderer\""));
-MDIGlobal[6]++;
+Printbold(s:strparam(s:lastplayer, s:" has been kicked for ragequit as a murderer (", i:bantime, s:" minutes). Please respect the other players."));
+consolecommand(strparam(s:"Ban ", s:lastplayer, s:" ", i:bantime, s:"minute \"Ragequit as a Murderer\""));
+//MDIGlobal[6]++;
  terminate;
 }
 while(Playercount() > 1) delay(1);
@@ -3924,7 +3923,7 @@ if(Playercount() == 1) //who's the last player is?
 int counter;
 while(counter < 32) 
    {
-   if (ClassifyActor(TID_START + counter) & ACTOR_ALIVE) lastplayer = counter;
+   if (ClassifyActor(TID_START + counter) & ACTOR_ALIVE) lastplayer = StripColors(strparam(n:counter + 1));
    counter++;
    }
 }
@@ -3935,11 +3934,15 @@ while(Playercount() > 0) delay(1);
 
 if (mapnum != GetLevelInfo(LEVELINFO_LEVELNUM)) terminate;
 
-Printbold(s:strparam(n:lastplayer+1, s:" has been kicked (", i:bantime, s:" minutes), because he quit the game at scoreboard screen. \n\nIt causes map restart or game crash. Please respect the other players."));
-consolecommand(strparam(s:"Ban_IDx ", i:lastplayer, s:" ", i:bantime, s:"minute \"Please wait till the map properly end next time\""));
-MDIGlobal[6]++;
+Printbold(s:strparam(s:lastplayer, s:" has been kicked (", i:bantime, s:" minutes), because he quit the game at scoreboard screen. \n\nIt causes map restart or game crash. Please respect the other players."));
+consolecommand(strparam(s:"Ban ", s:lastplayer, s:" ", i:bantime, s:"minute \"Please wait till the map properly end next time\""));
+//MDIGlobal[6]++;
 terminate;
 }
+
+
+
+
 
 
 script "TestFeature" (int IsOn)
